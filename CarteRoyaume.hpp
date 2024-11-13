@@ -3,17 +3,44 @@
 #include "Carte.hpp"
 #include <iostream> 
 
+enum TypeRoyaume {
+  ATELIER,
+  BUCHERON,
+  CHAPELLE,
+  DOUVE,
+  FESTIN, 
+  LABORATOIRE, 
+  SORCIERE, 
+  VILLAGE, 
+  VOLEUR
+};
+
 class CarteRoyaume : public Carte {
     protected: 
         bool attaque; 
-        bool reaction; 
+        bool reaction;
+        TypeRoyaume type;  
     
     public : 
         int getValeur(); 
-        void jouer(); 
+        std::string getType(); 
+
         bool estAttaque(); 
         bool estReaction(); 
-        std::string obtenirType();  
+         
+
+        void action(); 
+ 
+        void actionAtelier(); 
+        void actionBucheron(); 
+        void actionChapelle(); 
+        void actionDouve(); 
+        void actionFestin(); 
+        void actionLaboratoire(); 
+        void actionSorciere(); 
+        void actionVillage(); 
+        void actionVoleur();
+
 
 };
 
