@@ -21,13 +21,31 @@ void Plateau::initialiser(){
 }
 
 void Plateau::retirerCarte(Carte c){
-    for( auto carte : cartePlateau){
+    for(auto carte : cartePlateau){
         if(carte.first == c.getNom()){
-            cartePlateau[c.getNom()] -= 1 ;  
+            cartePlateau[c.getNom()] -= 1 ; 
+            if (carte.second == 0){
+                setCarteEpuise(1); 
+            }  
         }
     }
 }
 
-int Plateau::getNbCarteEpuise(){
+void Plateau::setCarteEpuise(int nb){
+    this->nbCarteEpuise += nb; 
+}
 
+int Plateau::getCarteEpuise(){
+    return this->nbCarteEpuise;
+}
+
+std::vector<Carte> Plateau::getListeRoyaume(){
+    return this->listeRoyaume; 
+}  
+std::vector<Carte> Plateau::getListeVictoire(){
+    return this->listeVictoire; 
+}  
+
+std::vector<Carte> Plateau::getListeTresors(){
+    return this->listeTresors; 
 }

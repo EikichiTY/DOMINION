@@ -19,12 +19,15 @@ class Plateau {
         void initialiser(); 
         void afficher(); 
         void retirerCarte(Carte*); 
-        int getNbCarteEpuise();
+        
+        void setCarteEpuise(int nb);
+        int getCarteEpuise();
         
         std::vector<Carte> getListeRoyaume();  
         std::vector<Carte> getListeVictoire();  
         std::vector<Carte> getListeTresors();
 
+        
         void retirerCarte(Carte c);   
 
 }; 
