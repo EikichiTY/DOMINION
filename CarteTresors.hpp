@@ -7,6 +7,7 @@ class CarteTresors : public Carte {
         int valeur; 
     
     public : 
+        CarteTresors(); 
         int getValeur(); 
         void jouer(); 
         std::string obtenirType();  

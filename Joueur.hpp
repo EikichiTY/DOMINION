@@ -13,6 +13,8 @@ class Joueur {
     public : 
         int calculerPoint(); 
         void jouerCarte();
+        Deck getDeck(); 
+        std::string choixAction();
 
 }; 
 

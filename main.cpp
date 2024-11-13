@@ -7,6 +7,8 @@ int main(){
     std::cout<<"Hello \n";
     
     std::cout<<c1.getNom()<<std::endl ; 
+
+    c1.afficheCarte(); 
     
     return 0; 
 }

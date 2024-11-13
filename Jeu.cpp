@@ -12,12 +12,12 @@ void Jeu::commenceTour(Joueur j){
     std::string choix = j.choixAction();    
 }
 
-Joueur Jeu::prochainJoueur(Joueur j*){ 
-    for (Joueur i in listeJoueurs){
-        if (i == j){break;} 
+/*Joueur Jeu::prochainJoueur(Joueur j*){ 
+    for (auto joueur : listeJoueurs){
+        if (joueur.equals(j)){break;} 
     }
     Joueur prochain = listeJoueurs.at(i+1); 
     return prochain; 
-}
+}*/
 
 

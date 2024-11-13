@@ -8,14 +8,24 @@
 
 class Plateau {
     private: 
-        std::map<Carte, int> nbCarteRestant;
+        std::vector<Carte> listeRoyaume;
+        std::vector<Carte> listeTresors;
+        std::vector<Carte> listeVictoire;
+
+        std::map<std::string, int> cartePlateau; 
         int nbCarteEpuise; 
     
     public: 
         void initialiser(); 
         void afficher(); 
         void retirerCarte(Carte*); 
-        int getNbCarteEpuise(); 
+        int getNbCarteEpuise();
+        
+        std::vector<Carte> getListeRoyaume();  
+        std::vector<Carte> getListeVictoire();  
+        std::vector<Carte> getListeTresors();
+
+        void retirerCarte(Carte c);   
 
 }; 
 
