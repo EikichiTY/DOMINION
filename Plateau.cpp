@@ -35,6 +35,15 @@ void Plateau::setCarteEpuise(int nb){
     this->nbCarteEpuise += nb; 
 }
 
+void Plateau::afficher(){
+    std::cout<<"-------------------------------------------------\n"; 
+    std::cout<<"Carte Restantes : \n";
+    for (auto carte : cartePlateau){
+        std::cout<<"Carte : "<<carte.first<<" | Disponibilés : "<<carte.second<<"\n"; 
+    }
+    std::cout<<"-------------------------------------------------\n"; 
+}
+
 int Plateau::getCarteEpuise(){
     return this->nbCarteEpuise;
 }
