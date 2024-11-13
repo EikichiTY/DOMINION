@@ -5,14 +5,21 @@
 
 class Joueur {
     private : 
-        Deck deck; 
+        std::string nom;
+        int score; 
         int nbAchat; 
         int nbActions; 
+        Deck deck;
 
-
-    public : 
-        int calculerPoint(); 
-        void jouerCarte();
+    public :
+    // Constructeur 
+     Joueur(const std::string& nom );
+    // Methode
+    std::string getNom() const;
+    int getScore() const;
+    void setScore(int nvScore);
+    int calculerPoint(); 
+    void jouerCarte();
 
 }; 
 
