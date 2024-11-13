@@ -18,7 +18,7 @@ class Plateau {
     public: 
         void initialiser(); 
         void afficher(); 
-        void retirerCarte(Carte*); 
+        
         
         void setCarteEpuise(int nb);
         int getCarteEpuise();
