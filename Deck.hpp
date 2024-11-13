@@ -16,11 +16,18 @@ class Deck{
         int nbPiece; 
 
     public : 
+        Deck(); 
+        ~Deck();
+        
         void piocherCarte(); 
-        void ajouteDefausse(Carte*); 
+        void ajouteDefausse(Carte* c); 
         void melangerDeck(); 
         int getNbPiece(); 
         int getNbPoint(); 
+        std::vector<Carte*> getMain(); 
+        std::vector<Carte*> getPioche(); 
+        std::vector<Carte*> getDefausse(); 
+        
 
 
 }; 

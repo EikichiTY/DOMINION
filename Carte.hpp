@@ -21,7 +21,8 @@ class Carte {
         void setPrix(int prix); 
         void setNom(std::string nom);  
 
-        std::string obtenirType();  
+        std::string getType();  
+        void afficheCarte(); 
         void action(); 
 
 }; 

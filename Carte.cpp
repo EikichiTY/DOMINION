@@ -23,3 +23,20 @@ int Carte::getPrix(){
 std::string Carte::getNom(){
     return this->nom; 
 }
+
+std::string Carte::getType(){
+    return this->type; 
+}
+
+void Carte::afficheCarte(){
+    std::cout<<"+-----------+\n"; 
+    std::cout<<"|   Carte   |\n";
+    std::cout<<"    "<<this->getNom()<<"  \n";
+    std::cout<<"+-----------+\n";
+    std::cout<<"|   Type    |\n";
+    std::cout<<"   "<<this->getType()<<"  \n";
+    std::cout<<"|  Prix : "<<this->getPrix()<<" |\n";
+    std::cout<<"|           |\n";
+    std::cout<<"+-----------+\n";
+}
+
