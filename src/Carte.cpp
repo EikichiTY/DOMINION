@@ -6,6 +6,11 @@ Carte::Carte(std::string nom, int prix){
     this->prix = prix; 
 }
 
+Carte::Carte(const Carte& c){
+    this->nom = c.nom; 
+    this->prix = c.prix; 
+}
+
 Carte::~Carte(){}
 
 void Carte::setPrix(int prix){

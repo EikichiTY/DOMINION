@@ -31,6 +31,18 @@ void Deck::melangerPioche(){
     std::random_shuffle(this->pioche.begin(), this->pioche.end()); 
 }
 
+void Deck::initMain(){
+    /*if(pioche.size() < 5){    // cas ou il reste moins de 5 cartes dans pioche a faire 
+   
+    }*/
+
+    for (int i = 0; i < 5 && !pioche.empty(); i++) {
+        Carte* carte = pioche.back();
+        main.push_back(carte);
+        pioche.pop_back();
+    }
+}
+
 int Deck::getNbPiece(){
     int nbPieces = 0; 
     for (auto carte : main){ 

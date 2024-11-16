@@ -13,6 +13,8 @@ class CarteRoyaume : public Carte {
     public : 
         
         CarteRoyaume(); 
+        CarteRoyaume(std::string nom); 
+        CarteRoyaume(const CarteRoyaume& c); 
         ~CarteRoyaume(); 
         
         int getValeur(); 

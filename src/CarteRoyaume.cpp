@@ -2,6 +2,30 @@
 #include <iostream> 
 #include <vector> 
 
+CarteRoyaume::CarteRoyaume(){}
+
+CarteRoyaume::CarteRoyaume(std::string nom){
+    std::tuple<std::string,int,bool,bool> newCarte; 
+    for(auto carte : cartePossiblesRoyaume){
+        if(std::get<0>(carte) == nom){
+            newCarte = carte; 
+        }
+    }
+    
+    this->nom = std::get<0>(newCarte); 
+    this->prix = std::get<1>(newCarte);
+    this->attaque = std::get<2>(newCarte); 
+    this->reaction = std::get<3>(newCarte); 
+}
+
+
+CarteRoyaume::CarteRoyaume(const CarteRoyaume& c){
+    this->nom = c.nom; 
+    this->prix = c.prix; 
+    this->attaque = c.attaque; 
+    this->reaction = c.reaction; 
+}
+
 
 bool CarteRoyaume::estAttaque(){
     return this->attaque; 

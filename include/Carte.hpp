@@ -18,8 +18,10 @@ class Carte {
 
     public : 
 
-      Carte(){}
+        Carte(){}
         Carte(std::string nom , int prix); 
+        Carte(const Carte& c); 
+        
         virtual ~Carte(); 
 
         virtual int getPrix(); 
