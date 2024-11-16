@@ -19,7 +19,7 @@ class CarteRoyaume : public Carte {
     protected: 
         bool attaque; 
         bool reaction;
-        TypeRoyaume type;  
+        TypeRoyaume typeCarteRoyaume;  
     
     public : 
         

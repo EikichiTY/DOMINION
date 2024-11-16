@@ -1,17 +1,32 @@
+# Compilateur
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++11 -Iinclude
 
-CXX=g++
-CXXFLAGS=-Wall -Wextra -Werror
+# Dossiers
+SRC_DIR = src
+INC_DIR = include
+OBJ_DIR = obj
+BIN_DIR = bin
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) $< -c -o $@
+# Fichiers
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+TARGET = $(BIN_DIR)/DOMINION
 
-main: Carte.o main.o
-	$(CXX) $^ -o $@
+# Règles
+all: create_dirs $(TARGET)
 
-.PHONY: run clean
+create_dirs:
+	@if not exist $(OBJ_DIR) mkdir $(OBJ_DIR)
+	@if not exist $(BIN_DIR) mkdir $(BIN_DIR)
 
-run: main
-	./$<
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
-	rm -f *.o *~ *.core 
+	rm -rf $(OBJ_DIR) $(BIN_DIR)
+
+.PHONY: all clean create_dirs

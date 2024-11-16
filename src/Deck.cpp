@@ -18,9 +18,9 @@ void Deck::melangerDeck(){
     std::random_shuffle(this->pioche.begin(), this->pioche.end()); 
 }
 
-int Deck::getNbPiece(){
+/*int Deck::getNbPiece(){
     
-}
+}*/
 
 /*int Deck::getNbPoint(){
     nbPoint = 0 ;

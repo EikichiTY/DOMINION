@@ -14,7 +14,6 @@ class Joueur {
     public :
     // Constructeur 
      Joueur(const std::string& nom );
-     ~Joueur();
     // Methode
     std::string getNom() const;
     int getScore() const;

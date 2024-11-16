@@ -24,8 +24,8 @@ std::string Carte::getNom(){
     return this->nom; 
 }
 
-std::string Carte::getType(){
-    return this->type; 
+TypeCarte Carte::getType(){
+    return this->typeCarte; 
 }
 
 void Carte::afficheCarte(){

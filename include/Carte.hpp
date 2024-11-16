@@ -3,25 +3,30 @@
 
 #include <iostream> 
 
+enum TypeCarte {
+  ROYAUME, 
+  TRESORS,
+  VICTOIRE
+};
 
 class Carte {
     protected : 
         std::string nom ; 
-        std::string type; 
+        TypeCarte typeCarte; 
         int prix; 
 
     public : 
 
         Carte(std::string nom , int prix); 
-        ~Carte(); 
+        virtual ~Carte(); 
 
-        int getPrix(); 
+        virtual int getPrix(); 
         std::string getNom(); 
 
         void setPrix(int prix); 
         void setNom(std::string nom);  
 
-        std::string getType();  
+        TypeCarte getType();  
         void afficheCarte(); 
         void action(); 
 
