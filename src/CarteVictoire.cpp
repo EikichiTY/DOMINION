@@ -13,5 +13,6 @@ CarteVictoire::CarteVictoire(std::string nom){
     
     this->nom = std::get<0>(newCarte); 
     this->prix = std::get<1>(newCarte);
-    this->point = std::get<2>(newCarte); 
+    this->point = std::get<2>(newCarte);
+    this->typeCarte = TypeCarte::VICTOIRE; 
 }

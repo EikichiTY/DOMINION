@@ -16,6 +16,7 @@ CarteRoyaume::CarteRoyaume(std::string nom){
     this->prix = std::get<1>(newCarte);
     this->attaque = std::get<2>(newCarte); 
     this->reaction = std::get<3>(newCarte); 
+    this->typeCarte = TypeCarte::ROYAUME;
 }
 
 
@@ -24,6 +25,7 @@ CarteRoyaume::CarteRoyaume(const CarteRoyaume& c){
     this->prix = c.prix; 
     this->attaque = c.attaque; 
     this->reaction = c.reaction; 
+    this->typeCarte = TypeCarte::ROYAUME;
 }
 
 
