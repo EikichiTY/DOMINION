@@ -2,6 +2,7 @@
 #define Carte_HPP
 
 #include <iostream> 
+#include <tuple> 
 
 enum TypeCarte {
   ROYAUME, 
@@ -17,6 +18,7 @@ class Carte {
 
     public : 
 
+      Carte(){}
         Carte(std::string nom , int prix); 
         virtual ~Carte(); 
 

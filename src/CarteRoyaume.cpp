@@ -1,19 +1,14 @@
 #include "CarteRoyaume.hpp"
 #include <iostream> 
+#include <vector> 
 
 
 bool CarteRoyaume::estAttaque(){
-    if (this->typeCarteRoyaume == VOLEUR || this->typeCarteRoyaume == SORCIERE|| this->typeCarteRoyaume == SORCIERE){
-        return true;
-    }
-    return false; 
+    return this->attaque; 
 } 
 
 bool CarteRoyaume::estReaction(){
-    if (this->typeCarteRoyaume != DOUVE){
-        return false; 
-    }
-    return true; 
+    return this->reaction; 
 }
 
 

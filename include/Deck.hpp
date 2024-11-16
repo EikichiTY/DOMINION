@@ -5,6 +5,9 @@
 #include <vector> 
 #include <map>
 #include "Carte.hpp"
+#include "CarteTresors.hpp"
+#include "CarteVictoire.hpp"
+
 
 class Deck{ 
     private : 
@@ -20,8 +23,12 @@ class Deck{
         ~Deck();
 
         void piocherCarte(); 
+        void acheterCarte(Carte* c);
+        void initMain(); 
         void ajouteDefausse(Carte* c); 
         void melangerDeck(); 
+        void deckFinPartie(); //stocke toutes les cartes dans la defausse pour compter le nombre de points 
+
         int getNbPiece(); 
         int getNbPoint(); 
         std::vector<Carte*> getMain(); 

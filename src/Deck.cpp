@@ -3,15 +3,18 @@
 #include "Deck.hpp"
 
 
-/*Deck::Deck(){
+Deck::Deck(){
+    
     for (int i = 0; i<7 ; i++){
-        this->pioche.push_back(CarteTresors(Cuivre));
+        this->pioche.push_back(new CarteTresors("Cuivre"));
     }
     for (int i = 0; i<3; i++){
-        this->pioche.push_back(CarteVictoire(Domaine))
+        this->pioche.push_back(new CarteVictoire("Domaine"));
     }
+    melangerPioche(); 
     
-}*/
+}
+
 Deck::~Deck(){} 
 
 void Deck::piocherCarte(){
@@ -24,7 +27,7 @@ void Deck::ajouteDefausse(Carte* c){
     this->defausse.push_back(c); 
 }
 
-void Deck::melangerDeck(){
+void Deck::melangerPioche(){
     std::random_shuffle(this->pioche.begin(), this->pioche.end()); 
 }
 
