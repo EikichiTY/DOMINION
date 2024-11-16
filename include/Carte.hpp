@@ -21,14 +21,14 @@ class Carte {
         virtual ~Carte(); 
 
         virtual int getPrix(); 
-        std::string getNom(); 
+        virtual std::string getNom(); 
 
-        void setPrix(int prix); 
-        void setNom(std::string nom);  
+        virtual void setPrix(int prix); 
+        virtual void setNom(std::string nom);  
 
-        TypeCarte getType();  
-        void afficheCarte(); 
-        void action(); 
+        virtual TypeCarte getType();  
+        virtual void afficheCarte(); 
+   
 
 }; 
 

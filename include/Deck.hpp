@@ -28,8 +28,6 @@ class Deck{
         std::vector<Carte*> getPioche(); 
         std::vector<Carte*> getDefausse(); 
         
-
-
 }; 
 
 

@@ -46,7 +46,7 @@ void CarteRoyaume::actionSorciere(){
 }
 
 void CarteRoyaume::actionVillage(){
-
+    //"Piochez une carte et obtenez 2 actions supplémentaires."
 }
 
 void CarteRoyaume::actionVoleur(){

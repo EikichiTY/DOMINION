@@ -27,14 +27,12 @@ class CarteRoyaume : public Carte {
         ~CarteRoyaume(); 
         
         int getValeur(); 
-        std::string getType(); 
+        std::string getTypeRoyaume(); 
 
         bool estAttaque(); 
         bool estReaction(); 
          
-
         void action(); 
- 
         void actionAtelier(); 
         void actionBucheron(); 
         void actionChapelle(); 
