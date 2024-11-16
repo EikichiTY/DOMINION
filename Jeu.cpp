@@ -14,7 +14,7 @@ void Jeu::commenceTour(Joueur j){
 
 /*Joueur Jeu::prochainJoueur(Joueur j*){ 
     for (auto joueur : listeJoueurs){
-        if (joueur.equals(j)){break;} 
+        if (joueur j ){break;} 
     }
     Joueur prochain = listeJoueurs.at(i+1); 
     return prochain; 

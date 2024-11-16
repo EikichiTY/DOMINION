@@ -15,6 +15,8 @@ class Jeu {
         std::vector<Joueur> listeJoueurs; 
 
     public : 
+        Jeu(); 
+        ~Jeu(); 
         void commenceTour(Joueur j); 
         void termineTour(); 
         Joueur prochainJoueur(Joueur j); 

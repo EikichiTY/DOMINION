@@ -18,7 +18,7 @@ class Deck{
     public : 
         Deck(); 
         ~Deck();
-        
+
         void piocherCarte(); 
         void ajouteDefausse(Carte* c); 
         void melangerDeck(); 

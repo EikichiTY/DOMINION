@@ -1,7 +1,9 @@
 #include "CarteRoyaume.hpp"
+#include <iostream> 
+
 
 bool CarteRoyaume::estAttaque(){
-    if (this->type != DOUVE){
+    if (this->type == VOLEUR || this->type == SORCIERE|| this->type == SORCIERE){
         return true;
     }
     return false; 

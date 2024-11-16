@@ -22,6 +22,10 @@ class CarteRoyaume : public Carte {
         TypeRoyaume type;  
     
     public : 
+        
+        CarteRoyaume(); 
+        ~CarteRoyaume(); 
+        
         int getValeur(); 
         std::string getType(); 
 

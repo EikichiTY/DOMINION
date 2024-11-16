@@ -7,6 +7,8 @@ class CarteVictoire : public Carte {
         int point; 
     
     public : 
+        CarteVictoire(); 
+        ~CarteVictoire(); 
         int getPoint(); 
         void setPoint(); 
 

@@ -16,6 +16,8 @@ class Plateau {
         int nbCarteEpuise; 
     
     public: 
+        Plateau(); 
+        ~Plateau(); 
         void initialiser(); 
         void afficher(); 
         
