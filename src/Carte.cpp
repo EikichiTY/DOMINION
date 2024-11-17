@@ -37,13 +37,14 @@ std::string Carte::TypetoString() {
 
 void Carte::afficheCarte(){
     std::cout<<"+-------------+\n"; 
-    std::cout<<"|    Carte    |\n";
+    std::cout<<"|  Nom Carte  |\n";
     std::cout<<"     "<<this->getNom()<<"  \n";
     std::cout<<"+-------------+\n";
     std::cout<<"|    Type     |\n";
     std::cout<<"    "<<TypetoString()<<" \n";
-    std::cout<<"|  Prix :  "<<this->getPrix()<<"  |\n";
     std::cout<<"|             |\n";
-    std::cout<<"+-------------+\n";
+    std::cout<<"|  Prix :  "<<this->getPrix()<<"  |\n";
+    std::cout<<"+-------------+\n\n";
+
 }
 

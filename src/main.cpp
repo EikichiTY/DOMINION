@@ -17,7 +17,10 @@ int main(){
     c1.afficheCarte(); */
 
     CarteTresors c1 = CarteTresors("Or"); 
-    c1.afficheCarte(); 
+    CarteVictoire c2 = CarteVictoire("Domaine"); 
+    
+    c1.afficheCarte();
+    c2.afficheCarte();  
 
     Jeu jeu;
     //jeu.ajouterJoueur();
