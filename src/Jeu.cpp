@@ -7,7 +7,7 @@ void Jeu::commenceTour(Joueur j){
     
     j.jouerCarte(); 
     j.acheterCarte(); 
-    j.defausserMain(); 
+    j.nouvelleMain(); 
     
     /*std::cout<<"Choissez une carte a jouer : \n"; 
 

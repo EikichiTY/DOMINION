@@ -1,6 +1,6 @@
 # Compilateur et options
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++11 -Iinclude
+CXXFLAGS = -Wall -Wextra -std=c++11 -Iinclude -mconsole -lstdc++
 
 # Dossiers
 SRC_DIR = src
@@ -38,6 +38,5 @@ clean:
 	@if exist $(BIN_DIR) rmdir /s /q $(BIN_DIR)
 
 .PHONY: all clean create_dirs
-
 #Pour compiler le projet utiliser la commande : mingw32-make sur VsCode
 #Pour executer le projet utiliser la commande : ./bin/dominion 
