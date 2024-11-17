@@ -20,6 +20,7 @@ class Jeu {
         void termineTour(); 
         Joueur prochainJoueur(Joueur j); 
         void ajouterJoueur(); 
+        std::vector<Joueur> getListeJoueurs(); 
 
 };
 

@@ -25,6 +25,9 @@ int main(){
     
 
     Jeu jeu;
-    //jeu.ajouterJoueur();
+    jeu.ajouterJoueur();
+
+    jeu.commenceTour(jeu.getListeJoueurs().at(0));
+
     return 0; 
 }

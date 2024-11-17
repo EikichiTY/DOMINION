@@ -1,6 +1,8 @@
 #include "Joueur.hpp"
 
-Joueur::Joueur(const std::string& nom) : nom(nom), score(0), nbAchat(0), nbActions(0) {}
+Joueur::Joueur(const std::string& nom) : nom(nom), score(0), nbAchat(0), nbActions(0) {
+
+}
 
 std::string Joueur::getNom() const {
     return nom;
@@ -14,17 +16,24 @@ void Joueur::setScore(int nvScore) {
     score = nvScore;
 }
 
-int Joueur::calculerPoint() {
-    
-    return score;
+void Joueur::afficherMain(){
+    std::vector<Carte*> mainJoueur = this->getDeck().getMain();
+    int index = 0; 
+    std::cout<<"Votre main : \n\n";
+    for(auto carte : mainJoueur){
+        std::cout<<index<<" | Carte : "<<carte->getNom()<<" | Type : "<<carte->TypetoString()<<"\n";
+        index ++; 
+    }
+    std::cout<<"\n";
 }
 
-void Joueur::jouerCarte() {
 
+void Joueur::jouerCarte(CarteRoyaume* c) {
+    //c->action(); 
 }
 
-void Joueur::acheterCarte(){
-
+void Joueur::acheterCarte(Carte* c){
+    this->deck.ajouteDefausse(c); 
 }
 
 void Joueur::nouvelleMain(){

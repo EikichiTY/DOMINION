@@ -9,6 +9,9 @@ class CarteVictoire : public Carte {
          
     public : 
         static const std::vector<std::tuple<std::string,int,int>> listeCarteVictoire ;
+        //permet de definir la structure de toutes les cartes utilisable dans la partie 
+        //carteVictoire = <nom,prix,point>
+
         CarteVictoire();
         CarteVictoire(const CarteVictoire& c); 
         CarteVictoire(std::string nom); 
