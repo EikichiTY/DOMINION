@@ -16,7 +16,7 @@ int main(){
 
     c1.afficheCarte(); */
 
-    CarteTresors c1 = CarteTresors("Cuivre"); 
+    CarteTresors c1 = CarteTresors("Or"); 
     c1.afficheCarte(); 
 
     Jeu jeu;

@@ -8,7 +8,7 @@ class CarteTresors : public Carte {
     
 
     public : 
-        static std::vector<std::tuple<std::string,int,int>> listeCarteTresors;
+        static const std::vector<std::tuple<std::string,int,int>> listeCarteTresors;
         CarteTresors();
         CarteTresors(const CarteTresors& c); 
 
