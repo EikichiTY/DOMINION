@@ -21,7 +21,7 @@ class CarteRoyaume : public Carte {
 
         bool estAttaque(); 
         bool estReaction(); 
-         
+                    
         void action(); 
         void actionAtelier(); 
         void actionBucheron(); 
@@ -32,6 +32,7 @@ class CarteRoyaume : public Carte {
         void actionSorciere(); 
         void actionVillage(); 
         void actionVoleur();
+        void actionJardin();
 
 };
 
