@@ -6,20 +6,16 @@
 class CarteVictoire : public Carte {
     protected: 
         int point; 
-        static const std::vector<std::tuple<std::string,int,int>> cartePossiblesVictoire ;  
+         
     public : 
-        CarteVictoire(); 
+        static const std::vector<std::tuple<std::string,int,int>> listeCarteVictoire ;
+        CarteVictoire();
+        CarteVictoire(const CarteVictoire& c); 
+        CarteVictoire(std::string nom); 
+
         ~CarteVictoire(); 
         int getPoint(); 
         void setPoint(); 
-
-
-    std::vector<std::tuple<std::string, int, int>> CarteVictoire::cartePossiblesVictoire = {
-    {"Domaine", 2, 1},
-    {"Duchesse",5,3},
-    {"Province", 8, 6},
-    {"Malediction", 0, -1}
-    };
 
 };
 

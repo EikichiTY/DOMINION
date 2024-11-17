@@ -1,12 +1,27 @@
 #include "CarteRoyaume.hpp"
 #include <iostream> 
 #include <vector> 
+#include <tuple> 
 
-CarteRoyaume::CarteRoyaume(){}
+const std::vector<std::tuple<std::string,int,bool,bool>> CarteRoyaume::listeCarteRoyaume = {
+    {"Atelier",3,false,false},
+    {"Bucheron",3,false,false},
+    {"Chapelle",2,false,false},
+    {"Douve",2,false,true},
+    {"Festin",4,false,false},
+    {"Laboratoire",5,false,false},
+    {"Sorciere",5,true,false},
+    {"Village",3,false,false},
+    {"Voleur",4,true,false},
+    {"Jardins",4,false,false}
+};
+
+
+CarteRoyaume::CarteRoyaume() : Carte(), attaque(false), reaction(false){}
 
 CarteRoyaume::CarteRoyaume(std::string nom){
     std::tuple<std::string,int,bool,bool> newCarte; 
-    for(auto carte : cartePossiblesRoyaume){
+    for(auto carte : listeCarteRoyaume){
         if(std::get<0>(carte) == nom){
             newCarte = carte; 
         }
@@ -27,6 +42,8 @@ CarteRoyaume::CarteRoyaume(const CarteRoyaume& c){
     this->reaction = c.reaction; 
     this->typeCarte = TypeCarte::ROYAUME;
 }
+
+CarteRoyaume::~CarteRoyaume(){}
 
 
 bool CarteRoyaume::estAttaque(){

@@ -1,11 +1,21 @@
 #include "CarteVictoire.hpp"
 #include <vector> 
 
-CarteVictoire::CarteVictoire(){}
+
+const std::vector<std::tuple<std::string, int, int>> CarteVictoire::listeCarteVictoire = {
+    {"Domaine", 2, 1},
+    {"Duche",5,3},
+    {"Province", 8, 6},
+    {"Malediction", 0, -1}
+};
+
+CarteVictoire::CarteVictoire() : Carte(), point(0){}
+
+CarteVictoire::~CarteVictoire(){}
 
 CarteVictoire::CarteVictoire(std::string nom){
     std::tuple<std::string,int,int> newCarte; 
-    for(auto carte : cartePossiblesVictoire){
+    for(auto carte : listeCarteVictoire){
         if(std::get<0>(carte) == nom){
             newCarte = carte; 
         }
@@ -15,4 +25,8 @@ CarteVictoire::CarteVictoire(std::string nom){
     this->prix = std::get<1>(newCarte);
     this->point = std::get<2>(newCarte);
     this->typeCarte = TypeCarte::VICTOIRE; 
+}
+
+int CarteVictoire::getPoint(){
+    return this->point;
 }

@@ -3,6 +3,7 @@
 
 #include <iostream> 
 #include <tuple> 
+#include <vector>
 
 enum TypeCarte {
   ROYAUME, 
@@ -18,19 +19,18 @@ class Carte {
 
     public : 
 
-        Carte(){}
-        Carte(std::string nom , int prix); 
-        Carte(const Carte& c); 
+        Carte();
+        
         
         virtual ~Carte(); 
 
-        virtual int getPrix(); 
-        virtual std::string getNom(); 
+        int getPrix(); 
+        std::string getNom(); 
 
-        virtual void setPrix(int prix); 
-        virtual void setNom(std::string nom);  
+        void setPrix(int prix); 
+        void setNom(std::string nom);  
 
-        virtual TypeCarte getType();  
+        TypeCarte getType();  
         virtual void afficheCarte(); 
    
 

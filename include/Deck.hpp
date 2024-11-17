@@ -22,11 +22,11 @@ class Deck{
         Deck(); 
         ~Deck();
 
-        void piocherCarte(); 
+        void piocherCarte();  
         void acheterCarte(Carte* c);
         void initMain(); 
         void ajouteDefausse(Carte* c); 
-        void melangerDeck(); 
+        void melangerPioche(); 
         void deckFinPartie(); //stocke toutes les cartes dans la defausse pour compter le nombre de points 
 
         int getNbPiece(); 

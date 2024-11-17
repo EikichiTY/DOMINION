@@ -1,15 +1,8 @@
 #include <iostream> 
 #include "Carte.hpp"
 
-Carte::Carte(std::string nom, int prix){
-    this->nom = nom; 
-    this->prix = prix; 
-}
+Carte::Carte(){}
 
-Carte::Carte(const Carte& c){
-    this->nom = c.nom; 
-    this->prix = c.prix; 
-}
 
 Carte::~Carte(){}
 

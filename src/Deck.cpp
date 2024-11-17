@@ -11,7 +11,7 @@ Deck::Deck(){
     for (int i = 0; i<3; i++){
         this->pioche.push_back(new CarteVictoire("Domaine"));
     }
-    melangerPioche(); 
+    
     
 }
 
