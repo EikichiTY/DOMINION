@@ -37,7 +37,7 @@ clean:
 	@if exist $(OBJ_DIR) rmdir /s /q $(OBJ_DIR)
 	@if exist $(BIN_DIR) rmdir /s /q $(BIN_DIR)
 
-.PHONY: all clean create_dirs
+.PHONY: all clean create_dirs
 
 #Pour compiler le projet utiliser la commande : mingw32-make sur VsCode
 #Pour executer le projet utiliser la commande : ./bin/dominion 

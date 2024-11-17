@@ -19,8 +19,11 @@ class Joueur {
     int getScore() const;
     void setScore(int nvScore);
     int calculerPoint(); 
+    
     void jouerCarte();
-    std::string choixAction(); 
+    void acheterCarte(); 
+    void nouvelleMain(); 
+
     Deck getDeck(); 
 
 }; 

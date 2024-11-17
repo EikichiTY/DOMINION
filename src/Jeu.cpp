@@ -4,14 +4,19 @@
 Jeu::Jeu(){}
 
 void Jeu::commenceTour(Joueur j){
-    std::cout<<"Choissez une carte a jouer : \n"; 
+    
+    j.jouerCarte(); 
+    j.acheterCarte(); 
+    j.defausserMain(); 
+    
+    /*std::cout<<"Choissez une carte a jouer : \n"; 
 
     std::vector<Carte*> main = j.getDeck().getMain(); 
     for (size_t i = 0; i < main.size(); i++){
         main.at(i)->afficheCarte(); 
     }
 
-    std::string choix = j.choixAction();    
+    std::string choix = j.choixAction();    */
 }
 
 /*Joueur Jeu::prochainJoueur(Joueur j*){ 

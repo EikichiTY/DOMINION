@@ -17,9 +17,7 @@ class CarteRoyaume : public Carte {
         CarteRoyaume(const CarteRoyaume& c); 
         ~CarteRoyaume(); 
         
-        int getValeur(); 
-        
-        std::string getTypeRoyaume(); 
+        int getValeur();  
 
         bool estAttaque(); 
         bool estReaction(); 

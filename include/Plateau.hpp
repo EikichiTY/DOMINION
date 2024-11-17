@@ -4,15 +4,14 @@
 #include <vector> 
 #include <map> 
 #include "Carte.hpp"
+#include "CarteTresors.hpp"
+#include "CarteRoyaume.hpp"
+#include "CarteVictoire.hpp"
 
 
 class Plateau {
     private: 
-        std::vector<Carte> listeRoyaume;
-        std::vector<Carte> listeTresors;
-        std::vector<Carte> listeVictoire;
-
-        std::map<std::string, int> cartePlateau; 
+        std::map<Carte*, int> cartePlateau; 
         int nbCarteEpuise; 
     
     public: 
@@ -25,12 +24,9 @@ class Plateau {
         void setCarteEpuise(int nb);
         int getCarteEpuise();
         
-        std::vector<Carte> getListeRoyaume();  
-        std::vector<Carte> getListeVictoire();  
-        std::vector<Carte> getListeTresors();
 
         
-        void retirerCarte(Carte c);   
+        void retirerCarte(Carte* c);   
 
 }; 
 

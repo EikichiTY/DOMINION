@@ -23,13 +23,18 @@ void Joueur::jouerCarte() {
 
 }
 
+void Joueur::acheterCarte(){
+
+}
+
+void Joueur::defausserMain(){
+
+}
+
 Deck Joueur::getDeck() {
     return deck;
 }
 
-std::string Joueur::choixAction() {
-    return "Action choisie";
-}
 
 
 /* 
