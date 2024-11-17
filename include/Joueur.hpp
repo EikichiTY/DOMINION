@@ -1,7 +1,10 @@
 #ifndef Joueur_HPP
 #define Joeuur_HPP 
 #include "Deck.hpp"
-
+#include "Carte.hpp"
+#include "CarteTresors.hpp"
+#include "CarteRoyaume.hpp"
+#include "CarteVictoire.hpp"
 
 class Joueur {
     private : 
@@ -12,16 +15,16 @@ class Joueur {
         Deck deck;
 
     public :
-    // Constructeur 
-     Joueur(const std::string& nom );
-    // Methode
+     
+    Joueur(const std::string& nom );
+    
     std::string getNom() const;
     int getScore() const;
     void setScore(int nvScore);
-    int calculerPoint(); 
-    
-    void jouerCarte();
-    void acheterCarte(); 
+    void afficherMain(); 
+
+    void jouerCarte(CarteRoyaume* c);
+    void acheterCarte(Carte* c); 
     void nouvelleMain(); 
 
     Deck getDeck(); 

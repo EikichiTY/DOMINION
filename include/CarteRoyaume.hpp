@@ -11,7 +11,10 @@ class CarteRoyaume : public Carte {
         
     public : 
         
-        static const std::vector<std::tuple<std::string,int,bool,bool>> listeCarteRoyaume; //permet de definir la structure de toutes les cartes utilisable dans la partie 
+        static const std::vector<std::tuple<std::string,int,bool,bool>> listeCarteRoyaume; 
+        //permet de definir la structure de toutes les cartes utilisable dans la partie 
+        //carteRoyaume = <nom,prix,attaque,reaction>
+
         CarteRoyaume(); 
         CarteRoyaume(std::string nom); 
         CarteRoyaume(const CarteRoyaume& c); 
