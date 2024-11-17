@@ -20,6 +20,6 @@ int main(){
     c1.afficheCarte(); 
 
     Jeu jeu;
-    jeu.ajouterJoueur();
+    //jeu.ajouterJoueur();
     return 0; 
 }

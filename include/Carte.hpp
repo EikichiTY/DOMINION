@@ -11,6 +11,7 @@ enum TypeCarte {
   VICTOIRE
 };
 
+
 class Carte {
     protected : 
         std::string nom ; 
@@ -21,7 +22,7 @@ class Carte {
 
         Carte();
         
-        
+        std::string TypetoString(); 
         virtual ~Carte(); 
 
         int getPrix(); 
