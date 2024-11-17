@@ -27,7 +27,7 @@ void Joueur::acheterCarte(){
 
 }
 
-void Joueur::defausserMain(){
+void Joueur::nouvelleMain(){
 
 }
 
