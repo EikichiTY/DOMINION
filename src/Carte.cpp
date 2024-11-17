@@ -2,8 +2,6 @@
 #include "Carte.hpp"
 
 Carte::Carte(){}
-
-
 Carte::~Carte(){}
 
 void Carte::setPrix(int prix){

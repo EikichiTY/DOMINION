@@ -30,3 +30,12 @@ Deck Joueur::getDeck() {
 std::string Joueur::choixAction() {
     return "Action choisie";
 }
+
+
+/* 
+    std::vector<Carte*> main = j.getDeck().getMain(); 
+    for (size_t i = 0; i < main.size(); i++){
+        main.at(i)->afficheCarte(); 
+    }
+
+    std::string choix = j.choixAction(); */

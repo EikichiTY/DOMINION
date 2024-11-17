@@ -37,7 +37,7 @@ void Plateau::setCarteEpuise(int nb){
 
 void Plateau::afficher(){
     std::cout<<"-------------------------------------------------\n"; 
-    std::cout<<"Carte Restantes : \n";
+    std::cout<<"Carte Disponibles a l'achat : \n";
     for (auto carte : cartePlateau){
         std::cout<<"Carte : "<<carte.first<<" | Disponibilés : "<<carte.second<<"\n"; 
     }
