@@ -1,6 +1,6 @@
 # Compilateur et options
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++11 -Iinclude -mconsole -lstdc++
+CXXFLAGS = -Wall -Wextra -std=c++11 -Iinclude -lstdc++
 
 # Dossiers
 SRC_DIR = src
@@ -20,7 +20,7 @@ all: create_dirs $(TARGET)
 $(TARGET): $(OBJS)
 	@echo "Linking: $(TARGET)"
 	$(CXX) $(CXXFLAGS) -o $@ $^
-
+  
 # Compilation des fichiers objets
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@echo "Compiling: $<"
@@ -40,4 +40,4 @@ clean:
 .PHONY: all clean create_dirs
 
 #Pour compiler le projet utiliser la commande : mingw32-make sur VsCode
-#Pour executer le projet utiliser la commande : ./bin/dominion 
+#Pour executer le projet utiliser la commande : ./bin/dominon
