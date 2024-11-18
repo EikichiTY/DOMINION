@@ -23,6 +23,7 @@ class Carte {
         Carte();
         
         std::string TypetoString(); 
+        
         virtual ~Carte(); 
 
         int getPrix(); 

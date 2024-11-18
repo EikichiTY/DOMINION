@@ -16,7 +16,7 @@ class Joueur {
 
     public :
      
-    Joueur(const std::string& nom );
+    Joueur(const std::string& nom ); //on doit ajouter l initialisation du deck + initialisation de la main dans le deck
     
     std::string getNom() const;
     int getScore() const;
