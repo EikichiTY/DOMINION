@@ -20,14 +20,15 @@ int main(){
     */
     Plateau plateau; 
     plateau.initialiser(); 
+
     plateau.afficher(); 
 
     
 
-    Jeu jeu;
+    /*Jeu jeu;
     jeu.ajouterJoueur();
 
-    jeu.commenceTour(jeu.getListeJoueurs().at(0));
+    jeu.commenceTour(jeu.getListeJoueurs().at(0));*/
 
     return 0; 
 }

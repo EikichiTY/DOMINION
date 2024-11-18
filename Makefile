@@ -1,6 +1,7 @@
 # Compilateur et options
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++11 -Iinclude -lstdc++
+CXXFLAGS = -Wall -Wextra -std=c++11 -Iinclude -lstdc++
 
 # Dossiers
 SRC_DIR = src

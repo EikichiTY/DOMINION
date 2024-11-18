@@ -6,30 +6,41 @@ Plateau::Plateau(){}
 
 Plateau::~Plateau(){}
 
+std::vector<std::pair<Carte*, int>> Plateau::cartePlateau = {}; 
+int Plateau::nbCarteEpuise = 0; 
+
 void Plateau::initialiser(){
-    cartePlateau.insert({new CarteTresors("Cuivre"),60}); 
-    cartePlateau.insert({new CarteTresors("Argent"), 40}); 
-    cartePlateau.insert({new CarteTresors("Or"), 30}); 
-    cartePlateau.insert({new CarteVictoire("Domaine"), 24});
-    cartePlateau.insert({new CarteVictoire("Duche"), 12}); 
-    cartePlateau.insert({new CarteVictoire("Province"),8}); 
-    cartePlateau.insert({new CarteVictoire("Malediction"),30}); 
-    cartePlateau.insert({new CarteRoyaume("Atelier"),10}); 
-    cartePlateau.insert({new CarteRoyaume("Bucheron"),10}); 
-    cartePlateau.insert({new CarteRoyaume("Laboratoire"),10}); 
-    cartePlateau.insert({new CarteRoyaume("Festin"),10}); 
-    cartePlateau.insert({new CarteRoyaume("Sorciere"),10}); 
-    cartePlateau.insert({new CarteRoyaume("Douve"),10}); 
-    cartePlateau.insert({new CarteRoyaume("Voleur"),10}); 
-    cartePlateau.insert({new CarteRoyaume("Village"),10}); 
-    cartePlateau.insert({new CarteRoyaume("Jardins"),10}); 
-    cartePlateau.insert({new CarteRoyaume("Chapelle"),10}); 
+    cartePlateau.push_back({new CarteTresors("Cuivre"),60}); 
+    cartePlateau.push_back({new CarteTresors("Argent"), 40}); 
+    cartePlateau.push_back({new CarteTresors("Or"), 30}); 
+    cartePlateau.push_back({new CarteVictoire("Domaine"), 24});
+    cartePlateau.push_back({new CarteVictoire("Duche"), 12}); 
+    cartePlateau.push_back({new CarteVictoire("Province"),8}); 
+    cartePlateau.push_back({new CarteVictoire("Malediction"),30}); 
+    cartePlateau.push_back({new CarteRoyaume("Atelier"),10}); 
+    cartePlateau.push_back({new CarteRoyaume("Bucheron"),10}); 
+    cartePlateau.push_back({new CarteRoyaume("Laboratoire"),10}); 
+    cartePlateau.push_back({new CarteRoyaume("Festin"),10}); 
+    cartePlateau.push_back({new CarteRoyaume("Sorciere"),10}); 
+    cartePlateau.push_back({new CarteRoyaume("Douve"),10}); 
+    cartePlateau.push_back({new CarteRoyaume("Voleur"),10}); 
+    cartePlateau.push_back({new CarteRoyaume("Village"),10}); 
+    cartePlateau.push_back({new CarteRoyaume("Jardins"),10}); 
+    cartePlateau.push_back({new CarteRoyaume("Chapelle"),10}); 
+
+    std::sort(cartePlateau.begin(), cartePlateau.end(),
+        [](const std::pair<Carte*, int>& a, const std::pair<Carte*, int>& b) {
+            return a.first->getPrix() < b.first->getPrix();
+    });
+
+    
 }
+
 
 void Plateau::retirerCarte(Carte* c){
     for(auto carte : cartePlateau){
         if(carte.first == c){
-            cartePlateau[c] -= 1 ; 
+           carte.second -= 1 ; 
             if (carte.second == 0){
                 setCarteEpuise(1); 
             }  
@@ -41,22 +52,26 @@ void Plateau::setCarteEpuise(int nb){
     this->nbCarteEpuise += nb; 
 }
 
-void Plateau::afficher(){
-    std::cout<<"-------------------------------------------------\n"; 
-    std::cout<<"Carte Disponibles a l'achat : \n";
-    int index = 0; 
-    for (auto carte : cartePlateau){
-        std::cout<<index<<" | Carte : "<<carte.first->getNom()<<" | Prix : "<<carte.first->getPrix()<<" | Disponibilites : "<<carte.second<<"\n";
-        index++; 
+void Plateau::afficher() {
+    std::cout << "----------------------------------------\n";
+    std::cout << "Carte Disponibles a l'achat : \n";
+    
+    int index = 0;
+    for (auto carte : cartePlateau) {
+        std::cout << index << " | Carte : " << carte.first->getNom() 
+                 << " | Prix : " << carte.first->getPrix() 
+                 << " | Disponibilites : " << carte.second << "\n";
+        index++;
     }
-    std::cout<<"-------------------------------------------------\n"; 
+    
+    std::cout << "----------------------------------------\n";
 }
 
 int Plateau::getCarteEpuise(){
-    return this->nbCarteEpuise;
+    return nbCarteEpuise;
 }
 
-const std::map<Carte*, int>& Plateau::getCartePlateau() const {
+const std::vector<std::pair<Carte*, int>>& Plateau::getCartePlateau() const {
     return cartePlateau;
 }
 
