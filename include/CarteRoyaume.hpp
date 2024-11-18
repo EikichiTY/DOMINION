@@ -2,8 +2,11 @@
 #define CarteRoyaume_HPP
 #include "Carte.hpp"
 #include <iostream> 
+#include "Joueur.hpp"
+#include "Plateau.hpp"
 
 
+class Joueur; // pour eviter les les inclusion circulaire 
 class CarteRoyaume : public Carte {
     protected: 
         bool attaque; 
@@ -24,9 +27,10 @@ class CarteRoyaume : public Carte {
 
         bool estAttaque(); 
         bool estReaction(); 
-         
+                    
         void action(); 
-        void actionAtelier(); 
+        void actionAtelier(Joueur& joueur, Plateau& plateau);
+
         void actionBucheron(); 
         void actionChapelle(); 
         void actionDouve(); 
@@ -35,6 +39,7 @@ class CarteRoyaume : public Carte {
         void actionSorciere(); 
         void actionVillage(); 
         void actionVoleur();
+        void actionJardin();
 
 };
 

@@ -54,10 +54,40 @@ bool CarteRoyaume::estReaction(){
     return this->reaction; 
 }
 
+void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
+    std::cout << "Cartes disponibles coûtant 4 pièces ou moins : " << std::endl;
+    std::vector<Carte*> cartesEligibles;
+    int index = 0;
 
-void CarteRoyaume::actionAtelier(){
-    //
+    for (auto& [carte, quantite] : plateau.getCartePlateau()) {
+        if (quantite > 0 && carte->getPrix() <= 4) {
+            cartesEligibles.push_back(carte);
+            std::cout << index << ". " << carte->getNom() << " (Prix : " << carte->getPrix() << ")\n";
+            index++;
+        }
+    }
+
+    if (cartesEligibles.empty()) {
+        std::cout << "Aucune carte éligible disponible." << std::endl;
+        return;
+    }
+
+    int choix;
+    std::cout << "Choisissez une carte en entrant son numéro : ";
+    std::cin >> choix;
+
+    while (choix < 0 || choix >= cartesEligibles.size()) {
+        std::cout << "Choix invalide. Réessayez : ";
+        std::cin >> choix;
+    }
+
+    Carte* carteChoisie = cartesEligibles[choix];
+    joueur.getDeck().ajouteDefausse(carteChoisie);
+    plateau.retirerCarte(carteChoisie);
+
+    std::cout << "Vous avez ajouté " << carteChoisie->getNom() << " à votre défausse." << std::endl;
 }
+
 
 void CarteRoyaume::actionBucheron(){
     //+2 pieces +1 achat 

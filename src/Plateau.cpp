@@ -55,3 +55,8 @@ int Plateau::getCarteEpuise(){
     return this->nbCarteEpuise;
 }
 
+const std::map<Carte*, int>& Plateau::getCartePlateau() const {
+    return cartePlateau;
+}
+
+

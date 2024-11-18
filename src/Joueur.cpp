@@ -30,6 +30,7 @@ void Joueur::afficherMain(){
 
 void Joueur::jouerCarte(CarteRoyaume* c) {
     //c->action(); 
+    (void)c; // Indique que le paramètre est intentionnellement non utilisé
 }
 
 void Joueur::acheterCarte(Carte* c){
