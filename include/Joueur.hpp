@@ -23,7 +23,7 @@ class Joueur {
     void setScore(int nvScore);
     void afficherMain(); 
 
-    void jouerCarte(CarteRoyaume* c);
+    void jouerCarte(Carte* c);
     void acheterCarte(Carte* c); 
     void nouvelleMain(); 
 

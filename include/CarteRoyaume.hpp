@@ -7,6 +7,7 @@
 
 
 class Joueur; // pour eviter les les inclusion circulaire 
+class Plateau; 
 class CarteRoyaume : public Carte {
     protected: 
         bool attaque; 

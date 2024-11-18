@@ -2,7 +2,9 @@
 #define Plateau_HPP 
 #include <iostream> 
 #include <vector> 
-#include <map> 
+#include <map>
+#include <algorithm>
+
 #include "Carte.hpp"
 #include "CarteTresors.hpp"
 #include "CarteRoyaume.hpp"
@@ -18,6 +20,7 @@ class Plateau {
         Plateau(); 
         ~Plateau(); 
         void initialiser(); 
+        
         void afficher(); 
         
         void setCarteEpuise(int nb);

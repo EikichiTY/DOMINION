@@ -59,10 +59,10 @@ void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
     std::vector<Carte*> cartesEligibles;
     int index = 0;
 
-    for (auto& [carte, quantite] : plateau.getCartePlateau()) {
-        if (quantite > 0 && carte->getPrix() <= 4) {
-            cartesEligibles.push_back(carte);
-            std::cout << index << ". " << carte->getNom() << " (Prix : " << carte->getPrix() << ")\n";
+    for (auto& carteQuantite : plateau.getCartePlateau()) {
+        if (carteQuantite.second > 0 && carteQuantite.first->getPrix() <= 4) {
+            cartesEligibles.push_back(carteQuantite.first);
+            std::cout << index << ". " << carteQuantite.first->getNom() << " (Prix : " << carteQuantite.first->getPrix() << ")\n";
             index++;
         }
     }
