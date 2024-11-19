@@ -11,21 +11,20 @@
 #include "CarteVictoire.hpp"
 
 
-class Plateau {
-    private: 
-        std::map<Carte*, int> cartePlateau; 
-        int nbCarteEpuise; 
-      
+class Plateau {      
     public: 
+        static std::vector<std::pair<Carte*, int>> cartePlateau; 
+        static int nbCarteEpuise; 
+
         Plateau(); 
         ~Plateau(); 
         void initialiser(); 
-        
+        void ordonnerPlateau();
         void afficher(); 
         
         void setCarteEpuise(int nb);
         int getCarteEpuise();
-        const std::map<Carte*, int>& getCartePlateau() const;
+        const std::vector<std::pair<Carte*, int>>& getCartePlateau() const;
 
         
         void retirerCarte(Carte* c);   
