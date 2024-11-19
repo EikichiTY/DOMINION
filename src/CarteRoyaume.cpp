@@ -45,7 +45,6 @@ CarteRoyaume::CarteRoyaume(const CarteRoyaume& c){
 
 CarteRoyaume::~CarteRoyaume(){}
 
-
 bool CarteRoyaume::estAttaque(){
     return this->attaque; 
 } 
@@ -93,9 +92,48 @@ void CarteRoyaume::actionBucheron(){
     //+2 pieces +1 achat 
 }
 
-void CarteRoyaume::actionChapelle(){
-    //
+void CarteRoyaume::actionChapelle(Deck& deck ){
+    std::vector<Carte*> mainJoueur =deck.getMain();
+    std::cout<<"Voici votre main : "<<std::endl;
+    for (int i =0 ; i<mainJoueur.size() ; ++i){
+        std::cout<< i+1 <<"->"<<mainJoueur[i]->getNom()<< std::endl;
+    } 
+    int nbreMaxCartesDefausser=4;
+    int carteDefausses=0;
+    std::vector<int> cartesChoisies;
+
+    while (carteDefausses<nbreMaxCartesDefausser){
+        std::cout<<"choisissez une carte à defausser sinon entrez 0 si vous voulez rien mettre "
+        int choix ;
+        std::cin >> choix;
+
+        if(choix==0){
+            break;
+        }
+
+        if( choix < 1 || choix>mainJoueur.size()){
+ 
+           std::cout<<"Choix invalide. Veuillez entrer un numéro valide."<<std::endl;
+          continue;
+        }
+
+        if(std::find(cartesChoisies.begin(),cartesChoisies.end(), choix - 1)!=cartesChoisies.end()){
+          std::cout<<"Vous avez déjà choisi cette carte."<<std::endl;
+          continue;
+       }
+       cartesChoisies.push_back(choix - 1);
+       cartesDefaussees++;
+
+        Carte* carteChoisie = mainJoueur[choix -1];
+        deck.ajouteDefausse(carteChoisie);
+        mainJoueur.erase(mainJoueur.begin() + choix -1);
+        std::cout << "Vous avez défaussé " << carteChoisie->getNom() << std::endl;
+    }
+      
+    std::cout << "Vous avez défaussé " << cartesDefaussees << " carte" << std::endl;
+      
 }
+
 
 void CarteRoyaume::actionDouve(){
     //pioche 2 cartes supplementaires + protege carte jouee par un adversere
