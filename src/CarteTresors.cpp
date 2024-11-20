@@ -5,7 +5,7 @@
 const std::vector<std::tuple<std::string, int, int>> CarteTresors::listeCarteTresors = {
     {"Cuivre", 0, 1},
     {"Argent",3,2},
-    {"Or", 6, 3}
+    {"Or\t", 6, 3}
 };
 
 CarteTresors::CarteTresors() : Carte(), valeur(0) {}
@@ -19,10 +19,10 @@ CarteTresors::CarteTresors(std::string nom){
         }
     }
     
-    this->nom = std::get<0>(newCarte); 
+    this->nom = std::get<0>(newCarte);
     this->prix = std::get<1>(newCarte);
-    this->valeur = std::get<2>(newCarte); 
-    this->typeCarte = TypeCarte::TRESORS; 
+    this->valeur = std::get<2>(newCarte);
+    this->typeCarte = TypeCarte::TRESORS;
 }
 
 CarteTresors::CarteTresors(const CarteTresors& c){

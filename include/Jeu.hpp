@@ -17,10 +17,14 @@ class Jeu {
     public : 
         Jeu();  
         void commenceTour(Joueur j); 
-        void termineTour(); 
+        void finPartie(); 
         Joueur prochainJoueur(Joueur j); 
         void ajouterJoueur(); 
         std::vector<Joueur> getListeJoueurs(); 
+
+        void phaseJeu(Joueur j, std::vector<CarteRoyaume*> carteJouer); 
+        void phaseAchat(Joueur j, std::vector<CarteTresors*> carteAchat);
+        void phaseAjustement(Joueur j);
 
 };
 

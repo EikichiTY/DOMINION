@@ -42,12 +42,7 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "map": "cpp",
-        "bit": "cpp",
-        "compare": "cpp",
-        "concepts": "cpp",
-        "optional": "cpp",
-        "string_view": "cpp",
-        "numbers": "cpp"
+        "ctime": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

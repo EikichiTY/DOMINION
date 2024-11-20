@@ -132,9 +132,9 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
 void CarteRoyaume::actionFestin(Plateau& plateau,Deck& deck){
     std::vector<std::pair<Carte*, int>> cartePlateau=plateau.getCartePlateau();
     std::vector<Carte*> carteAcces;
-    for(size_t i=0 ,i<cartePlateau.size();++i){
-        if(cartePlateau[i].first->getPrix <= 5){
-            carteAcces.push_back(cartePlateau[i].first)
+    for(size_t i=0 ;i<cartePlateau.size();++i){
+        if(cartePlateau[i].first->getPrix() <= 5){
+            carteAcces.push_back(cartePlateau[i].first);
             
         }
     }
@@ -150,7 +150,7 @@ void CarteRoyaume::actionFestin(Plateau& plateau,Deck& deck){
       std::cout << "Choix invalide. Réessayez : ";
       std::cin >> choix;
     }
-    Carte* carteChoisie = cartesAccess[choix-1];
+    Carte* carteChoisie = carteAcces[choix-1];
     deck.ajouteDefausse(carteChoisie);
 
 }
@@ -181,5 +181,5 @@ void CarteRoyaume::actionVoleur(){
     
 }
 void CarteRoyaume::actionJardin(){
-    
+
 }

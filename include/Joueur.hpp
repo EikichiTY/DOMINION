@@ -15,9 +15,9 @@ class Joueur {
         Deck deck;
 
     public :
-     
+    Joueur(); 
     Joueur(const std::string& nom ); //on doit ajouter l initialisation du deck + initialisation de la main dans le deck
-    
+        
     std::string getNom() const;
     int getScore() const;
     void setScore(int nvScore);
@@ -26,8 +26,12 @@ class Joueur {
     void jouerCarte(Carte* c);
     void acheterCarte(Carte* c); 
     void nouvelleMain(); 
+    void defausserMain();
+
+    int getNbPiece(); 
 
     Deck getDeck(); 
+    void initMainDeck(); 
 
 }; 
 

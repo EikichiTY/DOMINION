@@ -12,7 +12,7 @@ int Plateau::nbCarteEpuise = 0;
 void Plateau::initialiser(){
     cartePlateau.push_back({new CarteTresors("Cuivre"),60}); 
     cartePlateau.push_back({new CarteTresors("Argent"), 40}); 
-    cartePlateau.push_back({new CarteTresors("Or"), 30}); 
+    cartePlateau.push_back({new CarteTresors("Or\t"), 30}); 
     cartePlateau.push_back({new CarteVictoire("Domaine"), 24});
     cartePlateau.push_back({new CarteVictoire("Duche"), 12}); 
     cartePlateau.push_back({new CarteVictoire("Province"),8}); 
@@ -48,6 +48,14 @@ void Plateau::retirerCarte(Carte* c){
     }
 }
 
+void Plateau::retirerCarte(int index){
+    cartePlateau.at(index).second -= 1; 
+    if (cartePlateau.at(index).second == 0){ 
+        setCarteEpuise(1); 
+        std::cout<<"La pile de cartes : "<<cartePlateau.at(index).first->getNom()<<" est epuisee !";
+    }
+}
+
 void Plateau::setCarteEpuise(int nb){
     this->nbCarteEpuise += nb; 
 }
@@ -58,9 +66,9 @@ void Plateau::afficher() {
     
     int index = 0;
     for (auto carte : cartePlateau) {
-        std::cout << index << " | Carte : " << carte.first->getNom() 
-                 << " | Prix : " << carte.first->getPrix() 
-                 << " | Disponibilites : " << carte.second << "\n";
+        std::cout << index << "\t| Carte : " << carte.first->getNom() 
+                 << " \t| Prix : " << carte.first->getPrix() 
+                 << " \t| Disponibilites : " << carte.second << "\n";
         index++;
     }
     
