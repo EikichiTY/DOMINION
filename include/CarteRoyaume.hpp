@@ -35,12 +35,13 @@ class CarteRoyaume : public Carte {
         void actionBucheron(); 
         void actionChapelle(Deck& deck); 
         void actionDouve(); 
-        void actionFestin(); 
+        void actionFestin(Plateau& plateau , Deck& deck); 
         void actionLaboratoire(); 
         void actionSorciere(); 
         void actionVillage(); 
         void actionVoleur();
         void actionJardin();
+        
 
 };
 
