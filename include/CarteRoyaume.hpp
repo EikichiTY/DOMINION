@@ -33,7 +33,7 @@ class CarteRoyaume : public Carte {
         void actionAtelier(Joueur& joueur, Plateau& plateau);
 
         void actionBucheron(); 
-        void actionChapelle(); 
+        void actionChapelle(Deck& deck); 
         void actionDouve(); 
         void actionFestin(); 
         void actionLaboratoire(); 
