@@ -28,6 +28,7 @@ class Plateau {
 
         
         void retirerCarte(Carte* c);   
+        void retirerCarte(int index);
 
 }; 
 

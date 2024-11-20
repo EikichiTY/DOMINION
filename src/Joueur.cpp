@@ -1,7 +1,10 @@
 #include "Joueur.hpp"
 
-Joueur::Joueur(const std::string& nom) : nom(nom), score(0), nbAchat(0), nbActions(0) {
+Joueur::Joueur(){}
 
+Joueur::Joueur(const std::string& nom) : nom(nom), score(0), nbAchat(0), nbActions(0) {
+    deck = Deck(); 
+    deck.initMain();
 }
 
 std::string Joueur::getNom() const {
@@ -12,14 +15,18 @@ int Joueur::getScore() const {
     return score;
 }
 
+int Joueur::getNbPiece() {
+    return deck.getNbPiece();
+}
+
 void Joueur::setScore(int nvScore) {
     score = nvScore;
 }
 
 void Joueur::afficherMain(){
-    std::vector<Carte*> mainJoueur = this->getDeck().getMain();
+    std::vector<Carte*> mainJoueur = getDeck().getMain();
     int index = 0; 
-    std::cout<<"Votre main : \n\n";
+    std::cout<<"Votre main : \n";
     for(auto carte : mainJoueur){
         std::cout<<index<<" | Carte : "<<carte->getNom()<<" | Type : "<<carte->TypetoString()<<"\n";
         index ++; 
@@ -38,11 +45,19 @@ void Joueur::acheterCarte(Carte* c){
 }
 
 void Joueur::nouvelleMain(){
+    this->deck.initMain();
+}
 
+void Joueur::defausserMain(){
+    this->deck.mainToDefausse(); 
 }
 
 Deck Joueur::getDeck() {
     return deck;
+}
+
+void Joueur::initMainDeck(){
+    this->deck.initMain(); 
 }
 
 

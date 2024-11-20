@@ -23,17 +23,24 @@ class Deck{
         ~Deck();
 
         void piocherCarte();  
-        void acheterCarte(Carte* c);
         void initMain(); 
         void ajouteDefausse(Carte* c); 
         void melangerPioche(); 
-        void deckFinPartie(); //stocke toutes les cartes dans la defausse pour compter le nombre de points 
+        
+        void defausseToPioche();
+        void mainToDefausse();
+        void allToDefausse(); //stocke toutes les cartes dans la defausse pour compter le nombre de points 
 
+        //getters 
         int getNbPiece(); 
         int getNbPoint(); 
         std::vector<Carte*> getMain(); 
         std::vector<Carte*> getPioche(); 
-        std::vector<Carte*> getDefausse(); 
+        std::vector<Carte*> getDefausse();
+
+        void setNbPiece();
+
+        void afficheEtatDeck(); //renvoie le nb d elements dans chaque vecteurs 
         
 }; 
 

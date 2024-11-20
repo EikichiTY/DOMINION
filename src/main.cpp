@@ -5,7 +5,7 @@
 #include "CarteVictoire.hpp"
 #include "Jeu.hpp"
 #include "Plateau.hpp" 
-
+#include "Deck.hpp"
 
 #include <vector> 
 
@@ -17,18 +17,52 @@ int main(){
     
     c1.afficheCarte();
     c2.afficheCarte();  
-    */
+    
     Plateau plateau; 
     plateau.initialiser(); 
 
     plateau.afficher(); 
+    
+    
+    Deck deck;
+    
+    deck.afficheEtatDeck();
+    deck.initMain();
+    deck.afficheEtatDeck();
+    deck.mainToDefausse();
+    deck.afficheEtatDeck();
 
+    deck.ajouteDefausse(new CarteRoyaume("Voleur"));
+    deck.afficheEtatDeck();
+
+    deck.initMain();
+    deck.afficheEtatDeck();
+
+    deck.mainToDefausse();
+    deck.afficheEtatDeck();
+
+    deck.initMain();
+    deck.afficheEtatDeck();
+
+    deck.mainToDefausse();
+    deck.afficheEtatDeck();
+
+    deck.initMain();
+    deck.afficheEtatDeck();
+
+    deck.mainToDefausse();
+    deck.afficheEtatDeck();
+
+    deck.initMain();
+    deck.afficheEtatDeck();
+
+    */
     
 
-    /*Jeu jeu;
+    Jeu jeu;
     jeu.ajouterJoueur();
 
-    jeu.commenceTour(jeu.getListeJoueurs().at(0));*/
+    jeu.commenceTour(jeu.getListeJoueurs().at(0));
 
     return 0; 
 }
