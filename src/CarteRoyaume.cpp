@@ -131,11 +131,6 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
       
 }
 
-
-void CarteRoyaume::actionDouve(){
-    //pioche 2 cartes supplementaires + protege carte jouee par un adversere
-}
-
 void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
     std::vector<std::pair<Carte*, int>> cartePlateau=plateau.getCartePlateau();
     std::vector<Carte*> carteAcces;
@@ -193,12 +188,17 @@ void CarteRoyaume::actionVillage(Joueur& joueur){
     std::cout << "Le joueur gagne 2 actions supplémentaires." << std::endl;
 
 }
+void CarteRoyaume::actionDouve(){
+    //pioche 2 cartes supplementaires + protege carte jouee par un adversere
+}
 
 void CarteRoyaume::actionSorciere(){
     //Autres Joueurs prennent 1 malediction + 
 }
 
+void CarteRoyaume::actionBucheron(){
 
+}
 
 void CarteRoyaume::actionVoleur(){
     //autre joueur révèle les 2 premières cartes. Si elles révèlent des cartes Trésor, ils les défaussent ou les écartent
