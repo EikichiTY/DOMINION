@@ -21,7 +21,7 @@ class Deck{
     public : 
         Deck(); 
         ~Deck();
-
+        bool peutPiocher(); 
         void piocherCarte();  
         void initMain(); 
         void ajouteDefausse(Carte* c); 

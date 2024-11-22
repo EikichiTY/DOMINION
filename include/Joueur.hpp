@@ -38,7 +38,9 @@ class Joueur {
     Deck& getDeck(); 
     void initMainDeck(); 
     bool peutPiocher();
-
+    void piocherCarte();
+    void ajouteDefausse(Carte* c);
+    
 }; 
 
 #endif 

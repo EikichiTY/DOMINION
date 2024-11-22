@@ -156,10 +156,15 @@ bool Deck::peutPiocher() {
         return true; 
     }
 
+bool Deck::peutPiocher() {
+    if (!pioche.empty()) {
+      return true; 
+    }
+
     if (!defausse.empty()) {
-        defausseToPioche(); 
+        defausseToPioche();
         return true; 
     }
 
-  return false;
+    return false;
 }
