@@ -29,8 +29,8 @@ class CarteRoyaume : public Carte {
         bool estReaction(); 
                     
         void action(Joueur& joueur, Plateau& plateau, Deck& deck); 
+        
         void actionAtelier(Joueur& joueur, Plateau& plateau);
-
         void actionBucheron(); 
         void actionChapelle(Deck& deck); 
         void actionDouve(); 
@@ -39,7 +39,6 @@ class CarteRoyaume : public Carte {
         void actionSorciere(); 
         void actionVillage(Joueur& joueur); 
         void actionVoleur();
-        void actionJardin();
         
 
 };

@@ -27,6 +27,7 @@ class Jeu {
         
         void ajouterJoueur(); //ajoute les 2 joueurs a la partie
         std::vector<Joueur> getListeJoueurs(); //retourne la liste des joueurs
+        int calculerPoints(Joueur& j);
 
         //3 phases du tours 
         void phaseJeu(Joueur& j, std::vector<CarteRoyaume*> carteJouer); 
