@@ -50,7 +50,8 @@ bool CarteRoyaume::estAttaque(){
 } 
 
 bool CarteRoyaume::estReaction(){
-    return this->reaction; 
+    return this->reaction;
+    //test 
 }
 
 void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
@@ -87,15 +88,10 @@ void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
     std::cout << "Vous avez ajouté " << carteChoisie->getNom() << " à votre défausse." << std::endl;
 }
 
-
-void CarteRoyaume::actionBucheron(){
-    //+2 pieces +1 achat 
-}
-
 void CarteRoyaume::actionChapelle(Deck& deck ){
     std::vector<Carte*> mainJoueur =deck.getMain();
     std::cout<<"Voici votre main : "<<std::endl;
-    for (int i =0 ; i<mainJoueur.size() ; ++i){
+    for (size_t i =0 ; i<mainJoueur.size() ; ++i){
         std::cout<< i+1 <<"->"<<mainJoueur[i]->getNom()<< std::endl;
     } 
     int nbreMaxCartesDefausser=4;
@@ -103,6 +99,7 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
     std::vector<int> cartesChoisies;
 
     while (carteDefausses<nbreMaxCartesDefausser){
+        std::cout<<"choisissez une carte à defausser sinon entrez 0 si vous voulez rien mettre ";
         std::cout<<"choisissez une carte à defausser sinon entrez 0 si vous voulez rien mettre ";
         int choix ;
         std::cin >> choix;
@@ -130,7 +127,7 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
         std::cout << "Vous avez défaussé " << carteChoisie->getNom() << std::endl;
     }
       
-    std::cout << "Vous avez défaussé " << carteDefausses << " carte" << std::endl;
+    std::cout << "Vous avez défaussé " << cartesDefaussees << " carte" << std::endl;
       
 }
 
@@ -140,7 +137,7 @@ void CarteRoyaume::actionDouve(){
 }
 
 void CarteRoyaume::actionFestin(){
-    
+
 }
 
 void CarteRoyaume::actionLaboratoire(){
