@@ -136,7 +136,29 @@ void CarteRoyaume::actionDouve(){
     //pioche 2 cartes supplementaires + protege carte jouee par un adversere
 }
 
-void CarteRoyaume::actionFestin(){
+void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
+    std::vector<std::pair<Carte*, int>> cartePlateau=plateau.getCartePlateau();
+    std::vector<Carte*> carteAcces;
+    for(size_t i=0 ;i<cartePlateau.size();++i){
+        if(cartePlateau[i].first->getPrix() <= 5){
+            carteAcces.push_back(cartePlateau[i].first);
+            
+        }
+    }
+    std::cout<<"L'affichage des cartes eligibles ";
+    for (size_t i =0 ; i<carteAcces.size() ; ++i){
+        std::cout<< i+1 <<"->"<<carteAcces[i]->getNom()<< std::endl;
+    } 
+
+    std::cout<<"Veuillez entrer l'index de la carte avec un cout au plus 5 ";
+    int choix;
+    std::cin>>choix;
+    while (choix < 0 || choix >= carteAcces.size()) {
+      std::cout << "Choix invalide. Réessayez : ";
+      std::cin >> choix;
+    }
+    Carte* carteChoisie = carteAcces[choix-1];
+    deck.ajouteDefausse(carteChoisie);
 
 }
 
