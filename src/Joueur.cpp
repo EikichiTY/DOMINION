@@ -60,7 +60,9 @@ void Joueur::initMainDeck(){
     this->deck.initMain(); 
 }
 
-
+ bool peutPiocher() {
+        return deck.peutPiocher();
+    }
 
 /* 
     std::vector<Carte*> main = j.getDeck().getMain(); 

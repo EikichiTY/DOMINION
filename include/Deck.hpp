@@ -43,7 +43,7 @@ class Deck{
         void setNbPiece();
 
         void afficheEtatDeck(); //renvoie le nb d elements dans chaque vecteurs 
-        
+         
 }; 
 
 

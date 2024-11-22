@@ -127,7 +127,7 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
         std::cout << "Vous avez défaussé " << carteChoisie->getNom() << std::endl;
     }
       
-    std::cout << "Vous avez défaussé " << cartesDefaussees << " carte" << std::endl;
+    std::cout << "Vous avez défaussé " << carteDefausses << " carte" << std::endl;
       
 }
 

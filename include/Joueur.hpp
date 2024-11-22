@@ -32,6 +32,7 @@ class Joueur {
 
     Deck getDeck(); 
     void initMainDeck(); 
+    bool peutPiocher();
 
 }; 
 
