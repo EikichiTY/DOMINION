@@ -36,7 +36,7 @@ void Joueur::afficherMain(){
 
 
 void Joueur::jouerCarte(Carte* c) {
-    //c->action(); 
+    c->action(); 
     //(void)c; // Indique que le paramètre est intentionnellement non utilisé
 }
 

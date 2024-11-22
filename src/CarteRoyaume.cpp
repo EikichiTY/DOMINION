@@ -103,7 +103,7 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
     std::vector<int> cartesChoisies;
 
     while (carteDefausses<nbreMaxCartesDefausser){
-        std::cout<<"choisissez une carte à defausser sinon entrez 0 si vous voulez rien mettre "
+        std::cout<<"choisissez une carte à defausser sinon entrez 0 si vous voulez rien mettre ";
         int choix ;
         std::cin >> choix;
 
@@ -122,7 +122,7 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
           continue;
        }
        cartesChoisies.push_back(choix - 1);
-       cartesDefaussees++;
+       carteDefausses++;
 
         Carte* carteChoisie = mainJoueur[choix -1];
         deck.ajouteDefausse(carteChoisie);
@@ -130,7 +130,7 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
         std::cout << "Vous avez défaussé " << carteChoisie->getNom() << std::endl;
     }
       
-    std::cout << "Vous avez défaussé " << cartesDefaussees << " carte" << std::endl;
+    std::cout << "Vous avez défaussé " << carteDefausses << " carte" << std::endl;
       
 }
 
@@ -140,15 +140,15 @@ void CarteRoyaume::actionDouve(){
 }
 
 void CarteRoyaume::actionFestin(){
-
+    
 }
 
 void CarteRoyaume::actionLaboratoire(){
-
+    //Piocher 2 carte + 1 action 
 }
 
 void CarteRoyaume::actionSorciere(){
-
+    //Autres Joueurs prennent 1 malediction + 
 }
 
 void CarteRoyaume::actionVillage(){
@@ -156,5 +156,10 @@ void CarteRoyaume::actionVillage(){
 }
 
 void CarteRoyaume::actionVoleur(){
-    
+    //autre joueur révèle les 2 premières cartes. Si elles révèlent des cartes Trésor, ils les défaussent ou les écartent
+    //Vous pouvez gagner l'une de ces cartes Trésor écartées et la placer dans votre défausse.
+}
+
+void CarteRoyaume::actionJardin(){
+    //+1 point pour chaque 10 carte dans le deck a la fin de la partie
 }

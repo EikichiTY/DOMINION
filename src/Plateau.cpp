@@ -79,6 +79,18 @@ int Plateau::getCarteEpuise(){
     return nbCarteEpuise;
 }
 
+bool Plateau::getProvinceEpuise(){
+    for( auto carte : cartePlateau ){
+        if (carte.first->getNom() == "Province"){
+            if(carte.second == 0){
+                return true; 
+            }
+        break;
+        }
+    }
+    return false;
+}
+
 const std::vector<std::pair<Carte*, int>>& Plateau::getCartePlateau() const {
     return cartePlateau;
 }

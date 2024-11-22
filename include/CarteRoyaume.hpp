@@ -24,12 +24,10 @@ class CarteRoyaume : public Carte {
         CarteRoyaume(const CarteRoyaume& c); 
         ~CarteRoyaume(); 
         
-        int getValeur();  
-
         bool estAttaque(); 
         bool estReaction(); 
                     
-        void action(); 
+        void action(Joueur& joueur, Plateau& plateau, Deck& deck); 
         void actionAtelier(Joueur& joueur, Plateau& plateau);
 
         void actionBucheron(); 

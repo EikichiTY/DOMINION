@@ -31,6 +31,8 @@ class Deck{
         void mainToDefausse();
         void allToDefausse(); //stocke toutes les cartes dans la defausse pour compter le nombre de points 
 
+        void retirerCarteJeu(Carte* c); //retire une carte de la main et la supprime 
+
         //getters 
         int getNbPiece(); 
         int getNbPoint(); 

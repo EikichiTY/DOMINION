@@ -24,6 +24,7 @@ class Plateau {
         
         void setCarteEpuise(int nb);
         int getCarteEpuise();
+        bool getProvinceEpuise(); 
         const std::vector<std::pair<Carte*, int>>& getCartePlateau() const;
 
         

@@ -90,7 +90,6 @@ void Deck::mainToDefausse(){
     }
 }
 
-
 void Deck::allToDefausse(){   
     for (int i = main.size()-1; i >= 0 ; i--){
         ajouteDefausse(main.at(i)); 
@@ -103,6 +102,13 @@ void Deck::allToDefausse(){
     }
 }
 
+
+void Deck::retirerCarteJeu(Carte* c){
+    auto it = std::find(main.begin(), main.end(), c);
+    if (it != main.end()) {
+        main.erase(it);
+    }
+}
 
 int Deck::getNbPoint(){
     int nbPoint = 0 ;
