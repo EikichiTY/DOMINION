@@ -35,9 +35,9 @@ class CarteRoyaume : public Carte {
         void actionChapelle(Deck& deck); 
         void actionDouve(); 
         void actionFestin(Plateau& plateau , Deck& deck); 
-        void actionLaboratoire(); 
+        void actionLaboratoire(Joueur& joueur); 
         void actionSorciere(); 
-        void actionVillage(); 
+        void actionVillage(Joueur& joueur); 
         void actionVoleur();
         void actionJardin();
         

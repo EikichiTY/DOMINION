@@ -12,8 +12,7 @@ const std::vector<std::tuple<std::string,int,bool,bool>> CarteRoyaume::listeCart
     {"Laboratoire",5,false,false},
     {"Sorciere",5,true,false},
     {"Village",3,false,false},
-    {"Voleur",4,true,false},
-    {"Jardins",4,false,false}
+    {"Voleur",4,true,false}
 };
 
 
@@ -132,10 +131,6 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
 }
 
 
-void CarteRoyaume::actionDouve(){
-    //pioche 2 cartes supplementaires + protege carte jouee par un adversere
-}
-
 void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
     std::vector<std::pair<Carte*, int>> cartePlateau=plateau.getCartePlateau();
     std::vector<Carte*> carteAcces;
@@ -162,23 +157,48 @@ void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
 
 }
 
-void CarteRoyaume::actionLaboratoire(){
-    //Piocher 2 carte + 1 action 
+void CarteRoyaume::actionLaboratoire(Joueur& joueur){
+    for (int i = 0; i < 2; ++i) 
+    {
+        if (joueur.peutPiocher()) { 
+            joueur.piocherCarte(); 
+        } 
+        else
+        { 
+          std::cout << "Pas assez de cartes dans le pioche et la defausse." << std::endl;
+          break;
+        }
+    }
+    joueur.setNbAction(1);
+    std::cout << "Le joueur a gagne 1 action supplémentaire." << std::endl;
+
 }
 
+void CarteRoyaume::actionVillage(Joueur& joueur){
+    if (joueur.peutPiocher()) {
+        joueur.piocherCarte();
+        std::cout << "Le joueur a pioché une carte." << std::endl;
+    } 
+    else
+    {
+        std::cout << "Pas assez de cartes dans la pioche et la défausse pour piocher." << std::endl;
+    }
+
+    joueur.setNbAction(2);
+    std::cout << "Le joueur gagne 2 actions supplémentaires." << std::endl;
+}
+
+void CarteRoyaume::actionDouve(){
+    //pioche 2 cartes supplementaires + protege carte jouee par un adversere
+}
 void CarteRoyaume::actionSorciere(){
     //Autres Joueurs prennent 1 malediction + 
 }
+void CarteRoyaume::actionBucheron(){
 
-void CarteRoyaume::actionVillage(){
-    //"Piochez une carte et obtenez 2 actions supplémentaires."
 }
-
 void CarteRoyaume::actionVoleur(){
     //autre joueur révèle les 2 premières cartes. Si elles révèlent des cartes Trésor, ils les défaussent ou les écartent
     //Vous pouvez gagner l'une de ces cartes Trésor écartées et la placer dans votre défausse.
 }
 
-void CarteRoyaume::actionJardin(){
-    //+1 point pour chaque 10 carte dans le deck a la fin de la partie
-}

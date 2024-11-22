@@ -1,8 +1,8 @@
 #include "Joueur.hpp"
 
-Joueur::Joueur(){}
+Joueur::Joueur():nbAction(1){}
 
-Joueur::Joueur(const std::string& nom) : nom(nom), score(0), nbAchat(0), nbAction(0) {
+Joueur::Joueur(const std::string& nom) : nom(nom), score(0), nbAchat(0), nbAction(1) {
     deck = Deck(); 
     deck.initMain();
 }
@@ -67,7 +67,23 @@ int Joueur::getNbAchat(){
 void Joueur::setNbAction(int nb){
     this->nbAction += nb; 
 }
-
+void Joueur::setNbAction(int nb) {
+    if (nbAction + nb >= 0) {  
+        nbAction += nb;    
+        std::cout << "Le joueur a maintenant " << nbAction << " action(s)." << std::endl;
+    } else {
+        std::cout << "Erreur : le nombre d'actions ne peut pas être négatif." << std::endl;
+    }
+}
 int Joueur::getNbAction(){
     return this-> nbAction; 
 }
+bool Joueur:: peutPiocher() {
+    return deck.peutPiocher();
+}
+void Joueur::piocherCarte() {
+    deck.piocherCarte(); 
+}
+void Joueur::ajouteDefausse(Carte* c){
+    deck.ajouteDefausse(c);
+ }
