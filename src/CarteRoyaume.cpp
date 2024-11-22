@@ -130,10 +130,6 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
       
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 63bd7dfebd0c1fbc2678eb5f69367eb108746687
 void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
     std::vector<std::pair<Carte*, int>> cartePlateau=plateau.getCartePlateau();
     std::vector<Carte*> carteAcces;

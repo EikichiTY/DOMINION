@@ -151,12 +151,8 @@ void Deck::afficheEtatDeck(){
     std::cout<<"Main : "<<main.size()<<" elements \n";
     std::cout<<"Defausse : "<<defausse.size()<<" elements \n\n";
 }
-bool Deck::peutPiocher() {
-    if (!pioche.empty()) {
-        return true; 
-    }
 
-bool Deck::peutPiocher() {
+bool Deck::peutPiocher(){
     if (!pioche.empty()) {
       return true; 
     }

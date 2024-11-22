@@ -66,9 +66,7 @@ int Joueur::getNbAchat(){
     return this->nbAchat; 
 }
 
-void Joueur::setNbAction(int nb){
-    this->nbAction += nb; 
-}
+
 void Joueur::setNbAction(int nb) {
     if (nbAction + nb >= 0) {  
         nbAction += nb;    
