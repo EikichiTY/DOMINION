@@ -162,17 +162,43 @@ void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
 
 }
 
-void CarteRoyaume::actionLaboratoire(){
-    //Piocher 2 carte + 1 action 
+void CarteRoyaume::actionLaboratoire(Joueur& joueur){
+    for (int i = 0; i < 2; ++i) 
+    {
+        if (joueur.peutPiocher()) { 
+            joueur.piocherCarte(); 
+        } 
+        else
+        { 
+          std::cout << "Pas assez de cartes dans le pioche et la defausse." << std::endl;
+          break;
+        }
+    }
+    joueur.setNbAction(1);
+    std::cout << "Le joueur a gagne 1 action supplémentaire." << std::endl;
+
+}
+
+void CarteRoyaume::actionVillage(Joueur& joueur){
+    if (joueur.peutPiocher()) {
+        joueur.piocherCarte();
+        std::cout << "Le joueur a pioché une carte." << std::endl;
+    } 
+    else
+    {
+        std::cout << "Pas assez de cartes dans la pioche et la défausse pour piocher." << std::endl;
+    }
+
+    joueur.setNbAction(2);
+    std::cout << "Le joueur gagne 2 actions supplémentaires." << std::endl;
+
 }
 
 void CarteRoyaume::actionSorciere(){
     //Autres Joueurs prennent 1 malediction + 
 }
 
-void CarteRoyaume::actionVillage(){
-    //"Piochez une carte et obtenez 2 actions supplémentaires."
-}
+
 
 void CarteRoyaume::actionVoleur(){
     //autre joueur révèle les 2 premières cartes. Si elles révèlent des cartes Trésor, ils les défaussent ou les écartent
