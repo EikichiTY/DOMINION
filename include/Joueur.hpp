@@ -11,7 +11,7 @@ class Joueur {
         std::string nom;
         int score; 
         int nbAchat; 
-        int nbActions; 
+        int nbAction; 
         Deck deck;
 
     public :
@@ -23,14 +23,19 @@ class Joueur {
     void setScore(int nvScore);
     void afficherMain(); 
 
-    void jouerCarte(Carte* c);
     void acheterCarte(Carte* c); 
     void nouvelleMain(); 
     void defausserMain();
 
     int getNbPiece(); 
 
-    Deck getDeck(); 
+    int getNbAchat(); 
+    void setNbAchat(int nb); 
+
+    int getNbAction(); 
+    void setNbAction(int nb); 
+
+    Deck& getDeck(); 
     void initMainDeck(); 
     bool peutPiocher();
 

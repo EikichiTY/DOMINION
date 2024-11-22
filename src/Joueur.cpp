@@ -2,7 +2,7 @@
 
 Joueur::Joueur(){}
 
-Joueur::Joueur(const std::string& nom) : nom(nom), score(0), nbAchat(0), nbActions(0) {
+Joueur::Joueur(const std::string& nom) : nom(nom), score(0), nbAchat(0), nbAction(0) {
     deck = Deck(); 
     deck.initMain();
 }
@@ -28,17 +28,13 @@ void Joueur::afficherMain(){
     int index = 0; 
     std::cout<<"Votre main : \n";
     for(auto carte : mainJoueur){
-        std::cout<<index<<" | Carte : "<<carte->getNom()<<" | Type : "<<carte->TypetoString()<<"\n";
+        std::cout<<index<<" | Carte : "<<carte->getNom()<<"\t| Type : "<<carte->TypetoString()<<"\n";
         index ++; 
     }
     std::cout<<"\n";
 }
 
 
-void Joueur::jouerCarte(Carte* c) {
-    c->action(); 
-    //(void)c; // Indique que le paramètre est intentionnellement non utilisé
-}
 
 void Joueur::acheterCarte(Carte* c){
     this->deck.ajouteDefausse(c); 
@@ -52,7 +48,7 @@ void Joueur::defausserMain(){
     this->deck.mainToDefausse(); 
 }
 
-Deck Joueur::getDeck() {
+Deck& Joueur::getDeck() {
     return deck;
 }
 
@@ -62,12 +58,18 @@ void Joueur::initMainDeck(){
 
  bool peutPiocher() {
         return deck.peutPiocher();
-    }
+    }void Joueur::setNbAchat(int nb){
+    this->nbAchat += nb;
+}
 
-/* 
-    std::vector<Carte*> main = j.getDeck().getMain(); 
-    for (size_t i = 0; i < main.size(); i++){
-        main.at(i)->afficheCarte(); 
-    }
+int Joueur::getNbAchat(){
+    return this->nbAchat; 
+}
 
-    std::string choix = j.choixAction(); */
+void Joueur::setNbAction(int nb){
+    this->nbAction += nb; 
+}
+
+int Joueur::getNbAction(){
+    return this-> nbAction; 
+}

@@ -101,7 +101,7 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
     while (carteDefausses<nbreMaxCartesDefausser){
         std::cout<<"choisissez une carte à defausser sinon entrez 0 si vous voulez rien mettre ";
         std::cout<<"choisissez une carte à defausser sinon entrez 0 si vous voulez rien mettre ";
-        int choix ;
+        size_t choix ;
         std::cin >> choix;
 
         if(choix==0){
