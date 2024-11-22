@@ -33,6 +33,7 @@ class Carte {
         void setNom(std::string nom);  
 
         TypeCarte getType();  
+         
         virtual void afficheCarte(); 
    
 

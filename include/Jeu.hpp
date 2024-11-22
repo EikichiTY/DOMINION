@@ -6,6 +6,10 @@
 #include <map>
 #include "Plateau.hpp"
 #include "Joueur.hpp"
+#include "Carte.hpp"
+#include "CarteRoyaume.hpp"
+#include "CarteVictoire.hpp"
+#include "CarteTresors.hpp"
 
 class Jeu {
     private: 
@@ -25,9 +29,9 @@ class Jeu {
         std::vector<Joueur> getListeJoueurs(); //retourne la liste des joueurs
 
         //3 phases du tours 
-        void phaseJeu(Joueur j, std::vector<CarteRoyaume*> carteJouer); 
-        void phaseAchat(Joueur j, std::vector<CarteTresors*> carteAchat);
-        void phaseAjustement(Joueur j);
+        void phaseJeu(Joueur& j, std::vector<CarteRoyaume*> carteJouer); 
+        void phaseAchat(Joueur& j, std::vector<CarteTresors*> carteAchat);
+        void phaseAjustement(Joueur& j);
 
 };
 

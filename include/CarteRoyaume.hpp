@@ -4,6 +4,7 @@
 #include <iostream> 
 #include "Joueur.hpp"
 #include "Plateau.hpp"
+#include "Deck.hpp"
 
 
 class Joueur; // pour eviter les les inclusion circulaire 
