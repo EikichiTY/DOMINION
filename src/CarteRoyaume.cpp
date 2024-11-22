@@ -50,7 +50,8 @@ bool CarteRoyaume::estAttaque(){
 } 
 
 bool CarteRoyaume::estReaction(){
-    return this->reaction; 
+    return this->reaction;
+    //test 
 }
 
 void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
