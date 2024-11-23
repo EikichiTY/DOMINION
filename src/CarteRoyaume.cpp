@@ -216,6 +216,7 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
 void CarteRoyaume::actionBucheron(Joueur& joueur){
     std::cout << "Pièces : " << joueur.getNbPiece() << ", Achats : " << joueur.getNbAchat() << std::endl;
     joueur.setNbAchat(1);
+    joueur.addNbPiece(2);
     std::cout << "Action Bûcheron jouée !\n";
     std::cout << "+2 pièces et +1 achat ajouté.\n";
     std::cout << "Pièces : " << joueur.getNbPiece() << ", Achats : " << joueur.getNbAchat() << std::endl;
