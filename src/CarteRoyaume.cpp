@@ -209,8 +209,7 @@ void CarteRoyaume::actionDouve(Joueur& joueurActuel){
     std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n";
 }
 
-void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Plateau& Plateau) {
- 
+void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Plateau& plateau) {
     //Le joueur pioche 2 cartes 
     for (int i = 0; i < 2; ++i) {
         if (joueurActuel.peutPiocher()) {
@@ -222,7 +221,6 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
            std::cout << "Pas assez de cartes dans la pioche et la défausse pour piocher." << std::endl;
          }
     }
-   
     std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n";
 
     for (auto& joueur : autresJoueurs) {
