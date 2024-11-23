@@ -156,7 +156,10 @@ void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
     }
     Carte* carteChoisie = carteAcces[choix-1];
     deck.ajouteDefausse(carteChoisie);
-
+    plateau.retirerCarte(carteChoisie);
+    std::cout << "La carte " << carteChoisie->getNom() << " a été ajoutée à votre défausse." << std::endl;
+    deck.retirerCarteJeu(this);
+    std::cout << "La carte Festin a été utilisée et retirée de votre deck.\n";
 }
 
 void CarteRoyaume::actionLaboratoire(Joueur& joueur){
@@ -221,9 +224,10 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
     }
    
     std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n";
-  for (auto& joueur : autresJoueurs) {
 
-        // Chercher la carte "Malediction" sur le plateau
+    for (auto& joueur : autresJoueurs) {
+
+       // Chercher la carte "Malediction" sur le plateau
         Carte* carteMalediction = nullptr;
         for (auto& paire : plateau.cartePlateau) {
             if (paire.first->getNom() == "Malediction" && paire.second > 0) {
@@ -240,7 +244,7 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
         if (!douveDansMain(joueur)) {
             joueur.ajouteDefausse(carteMalediction);
             plateau.retirerCarte(carteMalediction);
-            std::cout << joueur.getNom() << " a reçu une carte Malédiction dans sa défausse.\n";
+            std::cout << joueur.getNom() << " a reçu une carte Malediction dans sa défausse.\n";
         } else {
             std::cout << "Le joueur " << joueur.getNom() << " est protégé par une carte Douve dans sa main !\n";
         }
@@ -360,8 +364,6 @@ void CarteRoyaume::actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJ
     }
     std::cout<<"################## Fin de l'action de la carte voleur ##################";
 }
-
-
 bool CarteRoyaume::douveDansMain(Joueur joueur){
     for (auto carte : joueur.getDeck().getMain()) {
             if(carte->getNom() == "Douve"){
