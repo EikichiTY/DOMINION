@@ -13,14 +13,18 @@ Jeu::~Jeu(){}
 
 void Jeu::jouerPartie(){
     ajouterJoueur();
+
     while(!finJeu){
         toursJoueur(listeJoueurs.at(0)); 
         finPartie();
         toursJoueur(listeJoueurs.at(1)); 
         finPartie(); 
     }
-    int pointJoueur1 = calculerPoints(listeJoueurs.at(0)); 
-    int pointJoueur2 = calculerPoints(listeJoueurs.at(1));
+    calculerPoints(listeJoueurs.at(0));
+    calculerPoints(listeJoueurs.at(1));
+
+    int pointJoueur1 = listeJoueurs.at(0).getScore();
+    int pointJoueur2 = listeJoueurs.at(1).getScore();
 
     std::cout<<"Fin de partie ! \n\nVoici les scores :\n"; 
     std::cout<<"Score joueur "<<listeJoueurs.at(0).getNom()<<" : "<<pointJoueur1<<std::endl; 
@@ -51,7 +55,6 @@ void Jeu::toursJoueur(Joueur& j){
     j.setNbAchat(1); 
     j.setNbAction(1); 
 
-
     for (auto carte : j.getDeck().getMain()){
         if (CarteRoyaume* cRoyaume = dynamic_cast<CarteRoyaume*>(carte)){
             carteAction.push_back(cRoyaume);  
@@ -63,31 +66,35 @@ void Jeu::toursJoueur(Joueur& j){
 
     //phase jeu
     while(j.getNbAction()>0){
-        bool choixAction = false; 
-        char a; 
-        while (!choixAction){
-            std::cout<<"Voulez vous jouer une carte ? \nEcrivez 1 pour oui / 0 pour non \n"; 
-            std::cin>>a;
-
-            if(a == '0' || a=='1'){
-                choixAction = true; 
-            }
-            else{
-                std::cout<<"Requete impossible ! \n";
-            }
-        }
-        if(a == '1'){
-            phaseJeu(j,carteAction);
+        if(carteAction.empty()){
+            std::cout<<"Vous n'avez pas de cartes action dans votre main ! \n";
         }
         else{
-            std::cout<<"Phase jeu terminee \n";
+            bool choixAction = false; 
+            char a; 
+            while (!choixAction){
+                std::cout<<"Voulez vous jouer une carte ? \nEcrivez 1 pour oui / 0 pour non \n"; 
+                std::cin>>a;
+
+                if(a == '0' || a=='1'){
+                    choixAction = true; 
+                }
+                else{
+                    std::cout<<"Requete impossible ! \n";
+                }
+            }
+            if(a == '1'){
+                phaseJeu(j,carteAction);
+            }
+            else{
+                std::cout<<"Phase jeu terminee \n";
+            }
         }
         j.setNbAction(-1); 
-
     }
     
     //phase achat : decision prise par le joueur d'acheter ou non  
-    while(j.getNbAchat() > 0){
+    while(j.getNbAchat() > 0 && !carteTresors.empty()){
         bool choixAchat = false; 
         char c;
         while(!choixAchat){
@@ -169,23 +176,27 @@ void Jeu::ajouterJoueur(){
 
 void Jeu::phaseJeu(Joueur& j, std::vector<CarteRoyaume*> carteJouer){
     //phase jeu carte 
-    if (!carteJouer.empty()){
-        std::cout<<"Cartes Royaumes dans votre Deck : \n";
-        int index = 0; 
-        for(auto c : carteJouer){
-            std::cout<<index<<" | Carte : "<<c->getNom()<<"\n"; 
-            index ++; 
-        }
-        std::cout<<"Quelle carte voulez vous jouer ? Entrez l'index de la carte souhaitee : \n";
-        int i;
-        std::cin>>i; 
-        
-        //carteJouer.at(i)->action(j, this->plateau, j.getDeck());    
+    std::cout<<"Cartes Royaumes dans votre Deck : \n";
+    int index = 0; 
+    for(auto c : carteJouer){
+        std::cout<<index<<" | Carte : "<<c->getNom()<<"\n"; 
+        index ++; 
     }
 
-    else {
-        std::cout<<"Vous n'avez pas de cartes action dans votre main ! \n";
-    }
+    size_t i;
+    bool choixCarte = false; 
+    while(!choixCarte){
+        std::cout<<"Quelle carte voulez vous jouer ? Entrez l'index de la carte souhaitee : \n";
+        std::cin>>i;   
+
+        if (i < '0' && i > carteJouer.size()){
+            std::cout<<"Index invalide ! \n"; 
+        }  
+        else {
+            choixCarte = true; 
+            carteJouer.at(i)->action(j, this->plateau, j.getDeck()); 
+        }
+    }   
 }
 
 
@@ -230,7 +241,7 @@ void Jeu::phaseAchat(Joueur& j,std::vector<CarteTresors*> carteAchat){
 
 void Jeu::phaseAjustement(Joueur& j){ 
     std::cout<<"Fin du tours\n"; 
-    
+
     j.defausserMain();
     std::cout<<"Votre main a ete defaussee \n"; 
 

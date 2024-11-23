@@ -33,7 +33,7 @@ class CarteRoyaume : public Carte {
         void actionAtelier(Joueur& joueur, Plateau& plateau);
         void actionBucheron(Joueur& joueur); 
         void actionChapelle(Deck& deck); 
-        void actionDouve(); 
+        void actionDouve(Joueur& joueurActuel); 
         void actionFestin(Plateau& plateau , Deck& deck); 
         void actionLaboratoire(Joueur& joueur); 
         void actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Carte* carteMalediction); 

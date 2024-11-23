@@ -49,8 +49,11 @@ bool CarteRoyaume::estAttaque(){
 } 
 
 bool CarteRoyaume::estReaction(){
-    return this->reaction;
-    //test 
+    return this->reaction; 
+}
+
+void CarteRoyaume::action(Joueur& joueur, Plateau& plateau, Deck& deck){
+    std::cout<<"Ca marche\n";
 }
 
 void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {

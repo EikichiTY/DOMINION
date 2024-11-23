@@ -25,7 +25,7 @@ void Plateau::initialiser(){
     cartePlateau.push_back({new CarteRoyaume("Douve"),10}); 
     cartePlateau.push_back({new CarteRoyaume("Voleur"),10}); 
     cartePlateau.push_back({new CarteRoyaume("Village"),10}); 
-    cartePlateau.push_back({new CarteRoyaume("Jardins"),10}); 
+    cartePlateau.push_back({new CarteVictoire("Jardins"),10}); 
     cartePlateau.push_back({new CarteRoyaume("Chapelle"),10}); 
 
     std::sort(cartePlateau.begin(), cartePlateau.end(),
