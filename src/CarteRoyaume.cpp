@@ -227,37 +227,37 @@ void CarteRoyaume::actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJ
             // phase 1 : Traiter les cartes Trésor a ecarter 
             if (cartesRevelees.at(0)->getType() == TypeCarte::TRESORS && cartesRevelees.at(1)->getType() == TypeCarte::TRESORS) { // Vérifie si la carte est une carte Trésor
                 bool choixVoleur = false; 
-                char c ; 
+                char index ; 
                 while(!choixVoleur){
                     std::cout<<"Joueur : "<<joueurActif.getNom()<<"Quelle carte souhaitez vous ecarter \n";
                     std::cout<<"Entrez 0 pour écarter la 1ere carte / Entrez 1 pour ecarter la 2e carte";
-                    std::cin>> c ; 
+                    std::cin>> index ; 
 
-                    if(c == '0' || c=='1'){
+                    if(index == '0' || index=='1'){
                         choixVoleur = true; 
                     }
                     else{
                         std::cout<<"Requete impossible ! \n";
                     }
                 }
-                if(c == '1'){
-                    std::cout<<"Le joueur "<<joueurActif.getNom()<<" a ecarte la carte : "<<cartesRevelees.at(1).getNom()<<"de "<<joueur.getNom()<<std::endl; 
+                if(index == '1'){
+                    std::cout<<"Le joueur "<<joueurActif.getNom()<<" a ecarte la carte : "<<cartesRevelees.at(1)->getNom()<<"de "<<joueur.getNom()<<std::endl; 
                     cartesTresorEcartees.push_back(cartesRevelees.at(1));
                     joueur.ajouteDefausse(cartesRevelees.at(0));
                 }
-                else if (c == '0'){
-                    std::cout<<"Le joueur "<<joueurActif.getNom()<<" a ecarte la carte : "<<cartesRevelees.at(0).getNom()<<"de "<<joueur.getNom()<<std::endl;
+                else if (index == '0'){
+                    std::cout<<"Le joueur "<<joueurActif.getNom()<<" a ecarte la carte : "<<cartesRevelees.at(0)->getNom()<<"de "<<joueur.getNom()<<std::endl;
                     cartesTresorEcartees.push_back(cartesRevelees.at(0));
                     joueur.ajouteDefausse(cartesRevelees.at(1));
                 }
             }
 
-            else if(cartesRevelees.at(0)->getType() == TypeCarte::TRESORS && cartesRevelees.at(1) != TypeCarte::TRESORS){
+            else if(cartesRevelees.at(0)->getType() == TypeCarte::TRESORS && cartesRevelees.at(1)->getType() != TypeCarte::TRESORS){
                 std::cout<<"La carte "<<cartesRevelees.at(0)->getNom()<<" a ete ecartee \n";
                 cartesTresorEcartees.push_back(cartesRevelees.at(0));
                 joueur.ajouteDefausse(cartesRevelees.at(1));
             }
-            else if(cartesRevelees.at(0)->getType() != TypeCarte::TRESORS && cartesRevelees.at(1) == TypeCarte::TRESORS){
+            else if(cartesRevelees.at(0)->getType() != TypeCarte::TRESORS && cartesRevelees.at(1)->getType() == TypeCarte::TRESORS){
                 std::cout<<"La carte "<<cartesRevelees.at(1)->getNom()<<" a ete ecartee \n";
                 cartesTresorEcartees.push_back(cartesRevelees.at(1));
                 joueur.ajouteDefausse(cartesRevelees.at(0));
@@ -278,24 +278,24 @@ void CarteRoyaume::actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJ
                     std::cout<<"Entrez 1 pour oui / Entrez 0 pour non";
                     std::cin>> decision ; 
 
-                    if(c == '0' || c=='1'){
+                    if(decision == '0' || decision=='1'){
                         choixCartePrendre = true; 
                     }
                     else{
                         std::cout<<"Requete impossible ! \n";
                     }
                 }
-                if(c == '1'){
+                if(decision == '1'){
                     joueurActif.ajouteDefausse(cartesTresorEcartees.at(0));
                     std::cout<<"Le joueur "<<joueurActif.getNom()<<" a recu la carte : "<<cartesTresorEcartees.at(0)->getNom()<<std::endl; 
                     cartesTresorEcartees.pop_back();
                 }
-                else if (c == '0'){
+                else if (decision == '0'){
                     std::cout<<"La carte "<<cartesTresorEcartees.at(0)->getNom()<<"a ete ecartee !"<<std::endl;
                     cartesTresorEcartees.pop_back();
                 }
             }
-            std::cout<<"################## Fin de l'action de la carte voleur ##################"
+            std::cout<<"################## Fin de l'action de la carte voleur ##################";
         }
     }
 }

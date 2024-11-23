@@ -38,7 +38,7 @@ class CarteRoyaume : public Carte {
         void actionLaboratoire(Joueur& joueur); 
         void actionSorciere(); 
         void actionVillage(Joueur& joueur); 
-        void actionVoleur();
+        void actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJoueurs);
         
         bool douveDansMain(Joueur joueur);
 

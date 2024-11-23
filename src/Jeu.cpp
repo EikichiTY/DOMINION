@@ -19,6 +19,25 @@ void Jeu::jouerPartie(){
         toursJoueur(listeJoueurs.at(1)); 
         finPartie(); 
     }
+    int pointJoueur1 = calculerPoints(listeJoueurs.at(0)); 
+    int pointJoueur2 = calculerPoints(listeJoueurs.at(1));
+
+    std::cout<<"Fin de partie ! \n\nVoici les scores :\n"; 
+    std::cout<<"Score joueur "<<listeJoueurs.at(0).getNom()<<" : "<<pointJoueur1<<std::endl; 
+    std::cout<<"Score joueur "<<listeJoueurs.at(1).getNom()<<" : "<<pointJoueur2<<std::endl; 
+
+    if(pointJoueur1 == pointJoueur2){
+        std::cout<<"Egalite !\nAucun vainqueur !\n"; 
+    }
+    else if (pointJoueur1 > pointJoueur2){
+        std::cout<<"Vainqueur : " <<listeJoueurs.at(0).getNom()<< " !!\n"; 
+    }
+    else if (pointJoueur1 < pointJoueur2){
+        std::cout<<"Vainqueur : " <<listeJoueurs.at(1).getNom()<< " !!\n"; 
+    }
+
+    std::cout<<"Bravo aux deux Joueurs !\nFin du jeu\n"; 
+    std::cout<<"---------------------------------------------------------------------------------------------------" ; 
 }
 
 
@@ -101,9 +120,15 @@ void Jeu::toursJoueur(Joueur& j){
 void Jeu::finPartie(){
     if(plateau.getCarteEpuise() == 3){
         this->finJeu = true;
+        for (auto joueur : listeJoueurs){
+            joueur.getDeck().allToDefausse(); 
+        }
     }
     else if(plateau.getProvinceEpuise()){    
         this->finJeu = true; 
+        for (auto joueur : listeJoueurs){
+            joueur.getDeck().allToDefausse(); 
+        }
     }
 }
 
