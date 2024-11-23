@@ -203,7 +203,8 @@ void CarteRoyaume::actionDouve(Joueur& joueurActuel){
     std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n";
 }
 
-void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Carte* carteMalediction) {
+void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Plateau& Plateau) {
+ 
     //Le joueur pioche 2 cartes 
     for (int i = 0; i < 2; ++i) {
         if (joueurActuel.peutPiocher()) {
@@ -217,16 +218,28 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
     }
    
     std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n";
+  for (auto& joueur : autresJoueurs) {
 
-    //les autres joueurs recoivent une malediction si ils n'ont pas de douves dans leurs mains
-    for (auto& joueur : autresJoueurs) {
-        bool presenceDouve = douveDansMain(joueur);
-        if (!presenceDouve){
-            joueur. ajouteDefausse(carteMalediction);
-            std::cout << joueur.getNom() << " a reçu une carte Malediction dans sa defausse.\n";
+        // Chercher la carte "Malediction" sur le plateau
+        Carte* carteMalediction = nullptr;
+        for (auto& paire : plateau.cartePlateau) {
+            if (paire.first->getNom() == "Malediction" && paire.second > 0) {
+                carteMalediction = paire.first;
+                break; 
+            }
         }
-        else {
-            std::cout<<"Le joueur "<<joueur.getNom()<<" est protege par la carte douve dans sa main !";
+
+        if (carteMalediction == nullptr) {
+            std::cout << "Aucune carte 'Malediction' n'est disponible sur le plateau.\n";
+            break; 
+        }
+
+        if (!douveDansMain(joueur)) {
+            joueur.ajouteDefausse(carteMalediction);
+            plateau.retirerCarte(carteMalediction);
+            std::cout << joueur.getNom() << " a reçu une carte Malédiction dans sa défausse.\n";
+        } else {
+            std::cout << "Le joueur " << joueur.getNom() << " est protégé par une carte Douve dans sa main !\n";
         }
     }
 }

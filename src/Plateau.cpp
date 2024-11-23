@@ -36,7 +36,6 @@ void Plateau::initialiser(){
     
 }
 
-
 void Plateau::retirerCarte(Carte* c){
     for(auto carte : cartePlateau){
         if(carte.first == c){
