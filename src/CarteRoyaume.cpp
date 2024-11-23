@@ -197,8 +197,118 @@ void CarteRoyaume::actionSorciere(){
 void CarteRoyaume::actionBucheron(){
     //+1 achat +2 pieces
 }
-void CarteRoyaume::actionVoleur(){
-    //autre joueur révèle les 2 premières cartes. Si elles révèlent des cartes Trésor, ils les défaussent ou les écartent
-    //Vous pouvez gagner l'une de ces cartes Trésor écartées et la placer dans votre défausse.
+void CarteRoyaume::actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJoueurs){    
+    // Parcourir tous les joueurs adverses
+    for (Joueur& joueur : listeJoueurs) {
+        if (&joueur == &joueurActif) {
+            continue; // Sauter le joueur actif
+        }
+
+        std::vector<Carte*> cartesTresorEcartees; //Cartes Trésor écartées (contiendra uniquement la carte ecarte du joueur attaque a chaque fois (size() = 1))
+        std::vector<Carte*> cartesRevelees; //contient les deux cartes revellee du joueur attaqué
+
+        std::cout << joueur.getNom() << " révèle les 2 premières cartes de son deck." << std::endl;
+
+        //On effectue l'action de la carte si le joueur attaqué n as pas de douves dans sa main
+        bool presenceDouve = douveDansMain(joueur);                 
+        if (!presenceDouve){
+
+            cartesRevelees.push_back(joueur.getDeck().getMain().at(4)); 
+            joueur.getDeck().getMain().pop_back(); 
+
+            cartesRevelees.push_back(joueur.getDeck().getMain().at(4)); 
+            joueur.getDeck().getMain().pop_back(); 
+
+            std::cout<<"Cartes revelees : \n";
+            for (auto carte : cartesRevelees){
+                carte->afficheCarte();
+            }
+
+            // phase 1 : Traiter les cartes Trésor a ecarter 
+            if (cartesRevelees.at(0)->getType() == TypeCarte::TRESORS && cartesRevelees.at(1)->getType() == TypeCarte::TRESORS) { // Vérifie si la carte est une carte Trésor
+                bool choixVoleur = false; 
+                char c ; 
+                while(!choixVoleur){
+                    std::cout<<"Joueur : "<<joueurActif.getNom()<<"Quelle carte souhaitez vous ecarter \n";
+                    std::cout<<"Entrez 0 pour écarter la 1ere carte / Entrez 1 pour ecarter la 2e carte";
+                    std::cin>> c ; 
+
+                    if(c == '0' || c=='1'){
+                        choixVoleur = true; 
+                    }
+                    else{
+                        std::cout<<"Requete impossible ! \n";
+                    }
+                }
+                if(c == '1'){
+                    std::cout<<"Le joueur "<<joueurActif.getNom()<<" a ecarte la carte : "<<cartesRevelees.at(1).getNom()<<"de "<<joueur.getNom()<<std::endl; 
+                    cartesTresorEcartees.push_back(cartesRevelees.at(1));
+                    joueur.ajouteDefausse(cartesRevelees.at(0));
+                }
+                else if (c == '0'){
+                    std::cout<<"Le joueur "<<joueurActif.getNom()<<" a ecarte la carte : "<<cartesRevelees.at(0).getNom()<<"de "<<joueur.getNom()<<std::endl;
+                    cartesTresorEcartees.push_back(cartesRevelees.at(0));
+                    joueur.ajouteDefausse(cartesRevelees.at(1));
+                }
+            }
+
+            else if(cartesRevelees.at(0)->getType() == TypeCarte::TRESORS && cartesRevelees.at(1) != TypeCarte::TRESORS){
+                std::cout<<"La carte "<<cartesRevelees.at(0)->getNom()<<" a ete ecartee \n";
+                cartesTresorEcartees.push_back(cartesRevelees.at(0));
+                joueur.ajouteDefausse(cartesRevelees.at(1));
+            }
+            else if(cartesRevelees.at(0)->getType() != TypeCarte::TRESORS && cartesRevelees.at(1) == TypeCarte::TRESORS){
+                std::cout<<"La carte "<<cartesRevelees.at(1)->getNom()<<" a ete ecartee \n";
+                cartesTresorEcartees.push_back(cartesRevelees.at(1));
+                joueur.ajouteDefausse(cartesRevelees.at(0));
+            }
+
+            else {  
+                std::cout<<"Aucune carte tresors n'as ete ecartee !";
+                joueur.ajouteDefausse(cartesRevelees.at(0));
+                joueur.ajouteDefausse(cartesRevelees.at(1));
+            }
+
+            //phase 2 : decision du joueur de garder ou non la carte ecartee
+            if (!cartesTresorEcartees.empty()) {
+                std::cout << joueurActif.getNom() << " : voulez vous prendre cette carte ?" << std::endl;
+                bool choixCartePrendre = false; 
+                char decision ; 
+                while(!choixCartePrendre){
+                    std::cout<<"Entrez 1 pour oui / Entrez 0 pour non";
+                    std::cin>> decision ; 
+
+                    if(c == '0' || c=='1'){
+                        choixCartePrendre = true; 
+                    }
+                    else{
+                        std::cout<<"Requete impossible ! \n";
+                    }
+                }
+                if(c == '1'){
+                    joueurActif.ajouteDefausse(cartesTresorEcartees.at(0));
+                    std::cout<<"Le joueur "<<joueurActif.getNom()<<" a recu la carte : "<<cartesTresorEcartees.at(0)->getNom()<<std::endl; 
+                    cartesTresorEcartees.pop_back();
+                }
+                else if (c == '0'){
+                    std::cout<<"La carte "<<cartesTresorEcartees.at(0)->getNom()<<"a ete ecartee !"<<std::endl;
+                    cartesTresorEcartees.pop_back();
+                }
+            }
+            std::cout<<"################## Fin de l'action de la carte voleur ##################"
+        }
+    }
+}
+
+
+bool CarteRoyaume::douveDansMain(Joueur joueur){
+    for (auto carte : joueur.getDeck().getMain()) {
+            if(carte->getNom() == "Douve"){
+                std::cout<<"Le joueur "<<joueur.getNom()<<" a une carte Douves dans sa main ! \n";
+                std::cout<<"Il est protege contre cette carte attaque !\n";
+                return true;  
+            }
+    }
+    return false;  
 }
 

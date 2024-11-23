@@ -40,6 +40,7 @@ class CarteRoyaume : public Carte {
         void actionVillage(Joueur& joueur); 
         void actionVoleur();
         
+        bool douveDansMain(Joueur joueur);
 
 };
 

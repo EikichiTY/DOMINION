@@ -133,15 +133,15 @@ void Deck::setNbPiece(){
     }
 }
 
-std::vector<Carte*> Deck::getMain(){
+std::vector<Carte*>& Deck::getMain(){
     return this->main; 
 }
 
-std::vector<Carte*> Deck::getPioche(){
+std::vector<Carte*>& Deck::getPioche(){
     return this->pioche;
 }
 
-std::vector<Carte*> Deck::getDefausse(){
+std::vector<Carte*>& Deck::getDefausse(){
     return this->defausse; 
 }
 
