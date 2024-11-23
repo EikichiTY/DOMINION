@@ -192,7 +192,7 @@ void CarteRoyaume::actionDouve(){
     //pioche 2 cartes supplementaires + protege carte jouee par un adversere
 }
 void CarteRoyaume::actionSorciere(){
-    //Autres Joueurs prennent 1 malediction + 
+    //Autres Joueurs prennent 1 malediction + piocher 2 cartes 
 }
 void CarteRoyaume::actionBucheron(){
     //+1 achat +2 pieces
