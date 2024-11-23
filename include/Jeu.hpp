@@ -22,12 +22,12 @@ class Jeu {
         ~Jeu();
         
         void jouerPartie(); 
-        void toursJoueur(Joueur j); //tours d'un seul joueur
+        void toursJoueur(Joueur& j); //tours d'un seul joueur
         void finPartie(); //verifie si la partie est fini grace aux deux conditions donnees 
         
         void ajouterJoueur(); //ajoute les 2 joueurs a la partie
         std::vector<Joueur> getListeJoueurs(); //retourne la liste des joueurs
-        int calculerPoints(Joueur& j);
+        void calculerPoints(Joueur& j);
 
         //3 phases du tours 
         void phaseJeu(Joueur& j, std::vector<CarteRoyaume*> carteJouer); 

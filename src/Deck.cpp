@@ -46,12 +46,12 @@ void Deck::melangerPioche(){
 void Deck::initMain(){
     if(pioche.size() < 5){    // cas ou il reste moins de 5 cartes dans la pioche. On deplace la defausse dans la pioche, on la melange 
         int cpt = 0; 
-        for (int i = 0; i < pioche.size(); i++) {
+        for (size_t i = 0; i < pioche.size(); i++) {
             Carte* carte = pioche.back();
             main.push_back(carte);
             pioche.pop_back();
             cpt ++; 
-        }  
+        }
 
         defausseToPioche();
         int nbCarte = 5 - cpt; 
@@ -64,7 +64,6 @@ void Deck::initMain(){
     }
 
     else{
-
         melangerPioche();
         for (int i = 0; i < 5 && !pioche.empty(); i++) {
             Carte* carte = pioche.back();

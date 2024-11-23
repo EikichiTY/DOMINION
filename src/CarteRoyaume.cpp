@@ -195,7 +195,7 @@ void CarteRoyaume::actionSorciere(){
     //Autres Joueurs prennent 1 malediction + 
 }
 void CarteRoyaume::actionBucheron(){
-
+    //+1 achat +2 pieces
 }
 void CarteRoyaume::actionVoleur(){
     //autre joueur révèle les 2 premières cartes. Si elles révèlent des cartes Trésor, ils les défaussent ou les écartent
