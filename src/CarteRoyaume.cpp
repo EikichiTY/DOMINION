@@ -208,8 +208,14 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
     std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n";
 
     for (auto& joueur : autresJoueurs) {
-        joueur. ajouteDefausse(carteMalediction);
-        std::cout << joueur.getNom() << " a reçu une carte Malediction dans sa defausse.\n";
+        bool presenceDouve = douveDansMain(joueur);
+        if (!presenceDouve){
+            joueur. ajouteDefausse(carteMalediction);
+            std::cout << joueur.getNom() << " a reçu une carte Malediction dans sa defausse.\n";
+        }
+        else {
+            std::cout<<"Le joueur "<<joueur.getNom()<<" est protege par la carte douve dans sa main !";
+        }
     }
 }
 
@@ -318,9 +324,12 @@ void CarteRoyaume::actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJ
                     cartesTresorEcartees.pop_back();
                 }
             }
-            std::cout<<"################## Fin de l'action de la carte voleur ##################";
+        }
+        else {
+            std::cout<<"Le joueur "<<joueur.getNom()<<" est protege par la carte douve dans sa main !";
         }
     }
+    std::cout<<"################## Fin de l'action de la carte voleur ##################";
 }
 
 
