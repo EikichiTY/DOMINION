@@ -36,9 +36,9 @@ class Deck{
         //getters 
         int getNbPiece(); 
         int getNbPoint(); 
-        std::vector<Carte*> getMain(); 
-        std::vector<Carte*> getPioche(); 
-        std::vector<Carte*> getDefausse();
+        std::vector<Carte*>& getMain(); 
+        std::vector<Carte*>& getPioche(); 
+        std::vector<Carte*>& getDefausse();
 
         void setNbPiece();
         void addNbPiece(int nb);

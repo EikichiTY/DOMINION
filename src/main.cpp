@@ -60,8 +60,10 @@ int main(){
     
 
     Jeu jeu;
+    //jeu.ajouterJoueur(); 
+    //jeu.toursJoueur(jeu.getListeJoueurs().at(0)); 
+    //jeu.toursJoueur(jeu.getListeJoueurs().at(0));
     jeu.jouerPartie();
-    //jeu.jouerPartie();
 
 
     return 0; 

@@ -38,8 +38,8 @@ class CarteRoyaume : public Carte {
         void actionLaboratoire(Joueur& joueur); 
         void actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Carte* carteMalediction); 
         void actionVillage(Joueur& joueur); 
-        void actionVoleur();
-        
+        void actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJoueurs);
+        bool douveDansMain(Joueur joueur);
 };
 
 
