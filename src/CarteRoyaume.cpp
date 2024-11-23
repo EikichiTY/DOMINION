@@ -187,13 +187,8 @@ void CarteRoyaume::actionVillage(Joueur& joueur){
     std::cout << "Le joueur gagne 2 actions supplémentaires." << std::endl;
 }
 
-void CarteRoyaume::actionDouve(){
-    //pioche 2 cartes supplementaires + protege carte jouee par un adversere
-}
-
-void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Carte* carteMalediction) {
-      
-    for (int i = 0; i < 2; ++i) 
+void CarteRoyaume::actionDouve(Joueur& joueurActuel){
+   for (int i = 0; i < 2; ++i) 
     {
         if (joueurActuel.peutPiocher()) {
            joueurActuel.piocherCarte();
@@ -206,7 +201,24 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
     }
    
     std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n";
+}
 
+void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Carte* carteMalediction) {
+    //Le joueur pioche 2 cartes 
+    for (int i = 0; i < 2; ++i) {
+        if (joueurActuel.peutPiocher()) {
+           joueurActuel.piocherCarte();
+           std::cout << "Le joueur a pioche une carte." << std::endl;
+        } 
+        else
+        {
+           std::cout << "Pas assez de cartes dans la pioche et la défausse pour piocher." << std::endl;
+         }
+    }
+   
+    std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n";
+
+    //les autres joueurs recoivent une malediction si ils n'ont pas de douves dans leurs mains
     for (auto& joueur : autresJoueurs) {
         bool presenceDouve = douveDansMain(joueur);
         if (!presenceDouve){
