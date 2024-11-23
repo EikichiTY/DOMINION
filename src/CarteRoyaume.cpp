@@ -4,15 +4,15 @@
 #include <tuple> 
 
 const std::vector<std::tuple<std::string,int,bool,bool>> CarteRoyaume::listeCarteRoyaume = {
-    {"Atelier",3,false,false},
-    {"Bucheron",3,false,false},
-    {"Chapelle",2,false,false},
-    {"Douve",2,false,true},
-    {"Festin",4,false,false},
-    {"Laboratoire",5,false,false},
-    {"Sorciere",5,true,false},
-    {"Village",3,false,false},
-    {"Voleur",4,true,false}
+    {"Atelier",1,false,false},//3
+    {"Bucheron",1,false,false},//3
+    {"Chapelle",1,false,false},//2
+    {"Douve",1,false,true},//2
+    {"Festin",1,false,false},//4
+    {"Laboratoire",1,false,false},//5
+    {"Sorciere",1,true,false},//5
+    {"Village",1,false,false},//3
+    {"Voleur",1,true,false}//4
 };
 
 
@@ -68,7 +68,7 @@ void CarteRoyaume::action(Joueur& joueur, Plateau& plateau, Deck& deck, std::vec
         actionFestin(plateau, deck);
     } else if (nomCarte == "Laboratoire") {
         actionLaboratoire(joueur);
-    } else if (nomCarte == "Sorcière") {
+    } else if (nomCarte == "Sorciere") {
         actionSorciere(joueur, listeJoueurs, plateau);
     } else if (nomCarte == "Village") {
         actionVillage(joueur);
@@ -148,10 +148,12 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
         Carte* carteChoisie = mainJoueur[choix -1];
         deck.ajouteDefausse(carteChoisie);
         mainJoueur.erase(mainJoueur.begin() + choix -1);
-        std::cout << "Vous avez défaussé " << carteChoisie->getNom() << std::endl;
+        std::cout << "Vous avez defausse " << carteChoisie->getNom() << std::endl;
     }
       
     std::cout << "Vous avez defausse " << carteDefausses << " carte" << std::endl;
+    
+    
     auto nouvelleMain = deck.getMain(); 
 
     int index = 0; 
@@ -161,7 +163,6 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
         index ++; 
     }
     std::cout<<"\n";
-     
 }
 
 void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
@@ -196,17 +197,12 @@ void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
 void CarteRoyaume::actionLaboratoire(Joueur& joueur){
     for (int i = 0; i < 2; ++i) 
     {
-        if (joueur.peutPiocher()) { 
-            joueur.piocherCarte(); 
-        } 
-        else
-        { 
-          std::cout << "Pas assez de cartes dans le pioche et la defausse." << std::endl;
-          break;
-        }
+        joueur.piocherCarte();
     }
     joueur.setNbAction(1);
-    std::cout << "Le joueur a gagne 1 action supplémentaire." << std::endl;
+    std::cout << "Le joueur a gagne 1 action supplementaire." << std::endl;
+
+    /**/
 
 }
 
@@ -281,12 +277,12 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
 }
 
 void CarteRoyaume::actionBucheron(Joueur& joueur){
-    std::cout << "Pièces : " << joueur.getNbPiece() << ", Achats : " << joueur.getNbAchat() << std::endl;
+    std::cout << "Nombre Pieces Initial : " << joueur.getNbPiece() << ", Nombre Achats Initial: " << joueur.getNbAchat() << std::endl;
     joueur.setNbAchat(1);
     joueur.addNbPiece(2);
-    std::cout << "Action Bûcheron jouée !\n";
-    std::cout << "+2 pièces et +1 achat ajouté.\n";
-    std::cout << "Pièces : " << joueur.getNbPiece() << ", Achats : " << joueur.getNbAchat() << std::endl;
+    std::cout << "Action Bucheron jouee !\n";
+    std::cout << "+2 pieces et +1 achat ajouté.\n";
+    std::cout << "Pieces : " << joueur.getNbPiece() << ", Achats : " << joueur.getNbAchat() << std::endl<<std::endl;
 }
 
 void CarteRoyaume::actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJoueurs){    

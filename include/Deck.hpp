@@ -27,6 +27,7 @@ class Deck{
         void ajouteDefausse(Carte* c); 
         void melangerPioche(); 
         
+        void uniqueMainToDefausse(Carte* c); //retire la carte c de la main et la met dans la defausse
         void defausseToPioche();
         void mainToDefausse();
         void allToDefausse(); //stocke toutes les cartes dans la defausse pour compter le nombre de points 

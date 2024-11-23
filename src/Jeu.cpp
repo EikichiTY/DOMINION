@@ -232,6 +232,7 @@ void Jeu::phaseAchat(Joueur& j,std::vector<CarteTresors*> carteAchat){
         this->plateau.retirerCarte(index);
 
         std::cout<<"Vous avez achete la carte : "<<plateau.getCartePlateau().at(index).first->getNom()<<"\n";
+        j.getDeck().addNbPiece(-plateau.getCartePlateau().at(index).first->getPrix());
     }
     else{ 
         std::cout<<"Vous ne pouvez pas effectuer d'achat dans ce tours !\n";

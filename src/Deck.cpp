@@ -23,7 +23,11 @@ Deck::Deck(){
 Deck::~Deck(){} 
 
 void Deck::piocherCarte(){
-    main.push_back(pioche.at(pioche.size()));
+    if(pioche.empty()){
+        defausseToPioche();
+        melangerPioche();
+    }
+    main.push_back(pioche.at(pioche.size()-1));
     pioche.pop_back(); 
 }
 
@@ -80,6 +84,15 @@ void Deck::defausseToPioche(){
         pioche.push_back(defausse.at(i));
         defausse.pop_back(); 
     }
+}
+
+void Deck::uniqueMaintoDefausse(Carte* c){
+    int index = 0; 
+    for (auto carte : main){
+        
+        index ++ ;
+    }
+
 }
 
 void Deck::mainToDefausse(){
