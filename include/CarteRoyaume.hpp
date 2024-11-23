@@ -28,7 +28,7 @@ class CarteRoyaume : public Carte {
         bool estAttaque(); 
         bool estReaction(); 
                     
-        void action(Joueur& joueur, Plateau& plateau, Deck& deck); 
+        void action(Joueur& joueur, Plateau& plateau, Deck& deck, std::vector<Joueur>& listeJoueurs); 
         
         void actionAtelier(Joueur& joueur, Plateau& plateau);
         void actionBucheron(Joueur& joueur); 

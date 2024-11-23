@@ -52,8 +52,31 @@ bool CarteRoyaume::estReaction(){
     return this->reaction; 
 }
 
-void CarteRoyaume::action(Joueur& joueur, Plateau& plateau, Deck& deck){
-    std::cout<<"Ca marche\n";
+void CarteRoyaume::action(Joueur& joueur, Plateau& plateau, Deck& deck, std::vector<Joueur>& listeJoueurs) {
+
+    std::string nomCarte = this->getNom();
+
+    if (nomCarte == "Atelier") {
+        actionAtelier(joueur, plateau);
+    } else if (nomCarte == "Bucheron") {
+        actionBucheron(joueur);
+    } else if (nomCarte == "Chapelle") {
+        actionChapelle(deck);
+    } else if (nomCarte == "Douve") {
+        actionDouve(joueur);
+    } else if (nomCarte == "Festin") {
+        actionFestin(plateau, deck);
+    } else if (nomCarte == "Laboratoire") {
+        actionLaboratoire(joueur);
+    } else if (nomCarte == "Sorcière") {
+        actionSorciere(joueur, listeJoueurs, plateau);
+    } else if (nomCarte == "Village") {
+        actionVillage(joueur);
+    } else if (nomCarte == "Voleur") {
+        actionVoleur(joueur, listeJoueurs);
+    } else {
+        std::cerr << "Action inconnue pour la carte : " << nomCarte << std::endl;
+    }
 }
 
 void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
@@ -101,8 +124,7 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
     std::vector<int> cartesChoisies;
 
     while (carteDefausses<nbreMaxCartesDefausser){
-        std::cout<<"choisissez une carte à defausser sinon entrez 0 si vous voulez rien mettre ";
-        std::cout<<"choisissez une carte à defausser sinon entrez 0 si vous voulez rien mettre ";
+        std::cout<<"choisissez une carte a defausser sinon entrez 0 si vous voulez rien mettre \n";
         size_t choix ;
         std::cin >> choix;
 
@@ -129,8 +151,17 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
         std::cout << "Vous avez défaussé " << carteChoisie->getNom() << std::endl;
     }
       
-    std::cout << "Vous avez défaussé " << carteDefausses << " carte" << std::endl;
-      
+    std::cout << "Vous avez defausse " << carteDefausses << " carte" << std::endl;
+    auto nouvelleMain = deck.getMain(); 
+
+    int index = 0; 
+    std::cout<<"Votre main : \n";
+    for(auto carte : nouvelleMain){
+        std::cout<<index<<" | Carte : "<<carte->getNom()<<"\t| Type : "<<carte->TypetoString()<<"\n";
+        index ++; 
+    }
+    std::cout<<"\n";
+     
 }
 
 void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
@@ -225,7 +256,7 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
 
     for (auto& joueur : autresJoueurs) {
 
-       // Chercher la carte "Malediction" sur le plateau
+        // Chercher la carte "Malediction" sur le plateau
         Carte* carteMalediction = nullptr;
         for (auto& paire : plateau.cartePlateau) {
             if (paire.first->getNom() == "Malediction" && paire.second > 0) {
@@ -257,6 +288,7 @@ void CarteRoyaume::actionBucheron(Joueur& joueur){
     std::cout << "+2 pièces et +1 achat ajouté.\n";
     std::cout << "Pièces : " << joueur.getNbPiece() << ", Achats : " << joueur.getNbAchat() << std::endl;
 }
+
 void CarteRoyaume::actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJoueurs){    
     // Parcourir tous les joueurs adverses
     for (Joueur& joueur : listeJoueurs) {
@@ -362,6 +394,7 @@ void CarteRoyaume::actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJ
     }
     std::cout<<"################## Fin de l'action de la carte voleur ##################";
 }
+
 bool CarteRoyaume::douveDansMain(Joueur joueur){
     for (auto carte : joueur.getDeck().getMain()) {
             if(carte->getNom() == "Douve"){

@@ -194,7 +194,7 @@ void Jeu::phaseJeu(Joueur& j, std::vector<CarteRoyaume*> carteJouer){
         }  
         else {
             choixCarte = true; 
-            carteJouer.at(i)->action(j, this->plateau, j.getDeck()); 
+            carteJouer.at(i)->action(j, this->plateau, j.getDeck(),this->listeJoueurs); 
         }
     }   
 }
