@@ -56,12 +56,13 @@ void Joueur::initMainDeck(){
     this->deck.initMain(); 
 }
 
- bool peutPiocher() {
-        return deck.peutPiocher();
-    }void Joueur::setNbAchat(int nb){
+
+void Joueur::setNbAchat(int nb){
     this->nbAchat += nb;
 }
-
+void Joueur::addNbPiece(int nb){
+    this->deck.addNbPiece(nb);
+}
 int Joueur::getNbAchat(){
     return this->nbAchat; 
 }

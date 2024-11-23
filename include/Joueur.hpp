@@ -31,7 +31,7 @@ class Joueur {
 
     int getNbAchat(); 
     void setNbAchat(int nb); 
-
+    void addNbPiece(int nb);
     int getNbAction(); 
     void setNbAction(int nb); 
 

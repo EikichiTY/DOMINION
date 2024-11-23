@@ -44,7 +44,7 @@ void Deck::melangerPioche(){
 }
 
 void Deck::initMain(){
-    if(pioche.size() < 5){    // cas ou il reste moins de 5 cartes dans pioche a faire 
+    if(pioche.size() < 5){    // cas ou il reste moins de 5 cartes dans la pioche. On deplace la defausse dans la pioche, on la melange 
         int cpt = 0; 
         for (int i = 0; i < pioche.size(); i++) {
             Carte* carte = pioche.back();
@@ -133,6 +133,9 @@ void Deck::setNbPiece(){
         }    
     }
 }
+void Deck::addNbPiece(int nb){
+    this->nbPiece+= nb;
+}
 
 std::vector<Carte*> Deck::getMain(){
     return this->main; 
@@ -159,6 +162,7 @@ bool Deck::peutPiocher(){
 
     if (!defausse.empty()) {
         defausseToPioche();
+        melangerPioche();
         return true; 
     }
 

@@ -29,19 +29,17 @@ class CarteRoyaume : public Carte {
         bool estReaction(); 
                     
         void action(Joueur& joueur, Plateau& plateau, Deck& deck); 
+        
         void actionAtelier(Joueur& joueur, Plateau& plateau);
-
-        void actionBucheron(); 
+        void actionBucheron(Joueur& joueur); 
         void actionChapelle(Deck& deck); 
         void actionDouve(); 
         void actionFestin(Plateau& plateau , Deck& deck); 
         void actionLaboratoire(Joueur& joueur); 
-        void actionSorciere(); 
+        void actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Carte* carteMalediction); 
         void actionVillage(Joueur& joueur); 
         void actionVoleur();
-        void actionJardin();
         
-
 };
 
 

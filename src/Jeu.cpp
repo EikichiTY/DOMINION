@@ -85,21 +85,21 @@ void Jeu::finPartie(){
 }
 
 
-void Jeu::calculPoints(Joueur& j){
+int Jeu::calculerPoints(Joueur& j){
     int point = 0; 
     int nbJardins = 0; 
     int pointJardin = 0; 
     for (auto carte : j.getDeck().getDefausse()){
         if(CarteVictoire* cVictoire = dynamic_cast<CarteVictoire*>(carte)){
             point += cVictoire->getPoint();
-            if(cVictoire.getNom() == "Jardins") { 
+            if(cVictoire->getNom() == "Jardins") { 
                 nbJardins += 1; 
             }
         }       
     }
 
-    pointJardin = (j.getDeck().size() / 10) * nbJardins ; 
-    
+    pointJardin = (j.getDeck().getDefausse().size() / 10) * nbJardins ; 
+
     j.setScore(point+pointJardin); 
 }
 

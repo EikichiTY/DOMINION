@@ -41,7 +41,7 @@ class Deck{
         std::vector<Carte*> getDefausse();
 
         void setNbPiece();
-
+        void addNbPiece(int nb);
         void afficheEtatDeck(); //renvoie le nb d elements dans chaque vecteurs 
          
 }; 

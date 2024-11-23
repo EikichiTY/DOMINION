@@ -190,11 +190,35 @@ void CarteRoyaume::actionVillage(Joueur& joueur){
 void CarteRoyaume::actionDouve(){
     //pioche 2 cartes supplementaires + protege carte jouee par un adversere
 }
-void CarteRoyaume::actionSorciere(){
-    //Autres Joueurs prennent 1 malediction + 
-}
-void CarteRoyaume::actionBucheron(){
 
+void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Carte* carteMalediction) {
+      
+    for (int i = 0; i < 2; ++i) 
+    {
+        if (joueurActuel.peutPiocher()) {
+           joueurActuel.piocherCarte();
+           std::cout << "Le joueur a pioche une carte." << std::endl;
+        } 
+        else
+        {
+           std::cout << "Pas assez de cartes dans la pioche et la défausse pour piocher." << std::endl;
+         }
+    }
+   
+    std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n";
+
+    for (auto& joueur : autresJoueurs) {
+        joueur. ajouteDefausse(carteMalediction);
+        std::cout << joueur.getNom() << " a reçu une carte Malediction dans sa defausse.\n";
+    }
+}
+
+void CarteRoyaume::actionBucheron(Joueur& joueur){
+    std::cout << "Pièces : " << joueur.getNbPiece() << ", Achats : " << joueur.getNbAchat() << std::endl;
+    joueur.setNbAchat(1);
+    std::cout << "Action Bûcheron jouée !\n";
+    std::cout << "+2 pièces et +1 achat ajouté.\n";
+    std::cout << "Pièces : " << joueur.getNbPiece() << ", Achats : " << joueur.getNbAchat() << std::endl;
 }
 void CarteRoyaume::actionVoleur(){
     //autre joueur révèle les 2 premières cartes. Si elles révèlent des cartes Trésor, ils les défaussent ou les écartent
