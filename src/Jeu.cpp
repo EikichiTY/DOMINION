@@ -48,24 +48,21 @@ void Jeu::jouerPartie(){
 void Jeu::toursJoueur(Joueur& j){
     std::cout<<"\n\n------------------------------------------------------------------------------------";
     std::cout<<"\nTour du joueur : "<<j.getNom()<<"\n";
-    j.afficherMain();
     std::vector<CarteRoyaume*> carteAction = {};
     std::vector<CarteTresors*> carteTresors = {}; 
 
     j.setNbAchat(1); 
     j.setNbAction(1); 
 
-    for (auto carte : j.getDeck().getMain()){
-        if (CarteRoyaume* cRoyaume = dynamic_cast<CarteRoyaume*>(carte)){
-            carteAction.push_back(cRoyaume);  
-        }
-        else if(carte->getType() == TRESORS){
-            carteTresors.push_back(dynamic_cast<CarteTresors*>(carte));
-        }
-    }
-
     //phase jeu
     while(j.getNbAction()>0){
+        j.afficherMain();
+        for (auto carte : j.getDeck().getMain()){
+            if (CarteRoyaume* cRoyaume = dynamic_cast<CarteRoyaume*>(carte)){
+                carteAction.push_back(cRoyaume); 
+            } 
+        }
+
         if(carteAction.empty()){
             std::cout<<"Vous n'avez pas de cartes action dans votre main ! \n";
         }
@@ -85,6 +82,7 @@ void Jeu::toursJoueur(Joueur& j){
             }
             if(a == '1'){
                 phaseJeu(j,carteAction);
+                carteAction = {}; 
             }
             else{
                 std::cout<<"Phase jeu terminee \n";
@@ -94,7 +92,15 @@ void Jeu::toursJoueur(Joueur& j){
     }
     
     //phase achat : decision prise par le joueur d'acheter ou non  
-    while(j.getNbAchat() > 0 && !carteTresors.empty()){
+    while(j.getNbAchat() > 0){
+        j.afficherMain();
+        j.getDeck().setNbPiece();
+        
+        for (auto carte : j.getDeck().getMain()){
+            if(carte->getType() == TRESORS){
+                carteTresors.push_back(dynamic_cast<CarteTresors*>(carte));
+            }
+        }
         bool choixAchat = false; 
         char c;
         while(!choixAchat){
@@ -110,6 +116,7 @@ void Jeu::toursJoueur(Joueur& j){
         }
         if(c == '1'){
             phaseAchat(j,carteTresors);
+            carteTresors = {};
         }
         else{
             std::cout<<"Phase achat terminee \n";
@@ -195,6 +202,9 @@ void Jeu::phaseJeu(Joueur& j, std::vector<CarteRoyaume*> carteJouer){
         else {
             choixCarte = true; 
             carteJouer.at(i)->action(j, this->plateau, j.getDeck(),this->listeJoueurs); 
+            
+            j.getDeck().uniqueMaintoDefausse(carteJouer.at(i));
+            carteJouer.erase(carteJouer.begin()+i); 
         }
     }   
 }

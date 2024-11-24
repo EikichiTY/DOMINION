@@ -5,9 +5,9 @@
 
 const std::vector<std::tuple<std::string,int,bool,bool>> CarteRoyaume::listeCarteRoyaume = {
     {"Atelier",1,false,false},//3
-    {"Bucheron",1,false,false},//3
-    {"Chapelle",1,false,false},//2
-    {"Douve",1,false,true},//2
+    {"Bucheron",3,false,false},//3
+    {"Chapelle",2,false,false},//2
+    {"Douve",2,false,true},//2
     {"Festin",1,false,false},//4
     {"Laboratoire",1,false,false},//5
     {"Sorciere",1,true,false},//5
@@ -201,8 +201,8 @@ void CarteRoyaume::actionLaboratoire(Joueur& joueur){
     }
     joueur.setNbAction(1);
     std::cout << "Le joueur a gagne 1 action supplementaire." << std::endl;
+    joueur.getDeck().uniqueMaintoDefausse(new CarteRoyaume ("Laboratoire"));
 
-    /**/
 
 }
 
@@ -211,13 +211,13 @@ void CarteRoyaume::actionVillage(Joueur& joueur){
         joueur.piocherCarte();
         std::cout << "Le joueur a pioché une carte." << std::endl;
     } 
-    else
-    {
-        std::cout << "Pas assez de cartes dans la pioche et la défausse pour piocher." << std::endl;
+    else{
+        std::cout << "Pas assez de cartes dans la pioche et la defausse pour piocher." << std::endl;
     }
 
     joueur.setNbAction(2);
-    std::cout << "Le joueur gagne 2 actions supplémentaires." << std::endl;
+    joueur.addNbPiece(1); 
+    std::cout << "Le joueur gagne 2 actions supplementaires." << std::endl;
 }
 
 void CarteRoyaume::actionDouve(Joueur& joueurActuel){
@@ -241,37 +241,39 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
     for (int i = 0; i < 2; ++i) {
         if (joueurActuel.peutPiocher()) {
            joueurActuel.piocherCarte();
-           std::cout << "Le joueur a pioche une carte." << std::endl;
         } 
         else
         {
            std::cout << "Pas assez de cartes dans la pioche et la défausse pour piocher." << std::endl;
          }
     }
-    std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n";
+    std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n\n";
+
+    // Chercher la carte "Malediction" sur le plateau
+    Carte* carteMalediction = nullptr;
+    for (auto& paire : plateau.cartePlateau) {
+        if (paire.first->getNom() == "Malediction" && paire.second > 0) {
+            carteMalediction = paire.first;
+            break; 
+        }
+    }
+
 
     for (auto& joueur : autresJoueurs) {
-
-        // Chercher la carte "Malediction" sur le plateau
-        Carte* carteMalediction = nullptr;
-        for (auto& paire : plateau.cartePlateau) {
-            if (paire.first->getNom() == "Malediction" && paire.second > 0) {
-                carteMalediction = paire.first;
-                break; 
-            }
-        }
-
         if (carteMalediction == nullptr) {
             std::cout << "Aucune carte 'Malediction' n'est disponible sur le plateau.\n";
             break; 
         }
 
-        if (!douveDansMain(joueur)) {
+        if (&joueur == &joueurActuel ) {
+        } 
+        else if (!douveDansMain(joueur)) {
             joueur.ajouteDefausse(carteMalediction);
             plateau.retirerCarte(carteMalediction);
-            std::cout << joueur.getNom() << " a reçu une carte Malediction dans sa défausse.\n";
-        } else {
-            std::cout << "Le joueur " << joueur.getNom() << " est protégé par une carte Douve dans sa main !\n";
+            std::cout<< joueur.getNom() << " a reçu une carte Malediction dans sa defausse.\n";            
+        }
+        else {
+            std::cout<< "Le joueur " << joueur.getNom() << " est protege par une carte Douve dans sa main !\n";
         }
     }
 }

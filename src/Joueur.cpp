@@ -69,10 +69,16 @@ int Joueur::getNbAchat(){
 
 
 void Joueur::setNbAction(int nb) {
-    if (nbAction + nb >= 0) {  
+    if (nbAction + nb > 0) {  
         nbAction += nb;    
-        std::cout << "Le joueur a " << nbAction << " action(s)." << std::endl;
-    } else {
+        std::cout << "Vous avez " << nbAction << " actions." << std::endl;
+
+    }else if(nbAction + nb == 0){
+        nbAction += nb;
+        std::cout<<"Vous avez effectue toutes vos actions \n\n";
+    }
+    
+     else {
         std::cout << "Erreur : le nombre d'actions ne peut pas etre negatif." << std::endl;
     }
 }

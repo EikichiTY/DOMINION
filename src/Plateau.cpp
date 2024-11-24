@@ -15,7 +15,7 @@ void Plateau::initialiser(){
     cartePlateau.push_back({new CarteTresors("Or\t"), 30}); 
     cartePlateau.push_back({new CarteVictoire("Domaine"), 24});
     cartePlateau.push_back({new CarteVictoire("Duche"), 12}); 
-    cartePlateau.push_back({new CarteVictoire("Province"),8}); 
+    cartePlateau.push_back({new CarteVictoire("Province"),1}); 
     cartePlateau.push_back({new CarteVictoire("Malediction"),30}); 
     cartePlateau.push_back({new CarteRoyaume("Atelier"),10}); 
     cartePlateau.push_back({new CarteRoyaume("Bucheron"),10}); 

@@ -87,12 +87,17 @@ void Deck::defausseToPioche(){
 }
 
 void Deck::uniqueMaintoDefausse(Carte* c){
-    int index = 0; 
+    bool present = false; 
     for (auto carte : main){
-        
-        index ++ ;
+        if(carte == c){
+            present = true; 
+            break;
+        }
     }
-
+    if(present){
+        ajouteDefausse(c); 
+        retirerCarteJeu(c);
+    }
 }
 
 void Deck::mainToDefausse(){
