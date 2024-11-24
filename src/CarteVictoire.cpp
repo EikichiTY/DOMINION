@@ -4,10 +4,10 @@
 
 const std::vector<std::tuple<std::string, int, int>> CarteVictoire::listeCarteVictoire = {
     {"Domaine", 2, 1},
-    {"Duche",5,3},
+    {"Duche", 5, 3},
     {"Province", 8, 6},
     {"Malediction", 0, -1},
-    {"Jardins",4,0}
+    {"Jardins", 4, 0} //points caluculés a la suite dans Jeu::calculerPoint(Joueur& j)
 };
 
 CarteVictoire::CarteVictoire() : Carte(), point(0){}
