@@ -61,7 +61,7 @@ void CarteRoyaume::action(Joueur& joueur, Plateau& plateau, Deck& deck, std::vec
     } else if (nomCarte == "Bucheron") {
         actionBucheron(joueur);
     } else if (nomCarte == "Chapelle") {
-        actionChapelle(deck);
+        actionChapelle(joueur);
     } else if (nomCarte == "Douve") {
         actionDouve(joueur);
     } else if (nomCarte == "Festin") {
@@ -94,7 +94,7 @@ void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
     }
     
     std::cout<<"Veuillez choisir une carte coutant 4 pieces ou moins a ajouter a votre deck : \n ";
-    for(int i= 0; i <cartesEligibles.size() ; i++ ){
+    for(size_t i= 0; i <cartesEligibles.size() ; i++ ){
         std::cout<<i<<"\t| Carte : "<<cartesEligibles[i]->getNom()<<" \t| Prix : "<<cartesEligibles[i]->getPrix()<<std::endl;
     }
 
@@ -111,7 +111,7 @@ void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
             std::cout << "Entree invalide. Veuillez entrer un entier : \n";
         } 
 
-        else if (choix < 0 || choix >= cartesEligibles.size()) {
+        else if (choix < 0 || choix >= static_cast<int>(cartesEligibles.size())) {
             std::cout << "Choix invalide. Reessayez : \n";
         } else {
             choixCarte = true; 
@@ -131,56 +131,69 @@ void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
     std::cout << "Vous avez ajoute " << carteChoisie->getNom() << " a votre defausse." << std::endl;
 }
 
-void CarteRoyaume::actionChapelle(Deck& deck ){
-    std::vector<Carte*> mainJoueur =deck.getMain();
-    std::cout<<"Voici votre main : "<<std::endl;
-    for (size_t i =0 ; i<mainJoueur.size() ; ++i){
-        std::cout<< i+1 <<"->"<<mainJoueur[i]->getNom()<< std::endl;
-    } 
-    int nbreMaxCartesDefausser=4;
-    int carteDefausses=0;
-    std::vector<int> cartesChoisies;
+void CarteRoyaume::actionChapelle(Joueur& j){
+    std::vector<Carte*> mainJoueur =j.getDeck().getMain();
+    j.afficherMain();
+    int valInterdit; 
+    
+    for (size_t i = 0; i< mainJoueur.size(); i++){   //on choisit pas la carte chapelle qu on vient de jouer dans le deck 
+        if(mainJoueur.at(i)->getNom() == "Chapelle"){
+            valInterdit = i; 
+            break; 
+        }    
+    }
 
-    while (carteDefausses<nbreMaxCartesDefausser){
-        std::cout<<"choisissez une carte a defausser sinon entrez 0 si vous voulez rien mettre \n";
-        size_t choix ;
-        std::cin >> choix;
+    int carteDefausses = 0;
+    std::vector<Carte*> listeCartesChoisies;
+    std::vector<int> indexChoisis;
 
-        if(choix==0){
-            break;
+    int choix ;
+    bool choixCartes = false;
+    std::cout<<"Choisissez des cartes a defausser\n";
+
+    while (!choixCartes){
+        std::cout<<"Entrez l'index de la carte a defausser sinon entrez -1 \n";
+        std::cin >> choix; 
+
+        if (std::cin.fail()) {   // Vérifie si l'entrée est invalide
+            std::cin.clear();    // Réinitialise le flag d'erreur
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Vide le flux d'entrée
+            std::cout << "Choix invalide. Veuillez entrer un entier : \n";
+        } 
+
+        else if(choix == -1){
+            choixCartes = true;
         }
 
-        if( choix < 1 || choix>mainJoueur.size()){
- 
-           std::cout<<"Choix invalide. Veuillez entrer un numéro valide."<<std::endl;
-          continue;
+        else if( choix < -1 || choix > static_cast<int>(mainJoueur.size()-1)){
+            std::cout<<"Choix invalide. Veuillez entrer un entier valide."<<std::endl;
         }
 
-        if(std::find(cartesChoisies.begin(),cartesChoisies.end(), choix - 1)!=cartesChoisies.end()){
-          std::cout<<"Vous avez déjà choisi cette carte."<<std::endl;
-          continue;
-       }
-       cartesChoisies.push_back(choix - 1);
-       carteDefausses++;
+        else if(std::find(indexChoisis.begin(),indexChoisis.end(), choix)!=indexChoisis.end()){
+            std::cout<<"Vous avez deja choisi cette carte."<<std::endl;
+        }
 
-        Carte* carteChoisie = mainJoueur[choix -1];
-        deck.ajouteDefausse(carteChoisie);
-        mainJoueur.erase(mainJoueur.begin() + choix -1);
-        std::cout << "Vous avez defausse " << carteChoisie->getNom() << std::endl;
-    }
-      
-    std::cout << "Vous avez defausse " << carteDefausses << " carte" << std::endl;
-    
-    
-    auto nouvelleMain = deck.getMain(); 
+        else if(choix == valInterdit){
+            std::cout<<"Vous ne pouvez pas choisir la carte Chapelle que vous venez de jouer \n";
+        }
 
-    int index = 0; 
-    std::cout<<"Votre main : \n";
-    for(auto carte : nouvelleMain){
-        std::cout<<index<<" | Carte : "<<carte->getNom()<<"\t| Type : "<<carte->typeToString()<<"\n";
-        index ++; 
+        else {
+            listeCartesChoisies.push_back(j.getDeck().getMain().at(choix));
+            indexChoisis.push_back(choix);
+            carteDefausses++;
+            std::cout << "Vous avez defausse " << j.getDeck().getMain().at(choix)->getNom() << std::endl;
+            if(carteDefausses == 4){break;}   //si on defausse 4 cartes alors on sort de la boucle
+        }
     }
-    std::cout<<"\n";
+
+    for(auto carte : listeCartesChoisies){
+        j.getDeck().uniqueMaintoDefausse(carte);
+    }
+    std::cout << "Vous avez defausse " << carteDefausses << " carte(s)" << std::endl;
+    
+    for (int i = 0; i< carteDefausses ; i++){
+        j.piocherCarte(); 
+    }
 }
 
 void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
@@ -209,7 +222,7 @@ void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
             std::cout << "Entree invalide. Veuillez entrer un entier : \n";
         } 
 
-        else if (choix < 0 || choix >= carteAcces.size()) {
+        else if (choix < 0 || choix >= static_cast<int>(carteAcces.size())) {
             std::cout << "Choix invalide. Reessayez : \n";
         } else {
             choixCarte = true; 

@@ -36,9 +36,6 @@ class Carte {
          
         void afficheCarte(); 
    
-
 }; 
-
-
 
 #endif

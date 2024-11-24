@@ -2,6 +2,7 @@
 #define CarteRoyaume_HPP
 #include "Carte.hpp"
 #include <iostream> 
+#include <limits>
 #include "Joueur.hpp"
 #include "Plateau.hpp"
 #include "Deck.hpp"
@@ -32,7 +33,7 @@ class CarteRoyaume : public Carte {
         
         void actionAtelier(Joueur& joueur, Plateau& plateau);
         void actionBucheron(Joueur& joueur); 
-        void actionChapelle(Deck& deck); 
+        void actionChapelle(Joueur& joueur); 
         void actionDouve(Joueur& joueurActuel); 
         void actionFestin(Plateau& plateau , Deck& deck); 
         void actionLaboratoire(Joueur& joueur); 
