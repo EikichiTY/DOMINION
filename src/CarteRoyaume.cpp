@@ -237,10 +237,8 @@ void CarteRoyaume::actionLaboratoire(Joueur& joueur){
         joueur.piocherCarte();
     }
     joueur.setNbAction(1);
-    std::cout << "Le joueur a gagne 1 action supplementaire." << std::endl;
+    std::cout << "Vous avez pioche 2 carte et gagne 1 action supplementaire." << std::endl;
     joueur.getDeck().uniqueMaintoDefausse(new CarteRoyaume ("Laboratoire"));
-
-
 }
 
 void CarteRoyaume::actionVillage(Joueur& joueur){

@@ -17,9 +17,7 @@ class CarteTresors : public Carte {
         CarteTresors(std::string nom); 
 
         ~CarteTresors(); 
-        int getValeur(); 
-        void jouer(); 
-        std::string obtenirType();  
+        int getValeur();  
 
 };
 
