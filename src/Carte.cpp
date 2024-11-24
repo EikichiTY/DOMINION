@@ -24,7 +24,7 @@ TypeCarte Carte::getType(){
     return this->typeCarte; 
 }
 
-std::string Carte::TypetoString() {
+std::string Carte::typeToString() {
     switch (typeCarte) {
         case ROYAUME: return "Royaume";
         case TRESORS: return "Tresors";
@@ -39,7 +39,7 @@ void Carte::afficheCarte(){
     std::cout<<"     "<<this->getNom()<<"  \n";
     std::cout<<"+-------------+\n";
     std::cout<<"|    Type     |\n";
-    std::cout<<"    "<<TypetoString()<<" \n";
+    std::cout<<"    "<<typeToString()<<" \n";
     std::cout<<"|             |\n";
     std::cout<<"|  Prix :  "<<this->getPrix()<<"  |\n";
     std::cout<<"+-------------+\n\n";

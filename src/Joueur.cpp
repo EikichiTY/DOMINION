@@ -28,7 +28,7 @@ void Joueur::afficherMain(){
     int index = 0; 
     std::cout<<"Votre main : \n";
     for(auto carte : mainJoueur){
-        std::cout<<index<<" | Carte : "<<carte->getNom()<<"\t| Type : "<<carte->TypetoString()<<"\n";
+        std::cout<<index<<" | Carte : "<<carte->getNom()<<"\t| Type : "<<carte->typeToString()<<"\n";
         index ++; 
     }
     std::cout<<"\n";

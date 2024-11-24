@@ -22,7 +22,7 @@ class Carte {
 
         Carte();
         
-        std::string TypetoString(); 
+        std::string typeToString(); 
         
         virtual ~Carte(); 
 
@@ -34,7 +34,7 @@ class Carte {
 
         TypeCarte getType();  
          
-        virtual void afficheCarte(); 
+        void afficheCarte(); 
    
 
 }; 

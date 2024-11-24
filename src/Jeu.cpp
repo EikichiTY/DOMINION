@@ -233,8 +233,14 @@ void Jeu::phaseAchat(Joueur& j,std::vector<CarteTresors*> carteAchat){
             std::cout<<"Entrez l'index de la carte a acheter : \n";
             std::cin>> index;
             
-            if(index < 0 || index >16){
-                std::cout<<"Erreur !! Choisissez un index entre 0 et 16 !\n\n";
+            if (std::cin.fail()) {   
+                std::cin.clear();    // Réinitialise le flag d'erreur
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Vide le flux d'entrée
+                std::cout << "Entree invalide ! Veuillez entrer un entier ! \n\n";
+            } 
+            
+            else if(index < 0 || index >16){
+                std::cout<<"Erreur ! Choisissez un index entre 0 et 16 !\n\n";
             }
 
             else if(plateau.getCartePlateau().at(index).second == 0){

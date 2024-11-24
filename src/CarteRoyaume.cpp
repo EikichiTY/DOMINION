@@ -4,13 +4,13 @@
 #include <tuple> 
 
 const std::vector<std::tuple<std::string,int,bool,bool>> CarteRoyaume::listeCarteRoyaume = {
-    {"Atelier",1,false,false},//3
+    {"Atelier",3,false,false},//3
     {"Bucheron",3,false,false},//3
     {"Chapelle",2,false,false},//2
     {"Douve",2,false,true},//2
-    {"Festin",1,false,false},//4
+    {"Festin",4,false,false},//4
     {"Laboratoire",1,false,false},//5
-    {"Sorciere",1,true,false},//5
+    {"Sorciere",5,true,false},//5
     {"Village",1,false,false},//3
     {"Voleur",4,true,false}//4
 };
@@ -80,30 +80,42 @@ void CarteRoyaume::action(Joueur& joueur, Plateau& plateau, Deck& deck, std::vec
 }
 
 void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
-    std::cout << "Cartes disponibles coûtant 4 pièces ou moins : " << std::endl;
     std::vector<Carte*> cartesEligibles;
-    int index = 0;
 
     for (auto& carteQuantite : plateau.getCartePlateau()) {
         if (carteQuantite.second > 0 && carteQuantite.first->getPrix() <= 4) {
             cartesEligibles.push_back(carteQuantite.first);
-            std::cout << index << ". " << carteQuantite.first->getNom() << " (Prix : " << carteQuantite.first->getPrix() << ")\n";
-            index++;
         }
     }
 
     if (cartesEligibles.empty()) {
-        std::cout << "Aucune carte éligible disponible." << std::endl;
+        std::cout << "Aucune carte eligible disponible." << std::endl;
         return;
     }
+    
+    std::cout<<"Veuillez choisir une carte coutant 4 pieces ou moins a ajouter a votre deck : \n ";
+    for(int i= 0; i <cartesEligibles.size() ; i++ ){
+        std::cout<<i<<"\t| Carte : "<<cartesEligibles[i]->getNom()<<" \t| Prix : "<<cartesEligibles[i]->getPrix()<<std::endl;
+    }
 
+
+    std::cout<<"\nEntrez l'index de la carte souhaitee \n ";    
     int choix;
-    std::cout << "Choisissez une carte en entrant son numéro : ";
-    std::cin >> choix;
-
-    while (choix < 0 || choix >= cartesEligibles.size()) {
-        std::cout << "Choix invalide. Réessayez : ";
+    bool choixCarte = false;
+    
+    while (!choixCarte) {
         std::cin >> choix;
+        if (std::cin.fail()) {   // Vérifie si l'entrée est invalide
+            std::cin.clear();    // Réinitialise le flag d'erreur
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Vide le flux d'entrée
+            std::cout << "Entree invalide. Veuillez entrer un entier : \n";
+        } 
+
+        else if (choix < 0 || choix >= cartesEligibles.size()) {
+            std::cout << "Choix invalide. Reessayez : \n";
+        } else {
+            choixCarte = true; 
+        }
     }
 
     Carte* carteChoisie = cartesEligibles[choix];
@@ -114,7 +126,8 @@ void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
             plateau.retirerCarte(ind);
         }
     }
-
+    std::cout<<"\n";
+    carteChoisie->afficheCarte();
     std::cout << "Vous avez ajoute " << carteChoisie->getNom() << " a votre defausse." << std::endl;
 }
 
@@ -164,7 +177,7 @@ void CarteRoyaume::actionChapelle(Deck& deck ){
     int index = 0; 
     std::cout<<"Votre main : \n";
     for(auto carte : nouvelleMain){
-        std::cout<<index<<" | Carte : "<<carte->getNom()<<"\t| Type : "<<carte->TypetoString()<<"\n";
+        std::cout<<index<<" | Carte : "<<carte->getNom()<<"\t| Type : "<<carte->typeToString()<<"\n";
         index ++; 
     }
     std::cout<<"\n";
@@ -186,11 +199,23 @@ void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
 
     std::cout<<"\nEntrez l'index de la carte souhaitee \n ";
     int choix;
-    std::cin>>choix;
-    while (choix < 0 || choix >= carteAcces.size()) {
-      std::cout << "Choix invalide. Reessayez : \n";
-      std::cin >> choix;
+    bool choixCarte = false;
+    
+    while (!choixCarte) {
+        std::cin >> choix;
+        if (std::cin.fail()) {   // Vérifie si l'entrée est invalide
+            std::cin.clear();    // Réinitialise le flag d'erreur
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Vide le flux d'entrée
+            std::cout << "Entree invalide. Veuillez entrer un entier : \n";
+        } 
+
+        else if (choix < 0 || choix >= carteAcces.size()) {
+            std::cout << "Choix invalide. Reessayez : \n";
+        } else {
+            choixCarte = true; 
+        }
     }
+
     Carte* carteChoisie = carteAcces[choix];
     deck.ajouteDefausse(carteChoisie);
     
