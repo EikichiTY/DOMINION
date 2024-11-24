@@ -9,9 +9,9 @@ const std::vector<std::tuple<std::string,int,bool,bool>> CarteRoyaume::listeCart
     {"Chapelle",2,false,false},//2
     {"Douve",2,false,true},//2
     {"Festin",4,false,false},//4
-    {"Laboratoire",1,false,false},//5
+    {"Laboratoire",5,false,false},//5
     {"Sorciere",5,true,false},//5
-    {"Village",1,false,false},//3
+    {"Village",3,false,false},//3
     {"Voleur",4,true,false}//4
 };
 
@@ -52,7 +52,7 @@ bool CarteRoyaume::estReaction(){
     return this->reaction; 
 }
 
-void CarteRoyaume::action(Joueur& joueur, Plateau& plateau, Deck& deck, std::vector<Joueur>& listeJoueurs) {
+void CarteRoyaume::action(Joueur& joueur, Plateau& plateau, std::vector<Joueur>& listeJoueurs) {
 
     std::string nomCarte = this->getNom();
 
@@ -65,7 +65,7 @@ void CarteRoyaume::action(Joueur& joueur, Plateau& plateau, Deck& deck, std::vec
     } else if (nomCarte == "Douve") {
         actionDouve(joueur);
     } else if (nomCarte == "Festin") {
-        actionFestin(plateau, deck);
+        actionFestin(plateau, joueur);
     } else if (nomCarte == "Laboratoire") {
         actionLaboratoire(joueur);
     } else if (nomCarte == "Sorciere") {
@@ -127,7 +127,6 @@ void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
         }
     }
     std::cout<<"\n";
-    carteChoisie->afficheCarte();
     std::cout << "Vous avez ajoute " << carteChoisie->getNom() << " a votre defausse." << std::endl;
 }
 
@@ -196,7 +195,7 @@ void CarteRoyaume::actionChapelle(Joueur& j){
     }
 }
 
-void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
+void CarteRoyaume::actionFestin(Plateau& plateau, Joueur& joueur){
     std::vector<std::pair<Carte*, int>> cartePlateau=plateau.getCartePlateau();
     std::vector<Carte*> carteAcces;
     for(size_t i=0 ;i<cartePlateau.size();++i){
@@ -230,17 +229,16 @@ void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
     }
 
     Carte* carteChoisie = carteAcces[choix];
-    deck.ajouteDefausse(carteChoisie);
+    joueur.getDeck().ajouteDefausse(carteChoisie);
     
     for (size_t ind = 0; ind < plateau.cartePlateau.size();ind++){
         if(plateau.cartePlateau.at(ind).first->getNom() == carteChoisie->getNom()){
             plateau.retirerCarte(ind);
         }
     }
-
     
     std::cout << "\nLa carte " << carteChoisie->getNom() << " a ete ajoutee a votre defausse." << std::endl;
-    deck.retirerCarteJeu(this);
+    joueur.getDeck().retirerCarteJeu(this);
     std::cout << "La carte Festin a ete utilisee et retiree de votre deck.\n";
 }
 
@@ -257,7 +255,7 @@ void CarteRoyaume::actionLaboratoire(Joueur& joueur){
 void CarteRoyaume::actionVillage(Joueur& joueur){
     if (joueur.peutPiocher()) {
         joueur.piocherCarte();
-        std::cout << "Le joueur a pioché une carte." << std::endl;
+        std::cout << "Le joueur a pioche une carte." << std::endl;
     } 
     else{
         std::cout << "Pas assez de cartes dans la pioche et la defausse pour piocher." << std::endl;
@@ -273,15 +271,14 @@ void CarteRoyaume::actionDouve(Joueur& joueurActuel){
     {
         if (joueurActuel.peutPiocher()) {
            joueurActuel.piocherCarte();
-           std::cout << "Le joueur a pioche une carte." << std::endl;
         } 
         else
         {
-           std::cout << "Pas assez de cartes dans la pioche et la défausse pour piocher." << std::endl;
+           std::cout << "Pas assez de cartes dans la pioche et la defausse pour piocher." << std::endl;
          }
     }
    
-    std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n";
+    std::cout <<"Le joueur : " <<joueurActuel.getNom() << " a pioche 2 cartes.\n";
 }
 
 void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Plateau& plateau) {
@@ -292,7 +289,7 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
         } 
         else
         {
-           std::cout << "Pas assez de cartes dans la pioche et la défausse pour piocher." << std::endl;
+           std::cout << "Pas assez de cartes dans la pioche et la defausse pour piocher." << std::endl;
          }
     }
     std::cout << joueurActuel.getNom() << " a pioche 2 cartes.\n\n";
@@ -336,7 +333,7 @@ void CarteRoyaume::actionBucheron(Joueur& joueur){
     joueur.setNbAchat(1);
     joueur.addNbPiece(2);
     std::cout << "Action Bucheron jouee !\n";
-    std::cout << "+2 pieces et +1 achat ajouté.\n";
+    std::cout << "+2 pieces et +1 achat ajoute.\n";
     std::cout << "Pieces : " << joueur.getNbPiece() << ", Achats : " << joueur.getNbAchat() << std::endl<<std::endl;
 }
 
@@ -406,7 +403,7 @@ void CarteRoyaume::actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJ
                 }
 
                 else {  
-                    std::cout<<"Aucune carte tresors n'as ete ecartee !";
+                    std::cout<<"Aucune carte tresors n'as ete trouvee !\nLes deux cartes devoilees sont defaussees";
                     joueur.ajouteDefausse(cartesRevelees.at(0));
                     joueur.ajouteDefausse(cartesRevelees.at(1));
                 }

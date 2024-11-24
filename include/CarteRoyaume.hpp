@@ -29,13 +29,13 @@ class CarteRoyaume : public Carte {
         bool estAttaque(); 
         bool estReaction(); 
                     
-        void action(Joueur& joueur, Plateau& plateau, Deck& deck, std::vector<Joueur>& listeJoueurs); 
-        
+        void action(Joueur& joueur, Plateau& plateau, std::vector<Joueur>& listeJoueurs); 
+
         void actionAtelier(Joueur& joueur, Plateau& plateau);
         void actionBucheron(Joueur& joueur); 
         void actionChapelle(Joueur& joueur); 
         void actionDouve(Joueur& joueurActuel); 
-        void actionFestin(Plateau& plateau , Deck& deck); 
+        void actionFestin(Plateau& plateau, Joueur& joueur); 
         void actionLaboratoire(Joueur& joueur); 
         void actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& autresJoueurs, Plateau& plateau); 
         void actionVillage(Joueur& joueur); 
@@ -43,12 +43,4 @@ class CarteRoyaume : public Carte {
         bool douveDansMain(Joueur joueur);
 };
 
-
-
-
-
-
-// on peut faire toute les fonction ici pour les differentes classes, puis on appelle la fonction qui correspond au type de la carte royaume dans la methiode action
-// On utilise un enum pour le type de roayaume (Voleur, Douve, ...)
-//(donc on se debarasse de toutes les sous classes). Si t as pas compris je t expliquerais des que tu reviens. 
 #endif

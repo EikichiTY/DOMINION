@@ -17,7 +17,7 @@ class CarteTresors : public Carte {
         CarteTresors(std::string nom); 
 
         ~CarteTresors(); 
-        int getValeur();  
+        int getValeur();  //retourne l'attribut valeur
 
 };
 

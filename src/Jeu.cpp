@@ -212,7 +212,7 @@ void Jeu::phaseJeu(Joueur& j, std::vector<CarteRoyaume*> carteJouer){
             carteJouer.at(i)->afficheCarte(); 
             std::cout<<"\n\n";
 
-            carteJouer.at(i)->action(j, this->plateau, j.getDeck(),this->listeJoueurs);
+            carteJouer.at(i)->action(j, this->plateau,this->listeJoueurs);
 
             j.getDeck().uniqueMaintoDefausse(carteJouer.at(i));
             carteJouer.erase(carteJouer.begin()+i); 
