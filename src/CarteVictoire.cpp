@@ -5,7 +5,7 @@
 const std::vector<std::tuple<std::string, int, int>> CarteVictoire::listeCarteVictoire = {
     {"Domaine", 2, 1},
     {"Duche",5,3},
-    {"Province", 1, 6},//8
+    {"Province", 8, 6},
     {"Malediction", 0, -1},
     {"Jardins",4,0}
 };

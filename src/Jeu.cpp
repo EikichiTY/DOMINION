@@ -17,6 +17,9 @@ void Jeu::jouerPartie(){
     while(!finJeu){
         toursJoueur(listeJoueurs.at(0)); 
         finPartie();
+        if(finJeu){
+            break;
+        }
         toursJoueur(listeJoueurs.at(1)); 
         finPartie(); 
     }
@@ -26,7 +29,8 @@ void Jeu::jouerPartie(){
     int pointJoueur1 = listeJoueurs.at(0).getScore();
     int pointJoueur2 = listeJoueurs.at(1).getScore();
 
-    std::cout<<"Fin de partie ! \n\nVoici les scores :\n"; 
+    std::cout<<"\n---------------------------------------------------------------------------------------------------" ; 
+    std::cout<<"\nFin de la partie ! \n\nVoici les scores :\n"; 
     std::cout<<"Score joueur "<<listeJoueurs.at(0).getNom()<<" : "<<pointJoueur1<<std::endl; 
     std::cout<<"Score joueur "<<listeJoueurs.at(1).getNom()<<" : "<<pointJoueur2<<std::endl; 
 
@@ -34,14 +38,14 @@ void Jeu::jouerPartie(){
         std::cout<<"Egalite !\nAucun vainqueur !\n"; 
     }
     else if (pointJoueur1 > pointJoueur2){
-        std::cout<<"Vainqueur : " <<listeJoueurs.at(0).getNom()<< " !!\n"; 
+        std::cout<<"Vainqueur : " <<listeJoueurs.at(0).getNom()<< " !\n"; 
     }
     else if (pointJoueur1 < pointJoueur2){
-        std::cout<<"Vainqueur : " <<listeJoueurs.at(1).getNom()<< " !!\n"; 
+        std::cout<<"Vainqueur : " <<listeJoueurs.at(1).getNom()<< " !\n"; 
     }
 
-    std::cout<<"Bravo aux deux Joueurs !\nFin du jeu\n"; 
-    std::cout<<"---------------------------------------------------------------------------------------------------" ; 
+    std::cout<<"Bravo aux deux Joueurs !\nFin du jeu"; 
+    std::cout<<"\n---------------------------------------------------------------------------------------------------" ; 
 }
 
 
@@ -56,6 +60,7 @@ void Jeu::toursJoueur(Joueur& j){
 
     //phase jeu
     while(j.getNbAction()>0){
+        std::cout<<"\n################ Phase Jeu ################\n";
         j.afficherMain();
         for (auto carte : j.getDeck().getMain()){
             if (CarteRoyaume* cRoyaume = dynamic_cast<CarteRoyaume*>(carte)){
@@ -93,6 +98,7 @@ void Jeu::toursJoueur(Joueur& j){
     
     //phase achat : decision prise par le joueur d'acheter ou non  
     while(j.getNbAchat() > 0){
+        std::cout<<"\n################ Phase Achat ################\n";
         j.afficherMain();
         j.getDeck().setNbPiece();
         
@@ -148,6 +154,7 @@ void Jeu::finPartie(){
 
 
 void Jeu::calculerPoints(Joueur& j){
+    j.getDeck().allToDefausse();
     int point = 0; 
     int nbJardins = 0; 
     int pointJardin = 0; 
@@ -183,7 +190,7 @@ void Jeu::ajouterJoueur(){
 
 void Jeu::phaseJeu(Joueur& j, std::vector<CarteRoyaume*> carteJouer){
     //phase jeu carte 
-    std::cout<<"Cartes Royaumes dans votre Deck : \n";
+    std::cout<<"\nCartes Royaumes dans votre Deck : \n";
     int index = 0; 
     for(auto c : carteJouer){
         std::cout<<index<<" | Carte : "<<c->getNom()<<"\n"; 
@@ -193,7 +200,7 @@ void Jeu::phaseJeu(Joueur& j, std::vector<CarteRoyaume*> carteJouer){
     size_t i;
     bool choixCarte = false; 
     while(!choixCarte){
-        std::cout<<"Quelle carte voulez vous jouer ? Entrez l'index de la carte souhaitee : \n";
+        std::cout<<"\nQuelle carte voulez vous jouer ? Entrez l'index de la carte souhaitee : \n";
         std::cin>>i;   
 
         if (i < '0' && i > carteJouer.size()){
@@ -201,8 +208,12 @@ void Jeu::phaseJeu(Joueur& j, std::vector<CarteRoyaume*> carteJouer){
         }  
         else {
             choixCarte = true; 
-            carteJouer.at(i)->action(j, this->plateau, j.getDeck(),this->listeJoueurs); 
-            
+            std::cout<<"Vous avez joue la carte : "<<carteJouer.at(i)->getNom()<<"\n\n";
+            carteJouer.at(i)->afficheCarte(); 
+            std::cout<<"\n\n";
+
+            carteJouer.at(i)->action(j, this->plateau, j.getDeck(),this->listeJoueurs);
+
             j.getDeck().uniqueMaintoDefausse(carteJouer.at(i));
             carteJouer.erase(carteJouer.begin()+i); 
         }
@@ -241,7 +252,9 @@ void Jeu::phaseAchat(Joueur& j,std::vector<CarteTresors*> carteAchat){
         j.acheterCarte(plateau.getCartePlateau().at(index).first);
         this->plateau.retirerCarte(index);
 
-        std::cout<<"Vous avez achete la carte : "<<plateau.getCartePlateau().at(index).first->getNom()<<"\n";
+        std::cout<<"Vous avez achete la carte : "<<plateau.getCartePlateau().at(index).first->getNom()<<"\n\n";
+        plateau.getCartePlateau().at(index).first->afficheCarte(); 
+        std::cout<<"\n\n";
         j.getDeck().addNbPiece(-plateau.getCartePlateau().at(index).first->getPrix());
     }
     else{ 

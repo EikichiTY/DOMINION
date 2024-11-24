@@ -12,7 +12,7 @@ const std::vector<std::tuple<std::string,int,bool,bool>> CarteRoyaume::listeCart
     {"Laboratoire",1,false,false},//5
     {"Sorciere",1,true,false},//5
     {"Village",1,false,false},//3
-    {"Voleur",1,true,false}//4
+    {"Voleur",4,true,false}//4
 };
 
 
@@ -108,9 +108,14 @@ void CarteRoyaume::actionAtelier(Joueur& joueur, Plateau& plateau) {
 
     Carte* carteChoisie = cartesEligibles[choix];
     joueur.getDeck().ajouteDefausse(carteChoisie);
-    plateau.retirerCarte(carteChoisie);
+    
+    for (size_t ind = 0; ind < plateau.cartePlateau.size();ind++){
+        if(plateau.cartePlateau.at(ind).first->getNom() == carteChoisie->getNom()){
+            plateau.retirerCarte(ind);
+        }
+    }
 
-    std::cout << "Vous avez ajouté " << carteChoisie->getNom() << " à votre défausse." << std::endl;
+    std::cout << "Vous avez ajoute " << carteChoisie->getNom() << " a votre defausse." << std::endl;
 }
 
 void CarteRoyaume::actionChapelle(Deck& deck ){
@@ -174,24 +179,31 @@ void CarteRoyaume::actionFestin(Plateau& plateau, Deck& deck){
             
         }
     }
-    std::cout<<"L'affichage des cartes eligibles ";
+    std::cout<<"Veuillez choisir une carte coutant 5 pieces ou moins a ajouter a votre deck : \n ";
     for (size_t i =0 ; i<carteAcces.size() ; ++i){
-        std::cout<< i+1 <<"->"<<carteAcces[i]->getNom()<< std::endl;
+        std::cout<<i<<"\t| Carte : "<<carteAcces[i]->getNom()<<" \t| Prix : "<<carteAcces[i]->getPrix()<<std::endl;
     } 
 
-    std::cout<<"Veuillez entrer l'index de la carte avec un cout au plus 5 ";
+    std::cout<<"\nEntrez l'index de la carte souhaitee \n ";
     int choix;
     std::cin>>choix;
     while (choix < 0 || choix >= carteAcces.size()) {
-      std::cout << "Choix invalide. Réessayez : ";
+      std::cout << "Choix invalide. Reessayez : \n";
       std::cin >> choix;
     }
-    Carte* carteChoisie = carteAcces[choix-1];
+    Carte* carteChoisie = carteAcces[choix];
     deck.ajouteDefausse(carteChoisie);
-    plateau.retirerCarte(carteChoisie);
-    std::cout << "La carte " << carteChoisie->getNom() << " a été ajoutée à votre défausse." << std::endl;
+    
+    for (size_t ind = 0; ind < plateau.cartePlateau.size();ind++){
+        if(plateau.cartePlateau.at(ind).first->getNom() == carteChoisie->getNom()){
+            plateau.retirerCarte(ind);
+        }
+    }
+
+    
+    std::cout << "\nLa carte " << carteChoisie->getNom() << " a ete ajoutee a votre defausse." << std::endl;
     deck.retirerCarteJeu(this);
-    std::cout << "La carte Festin a été utilisée et retirée de votre deck.\n";
+    std::cout << "La carte Festin a ete utilisee et retiree de votre deck.\n";
 }
 
 void CarteRoyaume::actionLaboratoire(Joueur& joueur){
@@ -217,7 +229,7 @@ void CarteRoyaume::actionVillage(Joueur& joueur){
 
     joueur.setNbAction(2);
     joueur.addNbPiece(1); 
-    std::cout << "Le joueur gagne 2 actions supplementaires." << std::endl;
+    std::cout << "Le joueur gagne 2 actions supplementaires et 1 piece virtuelle." << std::endl;
 }
 
 void CarteRoyaume::actionDouve(Joueur& joueurActuel){
@@ -269,8 +281,13 @@ void CarteRoyaume::actionSorciere(Joueur& joueurActuel, std::vector<Joueur>& aut
         } 
         else if (!douveDansMain(joueur)) {
             joueur.ajouteDefausse(carteMalediction);
-            plateau.retirerCarte(carteMalediction);
-            std::cout<< joueur.getNom() << " a reçu une carte Malediction dans sa defausse.\n";            
+            
+            for (size_t ind = 0; ind < plateau.cartePlateau.size();ind++){
+                if(plateau.cartePlateau.at(ind).first->getNom() == "Malediction"){
+                    plateau.retirerCarte(ind);
+                }
+            }
+            std::cout<<"Le joueur : "<< joueur.getNom() << " a recu une carte Malediction dans sa defausse.\n";            
         }
         else {
             std::cout<< "Le joueur " << joueur.getNom() << " est protege par une carte Douve dans sa main !\n";
@@ -291,112 +308,109 @@ void CarteRoyaume::actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJ
     // Parcourir tous les joueurs adverses
     for (Joueur& joueur : listeJoueurs) {
         if (&joueur == &joueurActif) {
-            continue; // Sauter le joueur actif
+            //sauter le tours du joueur actif qui joue la carte voleur
         }
+        else{
+            std::vector<Carte*> cartesTresorEcartees; //Cartes Trésor écartées (contiendra uniquement la carte ecarte du joueur attaque a chaque fois (size() = 1))
+            std::vector<Carte*> cartesRevelees; //contient les deux cartes revellee du joueur attaqué
 
-        std::vector<Carte*> cartesTresorEcartees; //Cartes Trésor écartées (contiendra uniquement la carte ecarte du joueur attaque a chaque fois (size() = 1))
-        std::vector<Carte*> cartesRevelees; //contient les deux cartes revellee du joueur attaqué
+            //On effectue l'action de la carte si le joueur attaqué n as pas de douves dans sa main
+            bool presenceDouve = douveDansMain(joueur);                 
+            if (!presenceDouve){
 
-        std::cout << joueur.getNom() << " révèle les 2 premières cartes de son deck." << std::endl;
+                std::cout << joueur.getNom() << " revele les 2 premieres cartes de son deck." << std::endl;
+                cartesRevelees.push_back(joueur.getDeck().getMain().at(joueur.getDeck().getMain().size()-1)); 
+                joueur.getDeck().getMain().pop_back(); 
 
-        //On effectue l'action de la carte si le joueur attaqué n as pas de douves dans sa main
-        bool presenceDouve = douveDansMain(joueur);                 
-        if (!presenceDouve){
+                cartesRevelees.push_back(joueur.getDeck().getMain().at(joueur.getDeck().getMain().size()-1)); 
+                joueur.getDeck().getMain().pop_back(); 
 
-            cartesRevelees.push_back(joueur.getDeck().getMain().at(4)); 
-            joueur.getDeck().getMain().pop_back(); 
+                std::cout<<"Cartes revelees : \n";
+                for (auto carte : cartesRevelees){
+                    carte->afficheCarte();
+                }
 
-            cartesRevelees.push_back(joueur.getDeck().getMain().at(4)); 
-            joueur.getDeck().getMain().pop_back(); 
+                // phase 1 : Traiter les cartes Trésor a ecarter 
+                if (cartesRevelees.at(0)->getType() == TypeCarte::TRESORS && cartesRevelees.at(1)->getType() == TypeCarte::TRESORS) { // Vérifie si la carte est une carte Trésor
+                    bool choixVoleur = false; 
+                    char index ; 
+                    while(!choixVoleur){
+                        std::cout<<"Joueur : "<<joueurActif.getNom()<<" | Quelle carte souhaitez vous ecarter \n";
+                        std::cout<<"Entrez 0 pour ecarter la 1ere carte / Entrez 1 pour ecarter la 2e carte \n";
+                        std::cin>> index ; 
 
-            std::cout<<"Cartes revelees : \n";
-            for (auto carte : cartesRevelees){
-                carte->afficheCarte();
-            }
-
-            // phase 1 : Traiter les cartes Trésor a ecarter 
-            if (cartesRevelees.at(0)->getType() == TypeCarte::TRESORS && cartesRevelees.at(1)->getType() == TypeCarte::TRESORS) { // Vérifie si la carte est une carte Trésor
-                bool choixVoleur = false; 
-                char index ; 
-                while(!choixVoleur){
-                    std::cout<<"Joueur : "<<joueurActif.getNom()<<"Quelle carte souhaitez vous ecarter \n";
-                    std::cout<<"Entrez 0 pour écarter la 1ere carte / Entrez 1 pour ecarter la 2e carte";
-                    std::cin>> index ; 
-
-                    if(index == '0' || index=='1'){
-                        choixVoleur = true; 
+                        if(index == '0' || index=='1'){
+                            choixVoleur = true; 
+                        }
+                        else{
+                            std::cout<<"Requete impossible ! \n";
+                        }
                     }
-                    else{
-                        std::cout<<"Requete impossible ! \n";
+                    if(index == '1'){
+                        std::cout<<"Le joueur "<<joueurActif.getNom()<<" a ecarte la carte : "<<cartesRevelees.at(1)->getNom()<<" du joueur "<<joueur.getNom()<<" !"<<std::endl; 
+                        cartesTresorEcartees.push_back(cartesRevelees.at(1));
+                        joueur.ajouteDefausse(cartesRevelees.at(0));
+                    }
+                    else if (index == '0'){
+                        std::cout<<"Le joueur "<<joueurActif.getNom()<<" a ecarte la carte : "<<cartesRevelees.at(0)->getNom()<<"de "<<joueur.getNom()<<std::endl;
+                        cartesTresorEcartees.push_back(cartesRevelees.at(0));
+                        joueur.ajouteDefausse(cartesRevelees.at(1));
                     }
                 }
-                if(index == '1'){
-                    std::cout<<"Le joueur "<<joueurActif.getNom()<<" a ecarte la carte : "<<cartesRevelees.at(1)->getNom()<<"de "<<joueur.getNom()<<std::endl; 
-                    cartesTresorEcartees.push_back(cartesRevelees.at(1));
-                    joueur.ajouteDefausse(cartesRevelees.at(0));
-                }
-                else if (index == '0'){
-                    std::cout<<"Le joueur "<<joueurActif.getNom()<<" a ecarte la carte : "<<cartesRevelees.at(0)->getNom()<<"de "<<joueur.getNom()<<std::endl;
+
+                else if(cartesRevelees.at(0)->getType() == TypeCarte::TRESORS && cartesRevelees.at(1)->getType() != TypeCarte::TRESORS){
+                    std::cout<<"La carte "<<cartesRevelees.at(0)->getNom()<<" a ete ecartee \n";
                     cartesTresorEcartees.push_back(cartesRevelees.at(0));
                     joueur.ajouteDefausse(cartesRevelees.at(1));
                 }
-            }
+                else if(cartesRevelees.at(0)->getType() != TypeCarte::TRESORS && cartesRevelees.at(1)->getType() == TypeCarte::TRESORS){
+                    std::cout<<"La carte "<<cartesRevelees.at(1)->getNom()<<" a ete ecartee \n";
+                    cartesTresorEcartees.push_back(cartesRevelees.at(1));
+                    joueur.ajouteDefausse(cartesRevelees.at(0));
+                }
 
-            else if(cartesRevelees.at(0)->getType() == TypeCarte::TRESORS && cartesRevelees.at(1)->getType() != TypeCarte::TRESORS){
-                std::cout<<"La carte "<<cartesRevelees.at(0)->getNom()<<" a ete ecartee \n";
-                cartesTresorEcartees.push_back(cartesRevelees.at(0));
-                joueur.ajouteDefausse(cartesRevelees.at(1));
-            }
-            else if(cartesRevelees.at(0)->getType() != TypeCarte::TRESORS && cartesRevelees.at(1)->getType() == TypeCarte::TRESORS){
-                std::cout<<"La carte "<<cartesRevelees.at(1)->getNom()<<" a ete ecartee \n";
-                cartesTresorEcartees.push_back(cartesRevelees.at(1));
-                joueur.ajouteDefausse(cartesRevelees.at(0));
-            }
+                else {  
+                    std::cout<<"Aucune carte tresors n'as ete ecartee !";
+                    joueur.ajouteDefausse(cartesRevelees.at(0));
+                    joueur.ajouteDefausse(cartesRevelees.at(1));
+                }
 
-            else {  
-                std::cout<<"Aucune carte tresors n'as ete ecartee !";
-                joueur.ajouteDefausse(cartesRevelees.at(0));
-                joueur.ajouteDefausse(cartesRevelees.at(1));
-            }
+                //phase 2 : decision du joueur de garder ou non la carte ecartee
+                if (!cartesTresorEcartees.empty()) {
+                    std::cout <<"Joueur "<< joueurActif.getNom() << " | Voulez vous prendre la carte "<<cartesTresorEcartees.at(0)->getNom()<<" ?" << std::endl;
+                    bool choixCartePrendre = false; 
+                    char decision ; 
+                    while(!choixCartePrendre){
+                        std::cout<<"Entrez 1 pour oui / Entrez 0 pour non\n";
+                        std::cin>> decision ; 
 
-            //phase 2 : decision du joueur de garder ou non la carte ecartee
-            if (!cartesTresorEcartees.empty()) {
-                std::cout << joueurActif.getNom() << " : voulez vous prendre cette carte ?" << std::endl;
-                bool choixCartePrendre = false; 
-                char decision ; 
-                while(!choixCartePrendre){
-                    std::cout<<"Entrez 1 pour oui / Entrez 0 pour non";
-                    std::cin>> decision ; 
-
-                    if(decision == '0' || decision=='1'){
-                        choixCartePrendre = true; 
+                        if(decision == '0' || decision=='1'){
+                            choixCartePrendre = true; 
+                        }
+                        else{
+                            std::cout<<"Requete impossible ! \n";
+                        }
                     }
-                    else{
-                        std::cout<<"Requete impossible ! \n";
+                    if(decision == '1'){
+                        joueurActif.ajouteDefausse(cartesTresorEcartees.at(0));
+                        std::cout<<"Le joueur "<<joueurActif.getNom()<<" a recu la carte : "<<cartesTresorEcartees.at(0)->getNom()<<std::endl; 
+                        cartesTresorEcartees.pop_back();
+                    }
+                    else if (decision == '0'){
+                        std::cout<<"La carte "<<cartesTresorEcartees.at(0)->getNom()<<" a ete ecartee !"<<std::endl;
+                        cartesTresorEcartees.pop_back();
                     }
                 }
-                if(decision == '1'){
-                    joueurActif.ajouteDefausse(cartesTresorEcartees.at(0));
-                    std::cout<<"Le joueur "<<joueurActif.getNom()<<" a recu la carte : "<<cartesTresorEcartees.at(0)->getNom()<<std::endl; 
-                    cartesTresorEcartees.pop_back();
-                }
-                else if (decision == '0'){
-                    std::cout<<"La carte "<<cartesTresorEcartees.at(0)->getNom()<<"a ete ecartee !"<<std::endl;
-                    cartesTresorEcartees.pop_back();
-                }
             }
-        }
-        else {
-            std::cout<<"Le joueur "<<joueur.getNom()<<" est protege par la carte douve dans sa main !";
         }
     }
-    std::cout<<"################## Fin de l'action de la carte voleur ##################";
+    std::cout<<"\n";
 }
 
 bool CarteRoyaume::douveDansMain(Joueur joueur){
     for (auto carte : joueur.getDeck().getMain()) {
             if(carte->getNom() == "Douve"){
-                std::cout<<"Le joueur "<<joueur.getNom()<<" a une carte Douves dans sa main ! \n";
+                std::cout<<"Le joueur "<<joueur.getNom()<<" a une carte Douve dans sa main ! \n";
                 std::cout<<"Il est protege contre cette carte attaque !\n";
                 return true;  
             }

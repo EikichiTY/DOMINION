@@ -19,7 +19,6 @@ class Plateau {
         Plateau(); 
         ~Plateau(); 
         void initialiser(); 
-        void ordonnerPlateau();
         void afficher(); 
         
         void setCarteEpuise(int nb);
