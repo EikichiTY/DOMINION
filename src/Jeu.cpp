@@ -255,7 +255,7 @@ void Jeu::phaseAchat(Joueur& j,std::vector<CarteTresors*> carteAchat){
             }
         }
         
-        j.acheterCarte(plateau.getCartePlateau().at(index).first);
+        j.ajouteDefausse(plateau.getCartePlateau().at(index).first);
         this->plateau.retirerCarte(index);
 
         std::cout<<"Vous avez achete la carte : "<<plateau.getCartePlateau().at(index).first->getNom()<<"\n\n";

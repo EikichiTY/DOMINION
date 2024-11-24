@@ -35,11 +35,6 @@ void Joueur::afficherMain(){
 }
 
 
-
-void Joueur::acheterCarte(Carte* c){
-    this->deck.ajouteDefausse(c); 
-}
-
 void Joueur::nouvelleMain(){
     this->deck.initMain();
 }

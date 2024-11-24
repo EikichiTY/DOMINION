@@ -31,7 +31,7 @@ CarteVictoire::CarteVictoire(std::string nom){
 CarteVictoire::CarteVictoire(const CarteVictoire& c){
     this->nom = c.nom; 
     this->prix = prix; 
-    this->valeur = c.valeur; 
+    this->point = c.point; 
     this->typeCarte = TypeCarte::VICTOIRE;
 }
 

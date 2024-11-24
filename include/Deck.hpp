@@ -21,29 +21,29 @@ class Deck{
     public : 
         Deck(); 
         ~Deck();
-        bool peutPiocher(); 
-        void piocherCarte();  
-        void initMain(); 
-        void ajouteDefausse(Carte* c); 
+        bool peutPiocher(); //verifie s'il reste assez de cartes pour piocher 
+        void piocherCarte(); //piocher une carte 
+        void initMain(); //initialise la main (5 fois piocher)
+        void ajouteDefausse(Carte* c); //ajoute une carte dans la defausse (ex:achat)
         void melangerPioche(); 
         
         void uniqueMaintoDefausse(Carte* c); //retire la carte c de la main et la met dans la defausse
-        void defausseToPioche();
-        void mainToDefausse();
+        void defausseToPioche(); //deplace toute la defausse dans la pioche
+        void mainToDefausse(); //defausse la main 
         void allToDefausse(); //stocke toutes les cartes dans la defausse pour compter le nombre de points 
 
         void retirerCarteJeu(Carte* c); //retire une carte de la main et la supprime 
 
         //getters 
-        int getNbPiece(); 
-        int getNbPoint(); 
+        int getNbPiece(); //renvoie le nb de pieces dans une main
+        int getNbPoint(); //renvoie le nb de points dans un deck
         std::vector<Carte*>& getMain(); 
         std::vector<Carte*>& getPioche(); 
         std::vector<Carte*>& getDefausse();
 
-        void setNbPiece();
-        void addNbPiece(int nb);
-        void afficheEtatDeck(); //renvoie le nb d elements dans chaque vecteurs 
+        void setNbPiece(); //modifie l'attribut nbPieces en fonction de la main 
+        void addNbPiece(int nb); //ajoute / retire des pieces virtuelles 
+        void afficheEtatDeck(); //renvoie le nb d'elements dans chaque vecteurs 
          
 }; 
 

@@ -42,3 +42,4 @@ clean:
 
 #Pour compiler le projet utiliser la commande : mingw32-make sur VsCode
 #Pour executer le projet utiliser la commande : ./bin/dominon
+ 

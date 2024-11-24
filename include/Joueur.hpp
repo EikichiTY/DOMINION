@@ -16,28 +16,30 @@ class Joueur {
 
     public :
     Joueur(); 
-    Joueur(const std::string& nom ); //on doit ajouter l initialisation du deck + initialisation de la main dans le deck
+    Joueur(const std::string& nom ); 
         
     std::string getNom() const;
     int getScore() const;
+    
     void setScore(int nvScore);
-    void afficherMain(); 
+    void afficherMain(); //afficher la main d un joueur
 
-    void acheterCarte(Carte* c); 
-    void nouvelleMain(); 
-    void defausserMain();
+    void nouvelleMain(); //initialise une main
+    void defausserMain(); //defausse une main 
 
-    int getNbPiece(); 
+    int getNbPiece(); //renvoie le nb de pieces du deck (main)
+    int getNbAchat(); //renvoie attribut nbAchat
+    int getNbAction(); //renvoie attribut nbAction
 
-    int getNbAchat(); 
-    void setNbAchat(int nb); 
-    void addNbPiece(int nb);
-    int getNbAction(); 
-    void setNbAction(int nb); 
+    void setNbAchat(int nb); //incremente l'attribut nbAchat
+    void addNbPiece(int nb); //ajoute pieces virtuelles 
+    void setNbAction(int nb); //incremente nbAction
 
-    Deck& getDeck(); 
+    Deck& getDeck(); //renvoie le deck du joueur
+    
+    //appel methode dans deck
     void initMainDeck(); 
-    bool peutPiocher();
+    bool peutPiocher(); 
     void piocherCarte();
     void ajouteDefausse(Carte* c);
     
