@@ -17,8 +17,7 @@ class CarteVictoire : public Carte {
         CarteVictoire(std::string nom); 
 
         ~CarteVictoire(); 
-        int getPoint(); 
-        void setPoint(); 
+        int getPoint();  
 
 };
 
