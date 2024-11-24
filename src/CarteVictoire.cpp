@@ -28,6 +28,13 @@ CarteVictoire::CarteVictoire(std::string nom){
     this->typeCarte = TypeCarte::VICTOIRE; 
 }
 
+CarteVictoire::CarteVictoire(const CarteVictoire& c){
+    this->nom = c.nom; 
+    this->prix = prix; 
+    this->valeur = c.valeur; 
+    this->typeCarte = TypeCarte::VICTOIRE;
+}
+
 int CarteVictoire::getPoint(){
     return this->point;
 }
