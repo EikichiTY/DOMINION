@@ -40,6 +40,6 @@ clean:
 
 .PHONY: all clean create_dirs
 
-#Pour compiler le projet utiliser la commande : mingw32-make sur VsCode
+#Pour compiler le projet utiliser la commande : mingw32-make sur VsCode Windows
 #Pour executer le projet utiliser la commande : ./bin/dominon
  
