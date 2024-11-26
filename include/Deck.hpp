@@ -14,10 +14,8 @@ class Deck{
         std::vector <Carte*> main; 
         std::vector <Carte*> pioche; 
         std::vector <Carte*> defausse; 
-
         int nbPoint; 
         int nbPiece; 
-
     public : 
         Deck(); 
         ~Deck();
@@ -44,7 +42,6 @@ class Deck{
         void setNbPiece(); //modifie l'attribut nbPieces en fonction de la main 
         void addNbPiece(int nb); //ajoute / retire des pieces virtuelles 
         void afficheEtatDeck(); //renvoie le nb d'elements dans chaque vecteurs 
-         
 }; 
 
 

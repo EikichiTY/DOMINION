@@ -352,11 +352,11 @@ void CarteRoyaume::actionVoleur(Joueur& joueurActif, std::vector<Joueur>& listeJ
             if (!presenceDouve){
 
                 std::cout << joueur.getNom() << " revele les 2 premieres cartes de son deck." << std::endl;
-                cartesRevelees.push_back(joueur.getDeck().getMain().at(joueur.getDeck().getMain().size()-1)); 
-                joueur.getDeck().getMain().pop_back(); 
+                cartesRevelees.push_back(joueur.getDeck().getPioche().at(joueur.getDeck().getPioche().size()-1)); 
+                joueur.getDeck().getPioche().pop_back(); 
 
-                cartesRevelees.push_back(joueur.getDeck().getMain().at(joueur.getDeck().getMain().size()-1)); 
-                joueur.getDeck().getMain().pop_back(); 
+                cartesRevelees.push_back(joueur.getDeck().getPioche().at(joueur.getDeck().getPioche().size()-1)); 
+                joueur.getDeck().getPioche().pop_back(); 
 
                 std::cout<<"Cartes revelees : \n";
                 for (auto carte : cartesRevelees){

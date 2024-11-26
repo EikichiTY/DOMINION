@@ -17,7 +17,7 @@ class CarteVictoire : public Carte {
         CarteVictoire(std::string nom); 
 
         ~CarteVictoire(); 
-        int getPoint();  
+        int getPoint();  //getter attribut point
 
 };
 
