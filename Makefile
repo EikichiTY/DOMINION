@@ -20,29 +20,28 @@ all: create_dirs $(TARGET)
 
 # Création de l'exécutable
 $(TARGET): $(OBJS)
-@echo "Linking: $(TARGET)"
-$(CXX) $(CXXFLAGS) -o $@ $^
+	@echo "Linking: $(TARGET)"
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Compilation des fichiers objets
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-@echo "Compiling: $<"
-$(CXX) $(CXXFLAGS) -o $@ -c $<
+	@echo "Compiling: $<"
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 # Création des répertoires nécessaires (compatible Linux)
 create_dirs:
-@mkdir -p $(OBJ_DIR)
-@mkdir -p $(BIN_DIR)
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(BIN_DIR)
 
 # Nettoyage des fichiers générés
 clean:
-@echo "Cleaning up..."
-@rm -rf $(OBJ_DIR) $(BIN_DIR)
+	@echo "Cleaning up..."
+	@rm -rf $(OBJ_DIR) $(BIN_DIR)
 
 .PHONY: all clean create_dirs
 
 #Pour compiler le projet utiliser la commande : make
 #Pour executer le projet utiliser la commande : ./bin/dominion
-
 
 ############################################################################################################
 # Makefile Windows
