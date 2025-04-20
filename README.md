@@ -7,10 +7,10 @@ L'objectif est de recréer une version fonctionnelle du jeu Dominion en suivant 
 
 Le jeu inclut également les **cartes trésors** (cuivre, argent, or), les **cartes victoires** (domaine, duché, province) et les **cartes malédiction**.
 
-## 📖 Description du jeu
+## Description du jeu
 Règles du jeu : http://www.cyberfab.fr/dominion.php
 
-### 🎮 Règles principales
+### Règles principales
 1. Chaque joueur construit un deck représentant son royaume en achetant des cartes Trésor, Royaume, et Victoire.
 2. Chaque tour est composé de 3 phases :
    - **Phase Action** : Jouez une ou plusieurs cartes Action.
@@ -21,7 +21,7 @@ Règles du jeu : http://www.cyberfab.fr/dominion.php
    - OU 3 piles de cartes de la réserve sont vides.
 4. Le joueur avec le plus de **points de victoire** remporte la partie.
 
-### 🃏 Configuration initiale
+### Configuration initiale
 - Chaque joueur commence avec un deck de :
   - **7 cartes de cuivre** (valant 1 d'achat).
   - **3 cartes de domaine** (rapportant 1 point de victoire chacune).
@@ -31,7 +31,7 @@ Règles du jeu : http://www.cyberfab.fr/dominion.php
   - **Cartes Victoire** : domaine, duché, province, jardin. 
   - **Cartes Malédiction** : 30 cartes.
 
-## 🛠 Fonctionnalités implémentées
+## Fonctionnalités implémentées
 - Jeu pour **2 joueurs** en console.
 - Mélange automatique des decks avant la partie.
 - Gestion des **3 phases de jeu** (Action, Achat, Ajustement).
